@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="fa">
+
+<head>
+    <meta charset="utf-8"/>
+    <title>
+        @yield('title')
+    </title>
+    @include('panel.sections.seo')
+
+    <link href="{{asset('assets/css/vendor.min.css')}}" rel="stylesheet"/>
+    <link href="{{asset('assets/css/icons.min.css')}}" rel="stylesheet"/>
+    <link href="{{asset('assets/css/app.min.css')}}" rel="stylesheet">
+    <script src="{{asset('assets/js/config.min.js'}}"></script>
+
+</head>
+<body>
+
+<div class="wrapper">
+    @include('panel.sections.header')
+    @include('panel.sections.sidebar')
+
+    <div class="page-content">
+        <div class="container-fluid">
+            @include('panel.sections.breadcrumb')
+            @yield('content')
+        </div>
+        @include('panel.sections.footer')
+    </div>
+</div>
+
+<script src="{{asset('panel/js/vendor.js')}}"></script>
+<script src="{{asset('panel/js/app.js')}}"></script>
+<script src="{{asset('panel/vendor/jsvectormap/js/jsvectormap.min.js')}}"></script>
+<script src="{{asset('panel/vendor/jsvectormap/maps/world-merc.js')}}"></script>
+<script src="{{asset('panel/vendor/jsvectormap/maps/world.js')}}"></script>
+<script src="{{asset('panel/js/pages/dashboard-analytics.js')}}">
+</script>
+
+</body>
+
+</html>
