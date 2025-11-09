@@ -7,11 +7,11 @@
         @yield('title')
     </title>
     @include('panel.sections.seo')
-
-    <link href="{{asset('assets/css/vendor.min.css')}}" rel="stylesheet"/>
-    <link href="{{asset('assets/css/icons.min.css')}}" rel="stylesheet"/>
-    <link href="{{asset('assets/css/app.min.css')}}" rel="stylesheet">
-    <script src="{{asset('assets/js/config.min.js'}}"></script>
+    @include('icons.icons')
+    <link href="{{asset('panel/css/vendor.min.css')}}" rel="stylesheet"/>
+    <link href="{{asset('panel/css/icons.min.css')}}" rel="stylesheet"/>
+    <link href="{{asset('panel/css/app.min.css')}}" rel="stylesheet">
+    <script src="{{asset('panel/js/config.min.js')}}"></script>
 
 </head>
 <body>

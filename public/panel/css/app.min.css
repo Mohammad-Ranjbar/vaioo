@@ -14952,15 +14952,16 @@ html[data-menu-size="hidden"] .topbar {
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
   line-height: var(--bs-topbar-height);
-  padding: 0
-    calc(var(--bs-main-nav-width-sm) * 0.5 - var(--bs-logo-sm-height) * 0.5);
+  /*padding: 0*/
+  /*  calc(var(--bs-main-nav-width-sm) * 0.5 - var(--bs-logo-sm-height) * 0.5);*/
 }
 .logo-box .logo-sm {
   display: none;
   height: var(--bs-logo-sm-height);
 }
 .logo-box .logo-lg {
-  height: var(--bs-logo-lg-height);
+  /*height: var(--bs-logo-lg-height);*/
+    width: 100%;
 }
 .logo-box .logo-light {
   display: none;

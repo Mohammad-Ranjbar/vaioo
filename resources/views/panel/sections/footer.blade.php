@@ -5,11 +5,11 @@
                 <script>
                     document.write(new Date().getFullYear())
                 </script>
-                &copy; لاهومز. طراحی شده توسط
+                &copy; طراحی شده توسط
                 <iconify-icon class="fs-18 align-middle text-danger" icon="solar:hearts-bold-duotone">
                 </iconify-icon>
-                <a class="fw-bold footer-text" href="#" target="_blank">
-                    iarsalan
+                <a class="fw-bold footer-text" href="https://mohammad-ranjbar.github.io/" target="_blank">
+                    MohammadRanjbar
                 </a>
             </div>
         </div>

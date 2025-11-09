@@ -1,17 +1,21 @@
+@php use Illuminate\Support\Facades\Route; @endphp
 <div class="row">
     <div class="col-12">
         <div class="page-title-box">
             <h4 class="mb-0 fw-semibold">
-                آنالیزها
+                @yield('breadcrumb')
             </h4>
             <ol class="breadcrumb mb-0">
-                <li class="breadcrumb-item">
-                    <a href="javascript: void(0);">
-                        داشبورد
-                    </a>
-                </li>
+                @if(Route::currentRouteName() !== 'admin.dashboard')
+                    <li class="breadcrumb-item">
+                        <a href="{{route('admin.dashboard')}}">
+                            داشبورد
+                        </a>
+                    </li>
+                @endif
+
                 <li class="breadcrumb-item active">
-                    آنالیزها
+                    @yield('breadcrumb')
                 </li>
             </ol>
         </div>

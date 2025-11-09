@@ -3,14 +3,12 @@
         <div class="container-fluid">
             <div class="navbar-header">
                 <div class="d-flex align-items-center gap-2">
-                    <!-- Menu Toggle Button -->
                     <div class="topbar-item">
                         <button class="button-toggle-menu topbar-button" style="transform: rotate(180deg);" type="button">
                             <i class="ri-menu-2-line fs-24">
                             </i>
                         </button>
                     </div>
-                    <!-- App Search-->
                     <form class="app-search d-none d-md-block me-auto">
                         <div class="position-relative">
                             <input autocomplete="off" class="form-control border-0" placeholder="جستجو کنید..." type="search" value=""/>
@@ -68,7 +66,6 @@
                                 </div>
                             </div>
                             <div data-simplebar="" style="max-height: 280px;">
-                                <!-- Item -->
                                 <a class="dropdown-item py-3 border-bottom text-wrap" href="javascript:void(0);">
                                     <div class="d-flex">
                                         <div class="flex-shrink-0">
@@ -171,13 +168,8 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Theme Setting -->
-                    <div class="topbar-item d-none d-md-flex">
-                        <button aria-controls="theme-settings-offcanvas" class="topbar-button" data-bs-target="#theme-settings-offcanvas" data-bs-toggle="offcanvas" id="theme-settings-btn" type="button">
-                            <i class="ri-settings-4-line fs-24">
-                            </i>
-                        </button>
-                    </div>
+
+
                     <!-- User -->
                     <div class="dropdown topbar-item">
                         <a aria-expanded="false" aria-haspopup="true" class="topbar-button" data-bs-toggle="dropdown" id="page-header-user-dropdown" type="button">
@@ -190,28 +182,28 @@
                             <h6 class="dropdown-header">
                                 امیرارسلان خوش آمدی!
                             </h6>
-                            <a class="dropdown-item" href="pages-calendar.html">
+                            <a class="dropdown-item" href="#">
                                 <iconify-icon class="align-middle me-2 fs-18" icon="solar:calendar-broken">
                                 </iconify-icon>
                                 <span class="align-middle">
 			برنامه های من
 		   </span>
                             </a>
-                            <a class="dropdown-item" href="pages-pricing.html">
+                            <a class="dropdown-item" href="#">
                                 <iconify-icon class="align-middle me-2 fs-18" icon="solar:wallet-broken">
                                 </iconify-icon>
                                 <span class="align-middle">
 			قیمت گذاری
 		   </span>
                             </a>
-                            <a class="dropdown-item" href="pages-faqs.html">
+                            <a class="dropdown-item" href="#">
                                 <iconify-icon class="align-middle me-2 fs-18" icon="solar:help-broken">
                                 </iconify-icon>
                                 <span class="align-middle">
 			کمک
 		   </span>
                             </a>
-                            <a class="dropdown-item" href="auth-lock-screen.html">
+                            <a class="dropdown-item" href="#">
                                 <iconify-icon class="align-middle me-2 fs-18" icon="solar:lock-keyhole-broken">
                                 </iconify-icon>
                                 <span class="align-middle">
@@ -220,7 +212,7 @@
                             </a>
                             <div class="dropdown-divider my-1">
                             </div>
-                            <a class="dropdown-item text-danger" href="auth-signin.html">
+                            <a class="dropdown-item text-danger" href="#">
                                 <iconify-icon class="align-middle me-2 fs-18" icon="solar:logout-3-broken">
                                 </iconify-icon>
                                 <span class="align-middle">
@@ -234,130 +226,3 @@
         </div>
     </div>
 </header>
-
-
-<div>
-    <div class="offcanvas offcanvas-end border-0 rounded-start-4 overflow-hidden" id="theme-settings-offcanvas"
-         tabindex="-1">
-        <div class="d-flex align-items-center bg-primary p-3 offcanvas-header">
-            <h5 class="text-white m-0">
-                تنظیمات تم
-            </h5>
-            <button aria-label="Close" class="btn-close btn-close-white ms-auto" data-bs-dismiss="offcanvas"
-                    type="button">
-            </button>
-        </div>
-        <div class="offcanvas-body p-0">
-            <div class="h-100" data-simplebar="">
-                <div class="p-3 settings-bar">
-                    <div>
-                        <h5 class="mb-3 font-16 fw-semibold">
-                            طرح رنگ
-                        </h5>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" id="layout-color-light" name="data-bs-theme"
-                                   type="radio" value="light"/>
-                            <label class="form-check-label" for="layout-color-light">
-                                لایت
-                            </label>
-                        </div>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" id="layout-color-dark" name="data-bs-theme" type="radio"
-                                   value="dark"/>
-                            <label class="form-check-label" for="layout-color-dark">
-                                دارک
-                            </label>
-                        </div>
-                    </div>
-                    <div>
-                        <h5 class="my-3 font-16 fw-semibold">
-                            رنگ تاپ بار
-                        </h5>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" id="topbar-color-light" name="data-topbar-color"
-                                   type="radio" value="light"/>
-                            <label class="form-check-label" for="topbar-color-light">
-                                لایت
-                            </label>
-                        </div>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" id="topbar-color-dark" name="data-topbar-color"
-                                   type="radio" value="dark"/>
-                            <label class="form-check-label" for="topbar-color-dark">
-                                دارک
-                            </label>
-                        </div>
-                    </div>
-                    <div>
-                        <h5 class="my-3 font-16 fw-semibold">
-                            رنگ منو
-                        </h5>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" id="leftbar-color-light" name="data-menu-color"
-                                   type="radio" value="light"/>
-                            <label class="form-check-label" for="leftbar-color-light">
-                                لایت
-                            </label>
-                        </div>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" id="leftbar-color-dark" name="data-menu-color"
-                                   type="radio" value="dark"/>
-                            <label class="form-check-label" for="leftbar-color-dark">
-                                دارک
-                            </label>
-                        </div>
-                    </div>
-                    <div>
-                        <h5 class="my-3 font-16 fw-semibold">
-                            سایز سایدبار
-                        </h5>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" id="leftbar-size-default" name="data-menu-size"
-                                   type="radio" value="default"/>
-                            <label class="form-check-label" for="leftbar-size-default">
-                                دیفالت
-                            </label>
-                        </div>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" id="leftbar-size-small" name="data-menu-size"
-                                   type="radio" value="condensed"/>
-                            <label class="form-check-label" for="leftbar-size-small">
-                                فشرده
-                            </label>
-                        </div>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" id="leftbar-hidden" name="data-menu-size" type="radio"
-                                   value="hidden"/>
-                            <label class="form-check-label" for="leftbar-hidden">
-                                مخفی
-                            </label>
-                        </div>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" id="leftbar-size-small-hover-active"
-                                   name="data-menu-size" type="radio" value="sm-hover-active"/>
-                            <label class="form-check-label" for="leftbar-size-small-hover-active">
-                                هاور اکتیو کوچک
-                            </label>
-                        </div>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" id="leftbar-size-small-hover" name="data-menu-size"
-                                   type="radio" value="sm-hover"/>
-                            <label class="form-check-label" for="leftbar-size-small-hover">
-                                هاور کوچک
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="offcanvas-footer border-top p-3 text-center">
-            <div class="row">
-                <div class="col">
-                    <button class="btn btn-danger w-100" id="reset-layout" type="button">
-                        ریست
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
