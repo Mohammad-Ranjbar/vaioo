@@ -12,7 +12,7 @@ CREATE TABLE `countries`  (
                             PRIMARY KEY (`id`) USING BTREE,
                             INDEX `idx_cc_fips`(`fips`) USING BTREE,
                             INDEX `idx_cc_iso`(`iso`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 270 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ;
 
 
 INSERT INTO `countries` VALUES (1, 'AA', 'AW', '.aw', 'Aruba', 'آروبا');
