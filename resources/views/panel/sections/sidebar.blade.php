@@ -30,7 +30,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{route('admin.dashboard')}}">
+                <a class="nav-link" href="{{route('admin.policies.index')}}">
                     <span class="nav-icon">
                          <i class="ri-home-office-line">
                          </i>

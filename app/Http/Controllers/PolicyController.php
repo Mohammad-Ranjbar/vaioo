@@ -13,7 +13,8 @@ class PolicyController extends Controller
      */
     public function index()
     {
-        //
+        $policies = Policy::query()->latest()->get();
+        return view('panel.pages.policies.index', compact('policies'));
     }
 
     /**
