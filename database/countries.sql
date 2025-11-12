@@ -1,19 +1,4 @@
 SET NAMES utf8mb4;
-SET FOREIGN_KEY_CHECKS = 0;
-
-DROP TABLE IF EXISTS `countries`;
-CREATE TABLE `countries`  (
-                            `id` int(11) NOT NULL AUTO_INCREMENT,
-                            `fips` varchar(2) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-                            `iso` varchar(2) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-                            `domain` varchar(3) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-                            `en_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-                            `fa_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-                            PRIMARY KEY (`id`) USING BTREE,
-                            INDEX `idx_cc_fips`(`fips`) USING BTREE,
-                            INDEX `idx_cc_iso`(`iso`) USING BTREE
-) ;
-
 
 INSERT INTO `countries` VALUES (1, 'AA', 'AW', '.aw', 'Aruba', 'آروبا');
 INSERT INTO `countries` VALUES (2, 'AC', 'AG', '.ag', 'Antigua and Barbuda', 'آنتیگوا و باربودا');
@@ -285,4 +270,4 @@ INSERT INTO `countries` VALUES (267, 'YM', 'YE', '.ye', 'Yemen', 'یمن');
 INSERT INTO `countries` VALUES (268, 'ZA', 'ZM', '.zm', 'Zambia', 'زامبیا');
 INSERT INTO `countries` VALUES (269, 'ZI', 'ZW', '.zw', 'Zimbabwe', 'زیمبابوه');
 
-SET FOREIGN_KEY_CHECKS = 1;
+
