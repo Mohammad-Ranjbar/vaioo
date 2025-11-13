@@ -21,6 +21,7 @@
     @include('panel.sections.sidebar')
 
     <div class="page-content">
+        @include('panel.sections.session')
         <div class="container-fluid">
             @include('panel.sections.breadcrumb')
             @yield('content')

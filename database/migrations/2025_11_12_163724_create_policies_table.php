@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('policies', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('country_id')->index()->constrained()->restrictOnDelete();
+            $table->foreignId('country_id')->unique()->constrained()->restrictOnDelete();
             $table->foreignId('admin_id')->index()->constrained()->restrictOnDelete();
             $table->text('policy');
             $table->boolean('is_active')->index();

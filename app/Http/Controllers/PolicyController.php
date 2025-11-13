@@ -5,63 +5,58 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePolicyRequest;
 use App\Http\Requests\UpdatePolicyRequest;
 use App\Models\Policy;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Exception;
+use Illuminate\Http\RedirectResponse;
 
 class PolicyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(): Factory|View
     {
-        $policies = Policy::query()->latest()->get();
+        $policies = Policy::query()->latest()->paginate(20);
         return view('panel.pages.policies.index', compact('policies'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StorePolicyRequest $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Policy $policy)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Policy $policy)
+    public function edit(Policy $policy): Factory|View
     {
-        //
+        return view('panel.pages.policies.edit', compact('policy'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdatePolicyRequest $request, Policy $policy)
+    public function update(UpdatePolicyRequest $request, Policy $policy): RedirectResponse
     {
-        //
+        try {
+            $policy->update($request->validated());
+
+            return redirect()->route('admin.policies.index')->with('success', trans('updated'));
+        } catch (Exception $exception) {
+            return back()->with('error', $exception->getMessage());
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Policy $policy)
+    public function destroy(Policy $policy): RedirectResponse
     {
-        //
+        try {
+            $policy->delete();
+
+            return redirect()->route('admin.policies.index')->with('success', trans('deleted'));
+        }catch (Exception $exception){
+            return back()->with('error', $exception->getMessage());
+        }
     }
 }

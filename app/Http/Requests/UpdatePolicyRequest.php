@@ -3,26 +3,28 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UpdatePolicyRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            //
+            'policy' => 'required',
+            'is_active' => 'required|boolean',
+//            'admin_id' => 'required|integer|exists:admins,id',
         ];
+    }
+
+    protected function prepareForValidation(): void
+    {
+//        $this->merge([
+//            'admin_id' => Auth::guard('admin')->id(),
+//        ]);
     }
 }
