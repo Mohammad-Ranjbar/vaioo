@@ -9,6 +9,6 @@ class Country extends Model
 {
     public function title(): Attribute
     {
-        return Attribute::get(fn () => $this->getAttribute('name_fa').'-'.$this->getAttribute('name_en').'-'.$this->getAttribute('iso'));
+        return Attribute::get(fn () => $this->getAttribute('name_fa').'-'.$this->getAttribute('name_en').'-'.$this->getAttribute('code'));
     }
 }

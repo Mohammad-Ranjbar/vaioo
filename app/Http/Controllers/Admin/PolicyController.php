@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePolicyRequest;
 use App\Http\Requests\UpdatePolicyRequest;
 use App\Models\Country;
 use App\Models\Policy;
+use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Exception;
 use Illuminate\Http\RedirectResponse;
 
 class PolicyController extends Controller
@@ -16,13 +17,13 @@ class PolicyController extends Controller
     public function index(): Factory|View
     {
         $policies = Policy::query()->latest()->paginate(20);
-        return view('panel.pages.policies.index', compact('policies'));
+        return view('panel.admin-panel.policies.index', compact('policies'));
     }
 
     public function create(): Factory|View
     {
         $countries = Country::query()->latest()->get();
-        return view('panel.pages.policies.create', compact('countries'));
+        return view('panel.admin-panel.policies.create', compact('countries'));
     }
 
     public function store(StorePolicyRequest $request)
@@ -37,7 +38,7 @@ class PolicyController extends Controller
 
     public function edit(Policy $policy): Factory|View
     {
-        return view('panel.pages.policies.edit', compact('policy'));
+        return view('panel.admin-panel.policies.edit', compact('policy'));
     }
 
     public function update(UpdatePolicyRequest $request, Policy $policy): RedirectResponse
