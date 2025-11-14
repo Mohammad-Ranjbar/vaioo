@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePolicyRequest;
 use App\Http\Requests\UpdatePolicyRequest;
+use App\Models\Country;
 use App\Models\Policy;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -18,9 +19,10 @@ class PolicyController extends Controller
         return view('panel.pages.policies.index', compact('policies'));
     }
 
-    public function create()
+    public function create(): Factory|View
     {
-        //
+        $countries = Country::query()->latest()->get();
+        return view('panel.pages.policies.create', compact('countries'));
     }
 
     public function store(StorePolicyRequest $request)

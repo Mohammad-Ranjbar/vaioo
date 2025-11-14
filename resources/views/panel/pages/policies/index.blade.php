@@ -68,6 +68,12 @@
                             سیاست های ارسال
                         </h4>
                     </div>
+                    <div>
+                        <a class="card-title btn btn-info" href="{{route('admin.policies.create')}}">
+                            ایجاد
+                            سیاست های ارسال
+                        </a>
+                    </div>
                 </div>
                 <div class="card-body p-0">
                     <div class="table-responsive">
