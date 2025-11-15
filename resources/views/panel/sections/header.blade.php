@@ -170,39 +170,18 @@
                     </div>
 
 
-                    <!-- User -->
                     <div class="dropdown topbar-item">
                         <a aria-expanded="false" aria-haspopup="true" class="topbar-button" data-bs-toggle="dropdown" id="page-header-user-dropdown" type="button">
-		  <span class="d-flex align-items-center">
-		   <img alt="avatar-3" class="rounded-circle" src="assets/images/users/avatar-1.jpg" width="32"/>
-		  </span>
+                          <span class="d-flex align-items-center">
+                           <img alt="avatar-3" class="rounded-circle" src="{{asset('panel/images/user.png')}}" width="32"/>
+                          </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end">
-                            <!-- item-->
                             <h6 class="dropdown-header">
-                                امیرارسلان خوش آمدی!
+                                    {{$auth->fullname}}
+                                 خوش آمدی!
                             </h6>
-                            <a class="dropdown-item" href="#">
-                                <iconify-icon class="align-middle me-2 fs-18" icon="solar:calendar-broken">
-                                </iconify-icon>
-                                <span class="align-middle">
-			برنامه های من
-		   </span>
-                            </a>
-                            <a class="dropdown-item" href="#">
-                                <iconify-icon class="align-middle me-2 fs-18" icon="solar:wallet-broken">
-                                </iconify-icon>
-                                <span class="align-middle">
-			قیمت گذاری
-		   </span>
-                            </a>
-                            <a class="dropdown-item" href="#">
-                                <iconify-icon class="align-middle me-2 fs-18" icon="solar:help-broken">
-                                </iconify-icon>
-                                <span class="align-middle">
-			کمک
-		   </span>
-                            </a>
+
                             <a class="dropdown-item" href="#">
                                 <iconify-icon class="align-middle me-2 fs-18" icon="solar:lock-keyhole-broken">
                                 </iconify-icon>
@@ -212,13 +191,17 @@
                             </a>
                             <div class="dropdown-divider my-1">
                             </div>
-                            <a class="dropdown-item text-danger" href="#">
-                                <iconify-icon class="align-middle me-2 fs-18" icon="solar:logout-3-broken">
-                                </iconify-icon>
-                                <span class="align-middle">
-			خروج
-		   </span>
-                            </a>
+                            <form action="{{$logoutUrl}}" method="post" role="form">
+                                @csrf
+                                <button type="submit" class="dropdown-item text-danger" href="#">
+                                    <iconify-icon class="align-middle me-2 fs-18" icon="solar:logout-3-broken">
+                                    </iconify-icon>
+                                    <span class="align-middle">
+                                خروج
+                               </span>
+                                </button>
+                            </form>
+
                         </div>
                     </div>
                 </div>
