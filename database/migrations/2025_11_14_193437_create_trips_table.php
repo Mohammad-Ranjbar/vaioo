@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('trips', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('representative_id')->constrained('')->restrictOnDelete();
+            $table->foreignId('representative_id')->constrained()->restrictOnDelete();
             $table->foreignId('destination_airport_id')->constrained('airports')->restrictOnDelete();
             $table->foreignId('source_airport_id')->constrained('airports')->restrictOnDelete();
             $table->dateTime('departure_date');
