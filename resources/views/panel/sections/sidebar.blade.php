@@ -52,6 +52,17 @@
                     </span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('admin.representatives.index')}}">
+                    <span class="nav-icon">
+                         <i class="ri-home-office-line">
+                         </i>
+                    </span>
+                        <span class="nav-text">
+                         نمایندگان
+                    </span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PolicyController;
+use App\Http\Controllers\Admin\RepresentativeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +22,7 @@ Route::prefix('admin')->as('admin.')->group(function () {
         Route::resources([
             'policies' => PolicyController::class,
             'users' => UserController::class,
+            'representatives' => RepresentativeController::class,
         ]);
     });
 

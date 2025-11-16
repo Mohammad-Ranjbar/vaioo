@@ -10,8 +10,8 @@ return new class extends Migration {
     {
         Schema::create('representatives', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name')->nullable();
-            $table->string('last_name')->nullable();
+            $table->string('name')->nullable();
+            $table->string('family')->nullable();
             $table->string('national_code')->index()->unique();
             $table->string('passport_number')->nullable()->unique();
             $table->string('email')->nullable()->index()->unique();
@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->string('password');
             $table->string('profile_image')->nullable();
             $table->date('birth_date')->nullable();
-
+            $table->boolean('is_active')->default(true);
             $table->enum('verification_status', ['pending', 'approved', 'rejected'])->index()->default('pending');
             $table->text('verification_rejection_reason')->nullable();
             $table->timestamp('verified_at')->nullable();
@@ -29,7 +29,6 @@ return new class extends Migration {
             $table->decimal('rating_average', 3)->default(0.00);
             $table->unsignedInteger('rating_count')->default(0);
 
-            $table->rememberToken();
             $table->timestamps();
         });
     }

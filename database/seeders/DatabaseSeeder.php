@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             CountriesTableSeeder::class,
             PolicySeeder::class,
             UserSeeder::class,
+            RepresentativeSeeder::class,
         ]);
     }
 }
