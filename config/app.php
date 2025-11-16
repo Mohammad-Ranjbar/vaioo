@@ -10,7 +10,7 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Tehran',
 
     'locale' => env('APP_LOCALE', 'en'),
 

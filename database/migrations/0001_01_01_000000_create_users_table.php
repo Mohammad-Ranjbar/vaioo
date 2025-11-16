@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('mobile')->unique()->index();
             $table->string('email')->nullable()->unique();
             $table->timestamp('mobile_verified_at')->nullable();
+            $table->boolean('is_active')->index()->default(true);
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

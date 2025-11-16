@@ -2,14 +2,14 @@
 <html dir="rtl" lang="fa">
 
 <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <title>
         @yield('title')
     </title>
     @include('panel.sections.seo')
     @include('icons.icons')
-    <link href="{{asset('panel/css/vendor.min.css')}}" rel="stylesheet"/>
-    <link href="{{asset('panel/css/icons.min.css')}}" rel="stylesheet"/>
+    <link href="{{asset('panel/css/vendor.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('panel/css/icons.min.css')}}" rel="stylesheet" />
     <link href="{{asset('panel/css/app.min.css')}}" rel="stylesheet">
     <script src="{{asset('panel/js/config.min.js')}}"></script>
 
@@ -35,8 +35,7 @@
 <script src="{{asset('panel/vendor/jsvectormap/js/jsvectormap.min.js')}}"></script>
 <script src="{{asset('panel/vendor/jsvectormap/maps/world-merc.js')}}"></script>
 <script src="{{asset('panel/vendor/jsvectormap/maps/world.js')}}"></script>
-<script src="{{asset('panel/js/pages/dashboard-analytics.js')}}">
-</script>
+<script src="{{asset('panel/js/pages/dashboard-analytics.js')}}"></script>
 
 </body>
 
