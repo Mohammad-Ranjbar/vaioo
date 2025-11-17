@@ -70,4 +70,9 @@ class Representative extends Model
             return $this->getAttribute('mobile');
         });
     }
+
+    public function imageUrl(): Attribute
+    {
+        return Attribute::get(fn() => asset('storage/'.$this->getAttribute('profile_image')));
+    }
 }

@@ -11,6 +11,8 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class RepresentativeController extends Controller
 {
@@ -61,12 +63,39 @@ class RepresentativeController extends Controller
         return view('panel.admin-panel.representatives.edit', compact('representative'));
     }
 
-    public function update(UpdateRepresentativeRequest $request, Representative $representative)
+    public function update(UpdateRepresentativeRequest $request, Representative $representative): Redirector|RedirectResponse
     {
         try {
-            $validatedData = $request->validated();
+            $validated = $request->validated();
+            if (empty($validated['password'])) {
+                unset($validated['password']);
+            } else {
+                $validated['password'] = Hash::make($validated['password']);
+            }
 
-            $representative->update($validatedData);
+            if ($request->hasFile('profile_image')) {
+                // Delete old image if exists
+                if ($representative->profile_image) {
+                    Storage::disk('public')->delete($representative->profile_image);
+                }
+                // Store new image
+                $validated['profile_image'] = $request->file('profile_image')->store('profiles/representatives', 'public');
+            }
+
+            // Handle remove profile image
+            if ($request->has('remove_profile_image') && $request->remove_profile_image) {
+                if ($representative->profile_image) {
+                    Storage::disk('public')->delete($representative->profile_image);
+                }
+                $validated['profile_image'] = null;
+            }
+
+            unset($validated['password_confirmation']);
+            unset($validated['remove_profile_image']);
+            unset($validated['mobile_verified']);
+            unset($validated['email_verified']);
+
+            $representative->update($validated);
 
             return redirect(route('admin.representatives.index'))->with('success', trans('created'));
 
@@ -78,7 +107,9 @@ class RepresentativeController extends Controller
     public function destroy(Representative $representative): Redirector|RedirectResponse
     {
         try {
-
+            if ($representative->getAttribute('profile_image')) {
+                Storage::disk('public')->delete($representative->getAttribute('profile_image'));
+            }
             $representative->delete();
 
             return redirect(route('admin.representatives.index'))->with('success', trans('created'));
