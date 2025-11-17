@@ -74,18 +74,16 @@ class RepresentativeController extends Controller
             }
 
             if ($request->hasFile('profile_image')) {
-                // Delete old image if exists
-                if ($representative->profile_image) {
-                    Storage::disk('public')->delete($representative->profile_image);
+                if ($representative->getAttribute('profile_image')) {
+                    Storage::disk('public')->delete($representative->getAttribute('profile_image'));
                 }
-                // Store new image
                 $validated['profile_image'] = $request->file('profile_image')->store('profiles/representatives', 'public');
             }
 
             // Handle remove profile image
-            if ($request->has('remove_profile_image') && $request->remove_profile_image) {
-                if ($representative->profile_image) {
-                    Storage::disk('public')->delete($representative->profile_image);
+            if ($request->has('remove_profile_image') && $request->input('remove_profile_image')) {
+                if ($representative->getAttribute('profile_image')) {
+                    Storage::disk('public')->delete($representative->getAttribute('profile_image'));
                 }
                 $validated['profile_image'] = null;
             }

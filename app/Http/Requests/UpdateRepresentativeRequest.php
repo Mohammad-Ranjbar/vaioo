@@ -55,6 +55,7 @@ class UpdateRepresentativeRequest extends FormRequest
             'email_verified' => ['sometimes', 'boolean'],
             'email_verified_at' => 'nullable',
             'mobile_verified_at' => 'nullable',
+            'verified_at' => 'nullable'
         ];
     }
 
@@ -105,24 +106,23 @@ class UpdateRepresentativeRequest extends FormRequest
     {
         if ($this->has('national_code')) {
             $this->merge([
-                'national_code' => preg_replace('/\s+/', '', $this->national_code),
+                'national_code' => preg_replace('/\s+/', '', $this->input('national_code')),
             ]);
         }
 
         if ($this->has('mobile')) {
             $this->merge([
-                'mobile' => preg_replace('/\s+/', '', $this->mobile),
+                'mobile' => preg_replace('/\s+/', '', $this->input('mobile')),
             ]);
         }
 
-        if ($this->has('passport_number') && !empty($this->passport_number)) {
+        if ($this->has('passport_number') && !empty($this->input('passport_number'))) {
             $this->merge([
-                'passport_number' => preg_replace('/\s+/', '', $this->passport_number),
+                'passport_number' => preg_replace('/\s+/', '', $this->input('passport_number')),
             ]);
         }
 
-        // Handle mobile verification
-        if ($this->has('mobile_verified') && $this->mobile_verified == '1') {
+        if ($this->has('mobile_verified') && $this->input('mobile_verified') == '1') {
             $this->merge([
                 'mobile_verified_at' => now(),
             ]);
@@ -132,8 +132,8 @@ class UpdateRepresentativeRequest extends FormRequest
             ]);
         }
 
-        // Handle email verification
-        if ($this->has('email_verified') && $this->email_verified == '1') {
+
+        if ($this->has('email_verified') && $this->input('email_verified') == '1') {
             $this->merge([
                 'email_verified_at' => now(),
             ]);
@@ -143,8 +143,7 @@ class UpdateRepresentativeRequest extends FormRequest
             ]);
         }
 
-        // Handle verification status and verified_at
-        if ($this->has('verification_status') && $this->verification_status == 'approved') {
+        if ($this->has('verification_status') && $this->input('verification_status') == 'approved') {
             $this->merge([
                 'verified_at' => now(),
             ]);
@@ -154,13 +153,12 @@ class UpdateRepresentativeRequest extends FormRequest
             ]);
         }
 
-        // Clear rejection reason if status is not rejected
-        if ($this->has('verification_status') && $this->verification_status !== 'rejected') {
+        if ($this->has('verification_status') && $this->input('verification_status') !== 'rejected') {
             $this->merge([
                 'verification_rejection_reason' => null,
             ]);
         }
-        if ($this->has('mobile_verified') && $this->mobile_verified == '1') {
+        if ($this->has('mobile_verified') && $this->input('mobile_verified') == '1') {
             $this->merge([
                 'mobile_verified_at' => now()->toDateTimeString(),
             ]);
@@ -171,7 +169,7 @@ class UpdateRepresentativeRequest extends FormRequest
         }
 
 // Handle email verification
-        if ($this->has('email_verified') && $this->email_verified == '1') {
+        if ($this->has('email_verified') && $this->input('email_verified') == '1') {
             $this->merge([
                 'email_verified_at' => now()->toDateTimeString(),
             ]);
@@ -180,23 +178,19 @@ class UpdateRepresentativeRequest extends FormRequest
                 'email_verified_at' => null,
             ]);
         }
-        // Convert boolean fields
+
         $this->merge([
-            'is_active' => (bool) $this->is_active,
-            'mobile_verified' => (bool) $this->mobile_verified,
-            'email_verified' => (bool) $this->email_verified,
-            'remove_profile_image' => (bool) $this->remove_profile_image,
+            'is_active' => (bool) $this->input('is_active'),
+            'mobile_verified' => (bool) $this->input('mobile_verified'),
+            'email_verified' => (bool) $this->input('email_verified'),
+            'remove_profile_image' => (bool) $this->input('remove_profile_image'),
         ]);
     }
 
-    /**
-     * Configure the validator instance.
-     */
     protected function withValidator($validator): void
     {
         $validator->after(function ($validator) {
-            // Additional validation for rejection reason
-            if ($this->verification_status == 'rejected' && empty($this->verification_rejection_reason)) {
+            if ($this->input('verification_status') == 'rejected' && empty($this->input('verification_rejection_reason'))) {
                 $validator->errors()->add(
                     'verification_rejection_reason',
                     'در صورت رد تایید، وارد کردن دلیل الزامی است.'
