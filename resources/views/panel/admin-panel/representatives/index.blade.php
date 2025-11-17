@@ -118,6 +118,10 @@
                                     </td>
                                     <td>
                                         <div class="d-flex gap-2">
+                                            <a class="btn btn-soft-info btn-sm"
+                                               href="{{route('admin.representatives.documents.create',$representative->id)}}">
+                                               مدارک
+                                            </a>
                                             <a class="btn btn-soft-primary btn-sm"
                                                href="{{route('admin.representatives.edit',$representative->id)}}">
                                                 <iconify-icon class="align-middle fs-18"

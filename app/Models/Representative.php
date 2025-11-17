@@ -5,12 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
+use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Representative extends Model
+class Representative extends Model implements HasMedia
 {
 
     use Notifiable, InteractsWithMedia;
+
     protected $hidden = [
         'password',
     ];
@@ -39,17 +42,31 @@ class Representative extends Model
     {
         $this->addMediaCollection('national_card_front')
             ->singleFile()
-            ->acceptsMimeTypes(['image/jpeg', 'image/png']);
+            ->acceptsMimeTypes(['image/jpeg'])
+            ->useDisk('public');
+
 
         $this->addMediaCollection('national_card_back')
             ->singleFile()
-            ->acceptsMimeTypes(['image/jpeg', 'image/png']);
+            ->acceptsMimeTypes(['image/jpeg'])
+            ->useDisk('public');
 
         $this->addMediaCollection('selfie_with_card')
             ->singleFile()
-            ->acceptsMimeTypes(['image/jpeg', 'image/png']);
+            ->acceptsMimeTypes(['image/jpeg'])
+            ->useDisk('public');
     }
 
+    public function getDocumentUrl(string $collectionName): ?string
+    {
+        $media = $this->getFirstMedia($collectionName);
+        return $media ? $media->getUrl() : null;
+    }
+
+    public function hasDocument(string $collectionName): bool
+    {
+        return $this->hasMedia($collectionName);
+    }
     public function casts(): array
     {
         return [
@@ -73,6 +90,6 @@ class Representative extends Model
 
     public function imageUrl(): Attribute
     {
-        return Attribute::get(fn() => asset('storage/'.$this->getAttribute('profile_image')));
+        return Attribute::get(fn() => asset('storage/' . $this->getAttribute('profile_image')));
     }
 }

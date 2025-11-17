@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\StoreRepresentativeDocumentRequest;
 use App\Http\Requests\StoreRepresentativeRequest;
 use App\Http\Requests\UpdateRepresentativeRequest;
 use App\Models\Representative;
@@ -54,7 +55,7 @@ class RepresentativeController extends Controller
 
     public function show(Representative $representative)
     {
-
+        return view('panel.admin-panel.representatives.show', compact('representative'));
     }
 
 
@@ -101,6 +102,7 @@ class RepresentativeController extends Controller
             return back()->with('error', $exception->getMessage());
         }
     }
+
 
     public function destroy(Representative $representative): Redirector|RedirectResponse
     {
