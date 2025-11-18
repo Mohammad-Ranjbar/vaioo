@@ -14,10 +14,11 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             AdminSeeder::class,
-            CountriesTableSeeder::class,
+            CountrySeeder::class,
             PolicySeeder::class,
             UserSeeder::class,
             RepresentativeSeeder::class,
+            AirportSeeder::class
         ]);
     }
 }

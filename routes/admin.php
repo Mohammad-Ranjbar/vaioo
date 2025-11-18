@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AirportController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PolicyController;
@@ -39,6 +40,7 @@ Route::prefix('admin')->as('admin.')->group(function () {
             'policies' => PolicyController::class,
             'users' => UserController::class,
             'representatives' => RepresentativeController::class,
+            'airports' => AirportController::class,
         ]);
     });
 
