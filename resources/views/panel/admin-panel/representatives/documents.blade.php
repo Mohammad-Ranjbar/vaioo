@@ -19,7 +19,6 @@
                         @csrf
 
                         <div class="row">
-                            <!-- National Card Front -->
                             <div class="col-md-4">
                                 <div class="card">
                                     <div class="card-body text-center">
@@ -51,12 +50,12 @@
                                                    class="form-control"
                                                    id="national_card_front"
                                                    name="national_card_front"
-                                                   accept="image/jpeg,image/png">
+                                                   accept="image/jpeg">
                                             @error('national_card_front')
                                             <div class="text-danger mt-1">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <small class="text-muted">فرمت‌های مجاز: JPEG, PNG - حداکثر حجم: 2MB</small>
+                                        <small class="text-muted">فرمت‌های مجاز: JPEG  - حداکثر حجم: 2MB</small>
                                     </div>
                                 </div>
                             </div>
@@ -93,12 +92,12 @@
                                                    class="form-control"
                                                    id="national_card_back"
                                                    name="national_card_back"
-                                                   accept="image/jpeg,image/png">
+                                                   accept="image/jpeg">
                                             @error('national_card_back')
                                             <div class="text-danger mt-1">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <small class="text-muted">فرمت‌های مجاز: JPEG, PNG - حداکثر حجم: 2MB</small>
+                                        <small class="text-muted">فرمت‌های مجاز: JPEG  - حداکثر حجم: 2MB</small>
                                     </div>
                                 </div>
                             </div>
@@ -135,12 +134,12 @@
                                                    class="form-control"
                                                    id="selfie_with_card"
                                                    name="selfie_with_card"
-                                                   accept="image/jpeg,image/png">
+                                                   accept="image/jpeg">
                                             @error('selfie_with_card')
                                             <div class="text-danger mt-1">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <small class="text-muted">فرمت‌های مجاز: JPEG, PNG - حداکثر حجم: 2MB</small>
+                                        <small class="text-muted">فرمت‌های مجاز: JPEG  - حداکثر حجم: 2MB</small>
                                     </div>
                                 </div>
                             </div>
