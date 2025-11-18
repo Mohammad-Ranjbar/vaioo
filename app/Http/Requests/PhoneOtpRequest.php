@@ -15,7 +15,7 @@ class PhoneOtpRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'phone' => 'required|regex:/^\+?[1-9]\d{1,14}$/', // E.164
+            'phone' => 'required|regex:/^\+?[1-9]\d{1,14}$/',
         ];
     }
 }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\StoreRepresentativeDocumentRequest;
+use App\Http\Requests\Admin\Representative\StoreRepresentativeDocumentRequest;
 use App\Models\Representative;
 use Exception;
 use Illuminate\Contracts\View\Factory;
@@ -44,21 +44,18 @@ class RepresentativeDocumentController extends Controller
                     ->toMediaCollection('selfie_with_card');
             }
 
-            return redirect()->route('admin.representatives.documents.create', $representative->id)
+            return redirect()->route('admin.representatives.documents.create', $representative->getAttribute('id'))
                 ->with('success', 'مدارک با موفقیت آپلود شدند.');
 
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return redirect()->back()
-                ->with('error', 'خطا در آپلود مدارک: ' . $e->getMessage());
+                ->with('error',$e->getMessage());
         }
     }
 
-    /**
-     * Generate unique file name with UUID
-     */
     private function generateFileName(string $collectionName): string
     {
-        $prefix = match($collectionName) {
+        $prefix = match ($collectionName) {
             'national_card_front' => 'front_',
             'national_card_back' => 'back_',
             'selfie_with_card' => 'selfie_',
@@ -68,9 +65,6 @@ class RepresentativeDocumentController extends Controller
         return $prefix . Str::uuid() . '.jpg';
     }
 
-    /**
-     * Delete a specific document.
-     */
     public function destroy(Representative $representative, string $collectionName): RedirectResponse
     {
         try {
@@ -78,22 +72,19 @@ class RepresentativeDocumentController extends Controller
 
             if ($media) {
                 $media->delete();
-                return redirect()->route('admin.representatives.documents.create', $representative->id)
+                return redirect()->route('admin.representatives.documents.create', $representative->getAttribute('id'))
                     ->with('success', 'تصویر با موفقیت حذف شد.');
             }
 
-            return redirect()->route('admin.representatives.documents.create', $representative->id)
+            return redirect()->route('admin.representatives.documents.create', $representative->getAttribute('id'))
                 ->with('error', 'تصویر یافت نشد.');
 
-        } catch (\Exception $e) {
-            return redirect()->route('admin.representatives.documents.create', $representative->id)
+        } catch (Exception $e) {
+            return redirect()->route('admin.representatives.documents.create', $representative->getAttribute('id'))
                 ->with('error', 'خطا در حذف تصویر: ' . $e->getMessage());
         }
     }
 
-    /**
-     * Delete all documents for a representative.
-     */
     public function destroyAll(Representative $representative): RedirectResponse
     {
         try {
@@ -101,11 +92,11 @@ class RepresentativeDocumentController extends Controller
             $representative->clearMediaCollection('national_card_back');
             $representative->clearMediaCollection('selfie_with_card');
 
-            return redirect()->route('admin.representatives.documents.create', $representative->id)
+            return redirect()->route('admin.representatives.documents.create', $representative->getAttribute('id'))
                 ->with('success', 'تمامی مدارک با موفقیت حذف شدند.');
 
-        } catch (\Exception $e) {
-            return redirect()->route('admin.representatives.documents.create', $representative->id)
+        } catch (Exception $e) {
+            return redirect()->route('admin.representatives.documents.create', $representative->getAttribute('id'))
                 ->with('error', 'خطا در حذف مدارک: ' . $e->getMessage());
         }
     }

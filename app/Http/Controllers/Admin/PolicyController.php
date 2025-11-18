@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Representative\UpdatePolicyRequest;
 use App\Http\Requests\StorePolicyRequest;
-use App\Http\Requests\UpdatePolicyRequest;
 use App\Models\Country;
 use App\Models\Policy;
 use Exception;

@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Admin\Representative;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
 class StoreRepresentativeRequest extends FormRequest
@@ -140,9 +139,9 @@ class StoreRepresentativeRequest extends FormRequest
 
         // Convert boolean fields
         $this->merge([
-            'is_active' => (bool) $this->input('is_active'),
-            'mobile_verified' => (bool) $this->input('mobile_verified'),
-            'email_verified' => (bool) $this->input('email_verified'),
+            'is_active' => (bool)$this->input('is_active'),
+            'mobile_verified' => (bool)$this->input('mobile_verified'),
+            'email_verified' => (bool)$this->input('email_verified'),
         ]);
     }
 

@@ -3,16 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AdminLoginRequest;
+use App\Http\Requests\Admin\Admin\AdminLoginRequest;
 use App\Models\Admin;
 use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Http\RedirectResponse;
 
 class AuthController extends Controller
 {
@@ -37,6 +36,11 @@ class AuthController extends Controller
         }
     }
 
+    public function check(): RedirectResponse
+    {
+        return redirect()->route('admin.dashboard');
+    }
+
     public function logout(Request $request): RedirectResponse
     {
         $request->session()->invalidate();
@@ -45,10 +49,5 @@ class AuthController extends Controller
         Auth::guard('admin')->logout();
         return redirect()->route('admin.login');
 
-    }
-
-    public function check()
-    {
-        return redirect()->route('admin.dashboard');
     }
 }
