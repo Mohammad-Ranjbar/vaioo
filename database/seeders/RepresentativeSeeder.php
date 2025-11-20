@@ -28,8 +28,6 @@ class RepresentativeSeeder extends Seeder
                 'verified_at' => now(),
                 'rating_average' => 4.5,
                 'rating_count' => 12,
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             [
                 'name' => 'سارا',
@@ -48,8 +46,6 @@ class RepresentativeSeeder extends Seeder
                 'verified_at' => now(),
                 'rating_average' => 4.2,
                 'rating_count' => 8,
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             [
                 'name' => 'رضا',
@@ -68,8 +64,6 @@ class RepresentativeSeeder extends Seeder
                 'verified_at' => null,
                 'rating_average' => 0.00,
                 'rating_count' => 0,
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             [
                 'name' => 'فاطمه',
@@ -88,8 +82,6 @@ class RepresentativeSeeder extends Seeder
                 'verified_at' => null,
                 'rating_average' => 3.8,
                 'rating_count' => 5,
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             [
                 'name' => 'حسین',
@@ -108,11 +100,12 @@ class RepresentativeSeeder extends Seeder
                 'verified_at' => now(),
                 'rating_average' => 4.8,
                 'rating_count' => 15,
-                'created_at' => now(),
-                'updated_at' => now(),
             ]
         ];
-
+        $representatives = array_map(fn($representative) => array_merge($representative, [
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]), $representatives);
         DB::table('representatives')->insertOrIgnore($representatives);
     }
 }

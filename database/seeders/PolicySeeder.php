@@ -20,11 +20,12 @@ class PolicySeeder extends Seeder
                 'admin_id' => Admin::query()->inRandomOrder()->first()->getAttribute('id'),
                 'policy' => fake(locale: 'fa_IR')->realText(250),
                 'is_active' => rand(0, 1),
-                'created_at' => now(),
-                'updated_at' => now(),
             ];
         }
-
+        $policies = array_map(fn($policy) => array_merge($policy, [
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]),$policies);
         Policy::query()->insertOrIgnore($policies);
     }
 }

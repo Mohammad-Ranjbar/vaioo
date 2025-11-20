@@ -17,8 +17,6 @@ class AdminSeeder extends Seeder
                 'mobile' => '09123876457',
                 'email' => 'maghani@vaioo.com',
                 'password' => Hash::make('09123876457'),
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             [
                 'name' => 'mohammad',
@@ -26,10 +24,13 @@ class AdminSeeder extends Seeder
                 'mobile' => '09126872183',
                 'email' => 'ranjbar@vaioo.com',
                 'password' => Hash::make('09126872183'),
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
         ];
+
+        $admins = array_map(fn($admin) => array_merge($admin, [
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]),$admins);
        Admin::query()->insertOrIgnore($admins);
     }
 }

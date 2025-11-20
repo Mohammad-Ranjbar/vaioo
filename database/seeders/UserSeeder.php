@@ -20,8 +20,6 @@ class UserSeeder extends Seeder
                 'mobile_verified_at' => now(),
                 'is_active' => true,
                 'password' => Hash::make('password'),
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             [
                 'name' => 'Sara',
@@ -31,8 +29,6 @@ class UserSeeder extends Seeder
                 'mobile_verified_at' => now(),
                 'is_active' => true,
                 'password' => Hash::make('password'),
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             [
                 'name' => 'Mohammad',
@@ -42,8 +38,6 @@ class UserSeeder extends Seeder
                 'mobile_verified_at' => null,
                 'is_active' => false,
                 'password' => Hash::make('password'),
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             [
                 'name' => 'Fatemeh',
@@ -53,8 +47,6 @@ class UserSeeder extends Seeder
                 'mobile_verified_at' => now(),
                 'is_active' => true,
                 'password' => Hash::make('password'),
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             [
                 'name' => 'Reza',
@@ -64,8 +56,6 @@ class UserSeeder extends Seeder
                 'mobile_verified_at' => now(),
                 'is_active' => true,
                 'password' => Hash::make('password'),
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             [
                 'name' => 'Zahra',
@@ -75,8 +65,6 @@ class UserSeeder extends Seeder
                 'mobile_verified_at' => null,
                 'is_active' => true,
                 'password' => Hash::make('password'),
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             [
                 'name' => 'Amir',
@@ -86,8 +74,6 @@ class UserSeeder extends Seeder
                 'mobile_verified_at' => now(),
                 'is_active' => false,
                 'password' => Hash::make('password'),
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             [
                 'name' => 'Narges',
@@ -97,8 +83,6 @@ class UserSeeder extends Seeder
                 'mobile_verified_at' => now(),
                 'is_active' => true,
                 'password' => Hash::make('password'),
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             [
                 'name' => 'Hossein',
@@ -108,8 +92,6 @@ class UserSeeder extends Seeder
                 'mobile_verified_at' => null,
                 'is_active' => true,
                 'password' => Hash::make('password'),
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             [
                 'name' => 'Maryam',
@@ -119,11 +101,12 @@ class UserSeeder extends Seeder
                 'mobile_verified_at' => now(),
                 'is_active' => true,
                 'password' => Hash::make('password'),
-                'created_at' => now(),
-                'updated_at' => now(),
             ]
         ];
-
+        $users = array_map(fn($user) => array_merge($user, [
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]),$users);
         DB::table('users')->insertOrIgnore($users);
 
     }

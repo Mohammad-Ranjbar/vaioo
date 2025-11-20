@@ -20,8 +20,7 @@ class AirportSeeder extends Seeder
                 'code' => 'IKA',
                 'is_active' => true,
                 'country_id' => 1,
-                'created_at' => now(),
-                'updated_at' => now(),
+
             ],
             [
                 'name_fa' => 'فرودگاه مهرآباد',
@@ -29,8 +28,7 @@ class AirportSeeder extends Seeder
                 'code' => 'THR',
                 'is_active' => true,
                 'country_id' => 1,
-                'created_at' => now(),
-                'updated_at' => now(),
+
             ],
             [
                 'name_fa' => 'فرودگاه بین‌المللی دبی',
@@ -38,8 +36,7 @@ class AirportSeeder extends Seeder
                 'code' => 'DXB',
                 'is_active' => true,
                 'country_id' => 2,
-                'created_at' => now(),
-                'updated_at' => now(),
+
             ],
             [
                 'name_fa' => 'فرودگاه آتاتورک استانبول',
@@ -47,11 +44,13 @@ class AirportSeeder extends Seeder
                 'code' => 'IST',
                 'is_active' => true,
                 'country_id' => 3,
-                'created_at' => now(),
-                'updated_at' => now(),
+
             ],
         ];
-
+        $airports = array_map(fn($airport) => array_merge($airport, [
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]),$airports);
 
             DB::table('airports')->insertOrIgnore($airports);
 
