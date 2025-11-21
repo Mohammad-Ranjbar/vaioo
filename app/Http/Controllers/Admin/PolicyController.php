@@ -46,7 +46,7 @@ class PolicyController extends Controller
         try {
             $policy->update($request->validated());
 
-            return redirect()->route('admin.policies.index')->with('success', trans('updated'));
+            return redirect()->route('admin.policies.index')->with('success', trans('messages.updated'));
         } catch (Exception $exception) {
             return back()->with('error', $exception->getMessage());
         }
@@ -57,7 +57,7 @@ class PolicyController extends Controller
         try {
             $policy->delete();
 
-            return redirect()->route('admin.policies.index')->with('success', trans('deleted'));
+            return redirect()->route('admin.policies.index')->with('success', trans('messages.deleted'));
         }catch (Exception $exception){
             return back()->with('error', $exception->getMessage());
         }

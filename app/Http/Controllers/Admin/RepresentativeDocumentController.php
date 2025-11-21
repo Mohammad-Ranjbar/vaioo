@@ -45,7 +45,7 @@ class RepresentativeDocumentController extends Controller
             }
 
             return redirect()->route('admin.representatives.documents.create', $representative->getAttribute('id'))
-                ->with('success', 'مدارک با موفقیت آپلود شدند.');
+                ->with('success', trans('messages.updated'));
 
         } catch (Exception $e) {
             return redirect()->back()
@@ -73,11 +73,11 @@ class RepresentativeDocumentController extends Controller
             if ($media) {
                 $media->delete();
                 return redirect()->route('admin.representatives.documents.create', $representative->getAttribute('id'))
-                    ->with('success', 'تصویر با موفقیت حذف شد.');
+                    ->with('success', trans('messages.deleted'));
             }
 
             return redirect()->route('admin.representatives.documents.create', $representative->getAttribute('id'))
-                ->with('error', 'تصویر یافت نشد.');
+                ->with('error', trans('messages.not_found'));
 
         } catch (Exception $e) {
             return redirect()->route('admin.representatives.documents.create', $representative->getAttribute('id'))
@@ -93,7 +93,7 @@ class RepresentativeDocumentController extends Controller
             $representative->clearMediaCollection('selfie_with_card');
 
             return redirect()->route('admin.representatives.documents.create', $representative->getAttribute('id'))
-                ->with('success', 'تمامی مدارک با موفقیت حذف شدند.');
+                ->with('success', trans('messages.deleted'));
 
         } catch (Exception $e) {
             return redirect()->route('admin.representatives.documents.create', $representative->getAttribute('id'))

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->date('departure_date');
             $table->date('arrival_date');
             $table->decimal('capacity_weight');
-            $table->decimal('capacity_value');
+            $table->unsignedBigInteger('capacity_value');
             $table->enum('status',['planning', 'in_progress', 'completed'])->index();
             $table->unique(['representative_id','source_airport_id','destination_airport_id'],'unique_trip');
             $table->timestamps();

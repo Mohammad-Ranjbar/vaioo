@@ -65,7 +65,7 @@ class RepresentativeController extends Controller
 
             $representative->update($validated);
 
-            return redirect(route('admin.representatives.index'))->with('success', trans('created'));
+            return redirect(route('admin.representatives.index'))->with('success', trans('messages.updated'));
 
         } catch (Exception $exception) {
             return back()->with('error', $exception->getMessage());
@@ -87,7 +87,7 @@ class RepresentativeController extends Controller
             Representative::query()->create($validated);
 
             return redirect()->route('admin.representatives.index')
-                ->with('success', 'نماینده با موفقیت ایجاد شد.');
+                ->with('success', trans('messages.created'));
 
         } catch (Exception $exception) {
             return back()->with('error', $exception->getMessage());
@@ -108,7 +108,7 @@ class RepresentativeController extends Controller
             }
             $representative->delete();
 
-            return redirect(route('admin.representatives.index'))->with('success', trans('created'));
+            return redirect(route('admin.representatives.index'))->with('success', trans('messages.deleted'));
 
         } catch (Exception $exception) {
             return back()->with('error', $exception->getMessage());

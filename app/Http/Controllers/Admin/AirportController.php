@@ -30,7 +30,7 @@ class AirportController extends Controller
 
             Airport::query()->create($validated);
 
-            return redirect(route('admin.airports.index'))->with('success', trans('created'));
+            return redirect(route('admin.airports.index'))->with('success', trans('messages.created'));
 
         } catch (Exception $exception) {
             return back()->with('error', $exception->getMessage());
@@ -62,7 +62,7 @@ class AirportController extends Controller
 
             $airport->update($validated);
 
-            return redirect(route('admin.airports.index'))->with('success', trans('updated'));
+            return redirect(route('admin.airports.index'))->with('success', trans('messages.updated'));
 
         } catch (Exception $exception) {
             return back()->with('error', $exception->getMessage());
@@ -76,7 +76,7 @@ class AirportController extends Controller
 
             $airport->delete();
 
-            return redirect(route('admin.airports.index'))->with('success', trans('deleted'));
+            return redirect(route('admin.airports.index'))->with('success', trans('messages.deleted'));
 
         } catch (Exception $exception) {
             return back()->with('error', $exception->getMessage());

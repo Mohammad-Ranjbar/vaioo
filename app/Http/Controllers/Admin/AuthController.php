@@ -30,7 +30,7 @@ class AuthController extends Controller
                 Auth::guard('admin')->login($admin);
                 return redirect()->route('admin.dashboard');
             }
-            return back()->with('error', trans('invalid_data'));
+            return back()->with('error', trans('messages.invalid_data'));
         } catch (Exception $exception) {
             return back()->with('error', $exception->getMessage())->withInput();
         }

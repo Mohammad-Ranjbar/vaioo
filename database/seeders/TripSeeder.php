@@ -18,7 +18,7 @@ class TripSeeder extends Seeder
                 'departure_date' => Carbon::now()->addDays(5)->setHour(8)->setMinute(0),
                 'arrival_date' => Carbon::now()->addDays(5)->setHour(20)->setMinute(0),
                 'capacity_weight' => 1500.50,
-                'capacity_value' => 75000.00,
+                'capacity_value' => 75000,
                 'status' => 'planning',
             ],
 
@@ -29,7 +29,7 @@ class TripSeeder extends Seeder
                 'departure_date' => Carbon::now()->subHours(2),
                 'arrival_date' => Carbon::now()->addHours(8),
                 'capacity_weight' => 2000.75,
-                'capacity_value' => 120000.00,
+                'capacity_value' => 120000,
                 'status' => 'in_progress',
             ],
 
@@ -40,8 +40,8 @@ class TripSeeder extends Seeder
                 'departure_date' => Carbon::now()->subDays(3)->setHour(14)->setMinute(30),
                 'arrival_date' => Carbon::now()->subDays(3)->setHour(23)->setMinute(45),
                 'capacity_weight' => 1800.25,
-                'capacity_value' => 95000.00,
-                'status' => 'completed',
+                'capacity_value' => 95000,
+                'status' => 'planning',
             ],
 
             [
@@ -51,7 +51,7 @@ class TripSeeder extends Seeder
                 'departure_date' => Carbon::now()->addDays(10)->setHour(16)->setMinute(15),
                 'arrival_date' => Carbon::now()->addDays(10)->setHour(22)->setMinute(30),
                 'capacity_weight' => 2200.00,
-                'capacity_value' => 150000.00,
+                'capacity_value' => 150000,
                 'status' => 'planning',
             ],
 
@@ -62,7 +62,7 @@ class TripSeeder extends Seeder
                 'departure_date' => Carbon::now()->subHours(5),
                 'arrival_date' => Carbon::now()->addHours(3),
                 'capacity_weight' => 1900.80,
-                'capacity_value' => 110000.00,
+                'capacity_value' => 110000,
                 'status' => 'in_progress',
             ],
         ];

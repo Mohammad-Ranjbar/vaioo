@@ -31,7 +31,6 @@
                             @enderror
                         </div>
 
-                        <!-- English Name (Required) -->
                         <div class="mb-3">
                             <label class="form-label" for="name_en">
                                 نام انگلیسی <span class="text-danger">*</span>
@@ -44,7 +43,6 @@
                             @enderror
                         </div>
 
-                        <!-- Airport Code (Required) -->
                         <div class="mb-3">
                             <label class="form-label" for="code">
                                 کد فرودگاه <span class="text-danger">*</span>
@@ -59,7 +57,6 @@
                             <small class="form-text text-muted">کد IATA فرودگاه (3 حرفی)</small>
                         </div>
 
-                        <!-- Country Selection (Required) -->
                         <div class="mb-3">
                             <label for="country_id" class="form-label">
                                 کشور <span class="text-danger">*</span>
