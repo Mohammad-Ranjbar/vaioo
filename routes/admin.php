@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PolicyController;
 use App\Http\Controllers\Admin\RepresentativeController;
 use App\Http\Controllers\Admin\RepresentativeDocumentController;
+use App\Http\Controllers\Admin\ShipmentController;
 use App\Http\Controllers\Admin\TripController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Middleware\AdminMiddleware;
@@ -43,6 +44,7 @@ Route::prefix('admin')->as('admin.')->group(function () {
             'representatives' => RepresentativeController::class,
             'airports' => AirportController::class,
             'trips' => TripController::class,
+            'shipments' => ShipmentController::class,
         ]);
     });
 

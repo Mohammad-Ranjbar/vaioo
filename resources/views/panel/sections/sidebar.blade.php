@@ -85,6 +85,17 @@
                     </span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('admin.shipments.index')}}">
+                    <span class="nav-icon">
+                         <i class="ri-home-office-line">
+                         </i>
+                    </span>
+                        <span class="nav-text">
+                         حمل و نقل
+                    </span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
