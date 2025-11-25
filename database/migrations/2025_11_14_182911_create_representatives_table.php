@@ -28,7 +28,7 @@ return new class extends Migration {
 
             $table->decimal('rating_average', 3)->default(0.00);
             $table->unsignedInteger('rating_count')->default(0);
-
+            $table->rememberToken();
             $table->timestamps();
         });
     }
