@@ -14,23 +14,21 @@
                         ویرایش محموله - {{ $shipment->tracking_code }}
                     </h5>
                     <hr>
-
                     <form action="{{ route('admin.shipments.update', $shipment->id) }}" method="post" role="form">
                         @csrf
                         @method('PUT')
 
-                        <!-- Trip Selection -->
                         <div class="mb-3">
                             <label for="trip_id" class="form-label">
                                 سفر <span class="text-danger">*</span>
                             </label>
                             <select class="form-select @error('trip_id') is-invalid @enderror"
                                     id="trip_id" name="trip_id" required>
-                                <option value="">-- انتخاب سفر --</option>
+                                <option value="" class="d-none">-- انتخاب سفر --</option>
                                 @foreach($trips as $trip)
                                     <option value="{{ $trip->id }}"
                                             {{ old('trip_id', $shipment->trip_id) == $trip->id ? 'selected' : '' }}>
-                                        سفر شماره {{ $trip->id }}
+                                      {{ $trip->full_title }}
                                     </option>
                                 @endforeach
                             </select>
@@ -39,18 +37,17 @@
                             @enderror
                         </div>
 
-                        <!-- User Selection -->
                         <div class="mb-3">
                             <label for="user_id" class="form-label">
                                 کاربر <span class="text-danger">*</span>
                             </label>
                             <select class="form-select @error('user_id') is-invalid @enderror"
                                     id="user_id" name="user_id" required>
-                                <option value="">-- انتخاب کاربر --</option>
+                                <option value="" class="d-none">-- انتخاب کاربر --</option>
                                 @foreach($users as $user)
                                     <option value="{{ $user->id }}"
                                             {{ old('user_id', $shipment->user_id) == $user->id ? 'selected' : '' }}>
-                                        {{ $user->name }} - {{ $user->email }}
+                                        {{ $user->full_name }}
                                     </option>
                                 @endforeach
                             </select>
@@ -59,7 +56,6 @@
                             @enderror
                         </div>
 
-                        <!-- Sender Information -->
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
@@ -179,20 +175,6 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-
-                        <!-- Tracking Code -->
-                        <div class="mb-3">
-                            <label class="form-label" for="tracking_code">
-                                کد رهگیری <span class="text-danger">*</span>
-                            </label>
-                            <input type="text" dir="ltr" id="tracking_code" name="tracking_code"
-                                   class="form-control text-left @error('tracking_code') is-invalid @enderror"
-                                   value="{{ old('tracking_code', $shipment->tracking_code) }}" required>
-                            @error('tracking_code')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
                         <button type="submit" class="btn btn-primary">
                             بروزرسانی محموله
                         </button>

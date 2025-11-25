@@ -21,7 +21,7 @@ class ShipmentController extends Controller
         $shipments = Shipment::query()
             ->with(['user', 'trip'])
             ->latest()
-            ->paginate(25);
+            ->paginate(10);
 
         return view('panel.admin-panel.shipments.index', compact('shipments'));
     }
@@ -43,7 +43,7 @@ class ShipmentController extends Controller
     public function create(): Factory|View
     {
         $users = User::query()->latest('id')->get();
-        $trips = Trip::query()->latest('id')->get();
+        $trips = Trip::query()->latest('id')->where('status','planning')->get();
 
         return view('panel.admin-panel.shipments.create', compact('users', 'trips'));
     }
@@ -57,7 +57,7 @@ class ShipmentController extends Controller
     public function edit(Shipment $shipment): Factory|View
     {
         $users = User::query()->latest()->get();
-        $trips = Trip::query()->latest()->get();
+        $trips = Trip::query()->latest('id')->where('status','planning')->get();
 
         return view('panel.admin-panel.shipments.edit', compact('shipment', 'users', 'trips'));
     }

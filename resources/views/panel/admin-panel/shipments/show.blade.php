@@ -67,14 +67,12 @@
                                         </tr>
                                         <tr>
                                             <td><strong>تاریخ ایجاد:</strong></td>
-                                            <td>{{ jdate($shipment->created_at)->format('Y/m/d H:i') }}</td>
+                                            <td dir="ltr">{{ jdate($shipment->created_at)->format('Y/m/d H:i') }}</td>
                                         </tr>
                                     </table>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Sender & Receiver Information -->
                         <div class="col-md-6">
                             <div class="card">
                                 <div class="card-header bg-light-subtle">

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Filters\TripFilter;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -28,9 +29,6 @@ class Trip extends Model
         'arrival_date' => 'datetime',
     ];
 
-    /**
-     * Scope for filtering trips
-     */
     public function scopeFilter(Builder $builder, $request): Builder
     {
         return (new TripFilter($request))->apply($builder);
@@ -49,5 +47,10 @@ class Trip extends Model
     public function destinationAirport(): BelongsTo
     {
         return $this->belongsTo(Airport::class, 'destination_airport_id');
+    }
+
+    public function fullTitle(): Attribute
+    {
+        return Attribute::get(fn() => $this->getAttribute('representative')->fullname.' :: '.$this->getAttribute('sourceAirport')->code .' -> '.$this->getAttribute('destinationAirport')->code);
     }
 }

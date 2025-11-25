@@ -16,19 +16,17 @@
 
                     <form action="{{ route('admin.shipments.store') }}" method="post" role="form">
                         @csrf
-
-                        <!-- Trip Selection -->
                         <div class="mb-3">
                             <label for="trip_id" class="form-label">
                                 سفر <span class="text-danger">*</span>
                             </label>
                             <select class="form-select @error('trip_id') is-invalid @enderror" id="trip_id"
                                     name="trip_id" required>
-                                <option value="">-- انتخاب سفر --</option>
+                                <option value="" class="d-none">-- انتخاب سفر --</option>
                                 @foreach($trips as $trip)
                                     <option value="{{ $trip->id }}"
                                             {{ old('trip_id') == $trip->id ? 'selected' : '' }}>
-                                        سفر شماره {{ $trip->id }}
+                                         {{ $trip->full_title }}
                                     </option>
                                 @endforeach
                             </select>
@@ -37,7 +35,6 @@
                             @enderror
                         </div>
 
-                        <!-- User Selection -->
                         <div class="mb-3">
                             <label for="user_id" class="form-label">
                                 کاربر <span class="text-danger">*</span>
@@ -48,7 +45,7 @@
                                 @foreach($users as $user)
                                     <option value="{{ $user->id }}"
                                             {{ old('user_id') == $user->id ? 'selected' : '' }}>
-                                        {{ $user->name }} - {{ $user->email }}
+                                        {{ $user->fullname }}
                                     </option>
                                 @endforeach
                             </select>
@@ -56,8 +53,6 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-
-                        <!-- Sender Information -->
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
@@ -87,7 +82,6 @@
                             </div>
                         </div>
 
-                        <!-- Receiver Information -->
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
@@ -117,7 +111,6 @@
                             </div>
                         </div>
 
-                        <!-- Package Details -->
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
@@ -135,7 +128,7 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label class="form-label" for="declared_value">
-                                        ارزش اعلامی (ریال) <span class="text-danger">*</span>
+                                        ارزش اعلامی (تومان) <span class="text-danger">*</span>
                                     </label>
                                     <input type="number" id="declared_value" name="declared_value"
                                            class="form-control @error('declared_value') is-invalid @enderror"
@@ -146,8 +139,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Description -->
                         <div class="mb-3">
                             <label class="form-label" for="description">
                                 توضیحات
@@ -160,7 +151,6 @@
                             @enderror
                         </div>
 
-                        <!-- Status -->
                         <div class="mb-3">
                             <label for="status" class="form-label">
                                 وضعیت <span class="text-danger">*</span>
@@ -186,21 +176,6 @@
                             @error('status')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
-                        </div>
-
-                        <!-- Tracking Code -->
-                        <div class="mb-3">
-                            <label class="form-label" for="tracking_code">
-                                کد رهگیری <span class="text-danger">*</span>
-                            </label>
-                            <input type="text" dir="ltr" id="tracking_code" name="tracking_code"
-                                   class="form-control text-left @error('tracking_code') is-invalid @enderror"
-                                   value="{{ old('tracking_code') ?? 'TRK' . strtoupper(Str::random(3)) . rand(100000, 999999) }}"
-                                   required>
-                            @error('tracking_code')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                            <small class="form-text text-muted">کد رهگیری منحصر به فرد برای پیگیری محموله</small>
                         </div>
 
                         <button type="submit" class="btn btn-success">
