@@ -1,3 +1,5 @@
+
+<div class="card-footer d-flex justify-content-center">
 @if (isset($paginator) && $paginator->lastPage() > 1)
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-end mb-0">
@@ -41,3 +43,4 @@
         </ul>
     </nav>
 @endif
+</div>

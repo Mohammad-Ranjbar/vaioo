@@ -96,7 +96,8 @@
                                                               icon="solar:eye-broken"></iconify-icon>
                                             </a>
 
-                                            <button type="button" class="btn btn-soft-danger btn-sm" data-bs-toggle="modal"
+                                            <button type="button" class="btn btn-soft-danger btn-sm"
+                                                    data-bs-toggle="modal"
                                                     data-bs-target="#deleteModal{{$shipment->id}}">
                                                 <iconify-icon class="align-middle fs-18"
                                                               icon="solar:trash-bin-minimalistic-2-broken"></iconify-icon>
@@ -107,13 +108,18 @@
                                                  aria-labelledby="deleteModalLabel{{$shipment->id}}" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered">
                                                     <div class="modal-content">
-                                                        <form action="{{route('admin.shipments.destroy',$shipment->id)}}" method="POST">
+                                                        <form
+                                                            action="{{route('admin.shipments.destroy',$shipment->id)}}"
+                                                            method="POST">
                                                             @csrf
                                                             @method('DELETE')
                                                             <div class="modal-body text-center">
-                                                                <iconify-icon icon="solar:warning-circle-broken" class="text-warning fs-48"></iconify-icon>
-                                                                <h5 class="mt-3">آیا از حذف این محموله اطمینان دارید؟</h5>
-                                                                <p class="text-muted">کد رهگیری: <strong>{{$shipment->tracking_code}}</strong></p>
+                                                                <iconify-icon icon="solar:warning-circle-broken"
+                                                                              class="text-warning fs-48"></iconify-icon>
+                                                                <h5 class="mt-3">آیا از حذف این محموله اطمینان
+                                                                    دارید؟</h5>
+                                                                <p class="text-muted">کد رهگیری:
+                                                                    <strong>{{$shipment->tracking_code}}</strong></p>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-info"
@@ -136,9 +142,7 @@
                         </table>
                     </div>
                 </div>
-                <div class="card-footer">
-                    @include('panel.sections.pagination',['paginator' => $shipments])
-                </div>
+                @include('panel.sections.pagination',['paginator' => $shipments])
             </div>
         </div>
     </div>

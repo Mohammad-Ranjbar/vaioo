@@ -174,9 +174,7 @@
                         </table>
                     </div>
                 </div>
-                <div class="card-footer">
                     @include('panel.sections.pagination',['paginator' => $representatives])
-                </div>
             </div>
         </div>
     </div>

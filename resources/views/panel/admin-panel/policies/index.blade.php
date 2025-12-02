@@ -7,58 +7,58 @@
 @endsection
 @section('content')
 
-{{--    <div class="row">--}}
-{{--        <div class="col-lg-12">--}}
-{{--            <div class="card">--}}
-{{--                <div class="card-header border-0">--}}
-{{--                    <div class="row justify-content-between">--}}
-{{--                        <div class="col-lg-6">--}}
-{{--                            <div class="row align-items-center">--}}
-{{--                                <div class="col-lg-6">--}}
-{{--                                    <form class="app-search d-none d-md-block me-auto">--}}
-{{--                                        <div class="position-relative">--}}
-{{--                                            <input autocomplete="off" class="form-control" placeholder="جستجو نماینده"--}}
-{{--                                                   type="search" value="" />--}}
-{{--                                            <iconify-icon class="search-widget-icon"--}}
-{{--                                                          icon="solar:magnifer-broken"></iconify-icon>--}}
-{{--                                        </div>--}}
-{{--                                    </form>--}}
-{{--                                </div>--}}
-{{--                                <div class="col-lg-4">--}}
-{{--                                    <h5 class="text-dark fw-medium mb-0">--}}
-{{--                                        311--}}
-{{--                                        <span class="text-muted">--}}
-{{--			   نماینده--}}
-{{--			  </span>--}}
-{{--                                    </h5>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="col-lg-6">--}}
-{{--                            <div class="text-md-end mt-3 mt-md-0">--}}
-{{--                                <button class="btn btn-outline-primary me-1" type="button">--}}
-{{--                                    <i class="ri-settings-2-line me-1">--}}
-{{--                                    </i>--}}
-{{--                                    تنظیمات بیشتر--}}
-{{--                                </button>--}}
-{{--                                <button class="btn btn-outline-primary me-1" type="button">--}}
-{{--                                    <i class="ri-filter-line me-1">--}}
-{{--                                    </i>--}}
-{{--                                    فیلترها--}}
-{{--                                </button>--}}
-{{--                                <button class="btn btn-success me-1" type="button">--}}
-{{--                                    <i class="ri-add-line">--}}
-{{--                                    </i>--}}
-{{--                                    نماینده جدید--}}
-{{--                                </button>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <!-- end col-->--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
+    {{--    <div class="row">--}}
+    {{--        <div class="col-lg-12">--}}
+    {{--            <div class="card">--}}
+    {{--                <div class="card-header border-0">--}}
+    {{--                    <div class="row justify-content-between">--}}
+    {{--                        <div class="col-lg-6">--}}
+    {{--                            <div class="row align-items-center">--}}
+    {{--                                <div class="col-lg-6">--}}
+    {{--                                    <form class="app-search d-none d-md-block me-auto">--}}
+    {{--                                        <div class="position-relative">--}}
+    {{--                                            <input autocomplete="off" class="form-control" placeholder="جستجو نماینده"--}}
+    {{--                                                   type="search" value="" />--}}
+    {{--                                            <iconify-icon class="search-widget-icon"--}}
+    {{--                                                          icon="solar:magnifer-broken"></iconify-icon>--}}
+    {{--                                        </div>--}}
+    {{--                                    </form>--}}
+    {{--                                </div>--}}
+    {{--                                <div class="col-lg-4">--}}
+    {{--                                    <h5 class="text-dark fw-medium mb-0">--}}
+    {{--                                        311--}}
+    {{--                                        <span class="text-muted">--}}
+    {{--			   نماینده--}}
+    {{--			  </span>--}}
+    {{--                                    </h5>--}}
+    {{--                                </div>--}}
+    {{--                            </div>--}}
+    {{--                        </div>--}}
+    {{--                        <div class="col-lg-6">--}}
+    {{--                            <div class="text-md-end mt-3 mt-md-0">--}}
+    {{--                                <button class="btn btn-outline-primary me-1" type="button">--}}
+    {{--                                    <i class="ri-settings-2-line me-1">--}}
+    {{--                                    </i>--}}
+    {{--                                    تنظیمات بیشتر--}}
+    {{--                                </button>--}}
+    {{--                                <button class="btn btn-outline-primary me-1" type="button">--}}
+    {{--                                    <i class="ri-filter-line me-1">--}}
+    {{--                                    </i>--}}
+    {{--                                    فیلترها--}}
+    {{--                                </button>--}}
+    {{--                                <button class="btn btn-success me-1" type="button">--}}
+    {{--                                    <i class="ri-add-line">--}}
+    {{--                                    </i>--}}
+    {{--                                    نماینده جدید--}}
+    {{--                                </button>--}}
+    {{--                            </div>--}}
+    {{--                        </div>--}}
+    {{--                        <!-- end col-->--}}
+    {{--                    </div>--}}
+    {{--                </div>--}}
+    {{--            </div>--}}
+    {{--        </div>--}}
+    {{--    </div>--}}
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
@@ -166,9 +166,7 @@
                         </table>
                     </div>
                 </div>
-                <div class="card-footer">
-                    @include('panel.sections.pagination',['paginator' => $policies])
-                </div>
+                @include('panel.sections.pagination',['paginator' => $policies])
             </div>
         </div>
     </div>

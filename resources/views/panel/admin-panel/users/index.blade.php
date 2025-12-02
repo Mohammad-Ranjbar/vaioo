@@ -170,9 +170,8 @@
                         </table>
                     </div>
                 </div>
-                <div class="card-footer">
+
                     @include('panel.sections.pagination',['paginator' => $users])
-                </div>
             </div>
         </div>
     </div>

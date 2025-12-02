@@ -113,9 +113,9 @@
                         </table>
                     </div>
                 </div>
-                <div class="card-footer">
-                    @include('panel.sections.pagination',['paginator' => $airports])
-                </div>
+
+                @include('panel.sections.pagination',['paginator' => $airports])
+
             </div>
         </div>
     </div>

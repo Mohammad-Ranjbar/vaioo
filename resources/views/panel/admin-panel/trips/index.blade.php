@@ -32,10 +32,10 @@
                                 <th>تاریخ رفت</th>
                                 <th>تاریخ برگشت</th>
                                 <th>ظرفیت وزن
-                                (کیلوگرم)
+                                    (کیلوگرم)
                                 </th>
                                 <th>ظرفیت ارزش
-                                (تومان)
+                                    (تومان)
                                 </th>
                                 <th>وضعیت</th>
                                 <th>تاریخ ایجاد</th>
@@ -88,7 +88,8 @@
                                                  aria-labelledby="deleteModalLabel{{$trip->id}}" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered">
                                                     <div class="modal-content">
-                                                        <form action="{{route('admin.trips.destroy',$trip->id)}}" method="POST">
+                                                        <form action="{{route('admin.trips.destroy',$trip->id)}}"
+                                                              method="POST">
                                                             @method('DELETE')
                                                             @csrf
                                                             <div class="modal-body">
@@ -117,9 +118,7 @@
                         </table>
                     </div>
                 </div>
-                <div class="card-footer">
-                    @include('panel.sections.pagination',['paginator' => $trips])
-                </div>
+                @include('panel.sections.pagination',['paginator' => $trips])
             </div>
         </div>
     </div>
