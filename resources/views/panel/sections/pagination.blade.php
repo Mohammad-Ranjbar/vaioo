@@ -3,14 +3,11 @@
 @if (isset($paginator) && $paginator->lastPage() > 1)
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-end mb-0">
-            {{-- Previous Page --}}
             <li class="page-item {{ ($paginator->onFirstPage()) ? 'disabled' : '' }}">
                 <a class="page-link" href="{{ !$paginator->onFirstPage() ? $paginator->previousPageUrl() : 'javascript:void(0);' }}">
                     قبلی
                 </a>
             </li>
-
-            {{-- Page Numbers --}}
             @php
                 $halfTotalLinks = floor(7 / 2);
                 $from = $paginator->currentPage() - $halfTotalLinks;
@@ -33,8 +30,6 @@
                     </li>
                 @endif
             @endfor
-
-            {{-- Next Page --}}
             <li class="page-item {{ ($paginator->currentPage() == $paginator->lastPage()) ? 'disabled' : '' }}">
                 <a class="page-link" href="{{ ($paginator->currentPage() == $paginator->lastPage()) ? 'javascript:void(0);' : $paginator->nextPageUrl() }}">
                     بعدی
