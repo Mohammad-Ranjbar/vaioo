@@ -1,10 +1,11 @@
-/**
-* Theme: Lahomes - Real Estate Admin Dashboard Template
-* Author: Techzaa
-* Module/App: Main Js
-*/
+const maxLength = 11;
+const input = document.getElementById('mobile');
 
-// Components
+input?.addEventListener('input', function() {
+    if (this.value.length > maxLength) {
+        this.value = this.value.substring(0, maxLength);
+    }
+});
 class Components {
     initBootstrapComponents() {
 

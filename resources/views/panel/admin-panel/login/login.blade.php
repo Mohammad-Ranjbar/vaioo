@@ -13,7 +13,7 @@
     <link href="{{asset('panel/css/vendor.min.css')}}" rel="stylesheet"/>
     <link href="{{asset('panel/css/icons.min.css')}}" rel="stylesheet"/>
     <link href="{{asset('panel/css/app.min.css')}}" rel="stylesheet">
-    <script src="{{asset('anel/js/config.min.js')}}'"></script>
+    <script src="{{asset('panel/js/config.min.js')}}"></script>
 </head>
 <body class="authentication-bg">
 <div class="account-pages pt-2 pt-sm-5 pb-4 pb-sm-5">
@@ -25,10 +25,10 @@
                     <div class="card-body px-3 py-5">
                         <div class="mx-auto mb-4 text-center auth-logo">
                             <a class="logo-dark" href="#">
-                                <img alt="logo dark" height="32" src="assets/images/logo-dark.png"/>
+                                <img alt="logo dark"  class="w-50" src="{{asset('/panel/images/logo/logo-panel.jpeg')}}"/>
                             </a>
                             <a class="logo-light" href="#">
-                                <img alt="logo light" height="28" src="assets/images/logo-light.png"/>
+                                <img alt="logo light" class="w-50" src="{{asset('/panel/images/logo/logo-panel.jpeg')}}"/>
                             </a>
                         </div>
                         <h2 class="fw-bold text-uppercase text-center fs-18">
@@ -41,7 +41,8 @@
                                     <label class="form-label" for="mobile">
                                         شماره موبایل
                                     </label>
-                                    <input class="form-control bg-light bg-opacity-50 border-light py-2 text-center" required id="mobile" name="mobile" />
+                                    <input class="form-control bg-light bg-opacity-50 border-light py-2 text-center"
+                                           required id="mobile" name="mobile" />
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="password">
@@ -67,6 +68,5 @@
 <script src="{{asset('panel/js/vendor.js')}}"></script>
 
 <script src="{{asset('panel/js/app.js')}}"></script>
-
 </body>
 </html>
