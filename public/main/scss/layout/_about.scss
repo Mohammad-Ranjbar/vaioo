@@ -1,0 +1,553 @@
+@use '../utils' as *;
+
+/*----------------------------------------*/
+/*  02. about css start
+/*----------------------------------------*/
+.it-about {
+    &-left {
+        @media #{$md,$xs}{
+            margin-bottom: 50px;
+        }
+        & p {
+            font-weight: 600;
+            font-size: 17px;
+            color: #525252;
+            @media #{$xl,$lg,$md}{
+                & br{
+                    display: none;
+                }
+            }
+            @media #{$xs}{
+                font-size: 15px;
+                & br{
+                    display: none;
+                }
+            }
+        }
+    }
+    &-thumb {
+        mask-image: url(../img/about/about-1.svg);
+        -webkit-mask-image: url(../img/about/about-1.svg);
+        width: 100%;
+        mask-repeat: no-repeat;
+        background-position: center center;
+        overflow: hidden;
+        height: 635px;
+        margin-left: 105px;
+        @media #{$lg}{
+            margin-left: 0;
+        }
+        @media #{$md}{
+            margin-left: 50px;
+        }
+        @media #{$xs}{
+            margin-left: 0;
+            mask-image: none;
+            height: 100%;
+            -webkit-mask-image: none;
+        }
+        & img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+    &-thumb-wrap {
+        @media #{$xl}{
+            margin-left: -100px;
+        }
+        @media #{$lg}{
+            margin-left: 50px;
+        }
+    }
+    &-shape {
+        &-1 {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            z-index: -1;
+            opacity: .4;   
+        }
+        &-2 {
+            position: absolute;
+            top: 59%;
+            left: 0;
+            z-index: -1;
+            transform-origin: top center;
+            animation: itswing 1.5s forwards infinite alternate;
+            @media #{$lg}{
+                left: -21%;
+            }
+            @media #{$xs}{
+                display: none;
+            }
+        }
+    }
+    &-list {
+        & ul {
+            & li {
+                padding-left: 30px;
+                position: relative;
+                list-style-type: none;
+                margin-bottom: 17px;
+                font-size: 18px;
+                color: var(--it-common-black);
+                & span {
+                    position: absolute;
+                    top: -1px;
+                    left: 0;
+                }
+            }
+        }
+    }
+}
+.it-about-2 {
+    &-top-right {
+        margin-left: 95px;
+        @media #{$md,$xs}{
+            margin-left: 0;
+            margin-top: 30px;
+        }
+        & p {
+            font-weight: 600;
+            font-size: 17px;
+            margin-bottom: 0;
+        }
+    }
+    &-thumb {
+        position: relative;
+        padding-left: 35px;
+        padding-top: 35px;
+        @media #{$lg}{
+           display: inline-block;
+        }
+        @media #{$md,$xs}{
+            margin-bottom: 70px;
+           display: inline-block;
+        }
+        & img {
+            max-width: inherit;
+            border: 5px solid #fff;
+            @media #{$xl,$lg,$md,$xs}{
+                max-width: 100%;
+            }
+        }
+        &::after {
+            position: absolute;
+            content: '';
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: calc(100% - 75px);
+            z-index: -1;
+            background-color: var(--it-theme-1);
+            @media #{$xl,$lg,$md,$xs}{
+                width: 90%;
+            }
+        }
+    }
+    &-tab {
+        &-btn {
+            & ul {
+                padding-bottom: 10px;
+                border-bottom: 1px solid #F4F4F4;
+                & li {
+                    &:not(:last-child){
+                        margin-right: 78px;
+                        @media #{$xs}{
+                            margin-right: 30px;
+                        }
+                    }
+                    & button {
+                        font-weight: 600;
+                        font-size: 22px;
+                        padding: 0;
+                        position: relative;
+                        transition: .3s;
+                        color: var(--it-common-black);
+                        @media #{$xs}{
+                           font-size: 18px;
+                        }
+                        &.active {
+                            color: var(--it-theme-1);
+                            &::after{
+                                width: 100%;
+                                opacity: 1;
+                                visibility: visible;
+                            }
+                        }
+                        &:hover {
+                            color: var(--it-theme-1);
+                            &::after{
+                                width: 100%;
+                                opacity: 1;
+                                visibility: visible;
+                            }
+                        }
+                        &::after{
+                            position: absolute;
+                            content: '';
+                            bottom: -11px;
+                            left: 0;
+                            width: 0;
+                            height: 2px;
+                            opacity: 0;
+                            visibility: hidden;
+                            transition: .3s;
+                            background-color: var(--it-theme-1);
+                        }
+                    }
+                }
+            }
+        }
+        &-content {
+            & p {
+                font-weight: 600;
+                font-size: 17px;
+                line-height: 1.76;
+                margin-bottom: 12px;
+                color: var(--it-text-body);
+                @media #{$xl,$lg}{
+                    font-size: 15px;
+                }
+                @media #{$xs}{
+                    font-size: 14px;
+                }
+            }
+            &-wrap {
+                @media #{$xl,$lg,$md,$xs}{
+                    margin-bottom: 40px;
+                }
+            }
+        }
+    }
+    &-funfact {
+        &-number {
+            font-weight: 700;
+            font-size: 55px;
+            margin-bottom: 10px;
+            color: var(--it-common-black);
+            @media #{$xl,$lg,$md}{
+                font-size: 34px;
+                margin-bottom: 15px;
+            }
+            @media #{$xs}{
+                font-size: 25px;
+                margin-bottom: 15px;
+            }
+            & i {
+                font-style: normal;
+            }
+        }
+        & span {
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 1.71;
+            padding-left: 20px;
+            color: var(--it-text-body);
+            display: inline-block;
+            position: relative;
+            @media #{$lg}{
+                font-size: 15px;
+            }
+            &::before {
+                position: absolute;
+                left: 0;
+                top: 9px;
+                content: '';
+                width: 8px;
+                height: 8px;
+                background-color: var(--it-theme-1);
+            }
+        }
+    }
+    &-right {
+        margin-left: 85px;
+        @media #{$xl}{
+            margin-left: 0;
+        }
+        @media #{$lg,$md,$xs}{
+            margin-left: 0;
+            margin-bottom: 50px;
+        }
+    }
+}
+.it-about-3 {
+    &-area {
+        & .it-about-left {
+            & p {
+                margin-right: 70px;
+                @media #{$xl,$md,$xs}{
+                    margin-right: 0;
+                } 
+            }
+        }
+        & .it-about-2-funfact {
+            padding-left: 38px;
+            @media #{$xl,$lg,$md}{
+                padding-left: 15px;
+            } 
+            @media #{$xs}{
+                padding: 0;
+            } 
+        }
+        & .it-about-2-funfcat-wrap {
+            @media #{$xl,$lg,$md,$xs}{
+                margin-top: 50px;
+            } 
+            & .row {
+                [class*=col-]{
+                    & .it-about-2-funfact  {
+                        border-left: 1px solid rgba($color: #0F313A, $alpha: .1);
+                        @media #{$md,$xs}{
+                            border-left: none;
+                        } 
+                    }
+                }
+            }
+        }
+
+    }
+    
+    &-thumb {
+        &.left-img{
+            margin-left: -125px;
+            @media #{$xxl,$xl,$lg,$md,$xs}{
+                margin-left: 0;
+            }
+            & img{
+                max-width: inherit;
+                @media #{$lg,$md,$xs}{
+                    max-width: 100%;
+                }
+            }
+        }
+        & img {
+            @media #{$lg}{
+                margin-top: 50px;
+            } 
+            @media #{$md,$xs}{
+                width: 100%;
+                margin-top: 50px;
+            } 
+        }
+    }
+    &-shape-1 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        opacity: 0.4;
+    }
+}
+.it-about-4 {
+    &-area {
+        @media #{$xs}{
+            padding-bottom: 130px;
+        } 
+    }
+    & .it-about-left p {
+        color: var(--it-common-black);
+    }
+    &-thumb {
+        &-sm {
+            position: absolute;
+            right: -6.5%;
+            bottom: 0;
+            @media #{$xl}{
+                right: -12.5%;
+            } 
+            @media #{$lg}{
+                right: 10.5%;
+                bottom: -32px;
+            } 
+            @media #{$md}{
+                right: 12.5%;
+            } 
+            @media #{$xs}{
+                margin-top: 20px;
+                margin-bottom: 20px;
+                position: static;
+            } 
+            & img {
+                border: 5px solid #fff;
+                @media #{$xs}{
+                    width: 100%;
+                }
+            }
+        }
+        &-wrap {
+            @media #{$md}{
+                margin: 0px;
+                margin-bottom: 100px;
+            }
+        }
+    }
+    &-client {
+        &-info {
+            & h5 {
+                font-weight: 600;
+                font-size: 30px;
+                color: var(--it-common-black);
+            }
+            & span {
+                font-weight: 600;
+                font-size: 17px;
+                color: var(--it-theme-1);
+            }
+        }
+        &-box {
+            position: absolute;
+            bottom: -10%;
+            left: 34%;
+            z-index: 1;
+            padding: 10px 20px;
+            padding-right: 55px;
+            background-color: var(--it-gray-1);
+            box-shadow: 0 4px 10px 0 rgba(15, 49, 58, 0.1);
+            animation: ittranslateX2 4s infinite alternate;
+            @media #{$lg}{
+                left: 0;
+            }
+            @media #{$xs}{
+                position: static;
+                animation: none;
+            } 
+        }
+    }
+    &-left {
+        margin-left: 77px;
+        @media #{$lg,$md,$xs}{
+            margin-left: 0;
+            margin-bottom: 50px;
+        }
+        & p{
+            font-size: 16px;
+            @media #{$xs}{
+                & br{
+                    display: none;
+                }
+            }
+        }
+    }
+    &-thumb {
+        & img {
+            @media #{$xs}{
+                width: 100%;
+            }
+        }
+    }
+    &-shape {
+        &-1 {
+            position: absolute;
+            top: 4%;
+            right: 8%;
+            animation: itupdown 0.8s infinite alternate;
+            @media #{$xl}{
+                right: -10%;
+            }
+            @media #{$lg}{
+                right: 25%;
+            }
+            @media #{$xs}{
+                display: none;
+            }
+        }
+        &-2 {
+            position: absolute;
+            bottom: 18%;
+            right: -4%;
+            z-index: -1;
+            @media #{$xxl}{
+                right: -19%;
+            } 
+            @media #{$xl}{
+                right: -19%;
+                transform: scale(.6);
+            } 
+        }
+    }
+}
+.it-about-5 {
+    &-thumb {
+        & img {
+            max-width: inherit;
+            @media #{$xl,$lg} {
+                max-width: 100%;
+            }
+            @media #{$md,$xs} {
+                width: 100%;
+            }
+        }
+        &.thumb-style-1 {
+            transform: translateX(-70px);
+            @media #{$xl,$lg,$md,$xs} {
+                transform: translateX(0);
+            }
+        }
+    }
+    &-text {
+        & p {
+            font-weight: 600;
+            font-size: 17px;
+            line-height: 1.76;
+            margin-right: 80px;
+            color: var(--it-common-black);
+            @media #{$xl,$lg,$md,$xs} {
+                margin-right: 0;
+            }
+        }
+    }
+    &-content {
+        margin-left: 35px;
+        @media #{$md,$xs} {
+            margin-left: 0 ;
+        }
+    }
+    &-area {
+        & .it-about-2-funfact-wrap {
+            padding: 20px 50px;
+            background-color: var(--it-gray-1);
+            @media #{$xl} {
+                margin-right: 0;
+                padding: 20px 30px;
+            }
+            @media #{$lg,$md,$xs} {
+                margin-right: 0;
+                padding: 20px 30px;
+                margin-bottom: 50px;
+            }
+        }
+        & .it-about-2-funfact-number {
+            margin-bottom: 6px;
+        }
+        & .it-about-2-funfact span {
+            @media #{$md,$xs} {
+                font-size: 12px;
+            }
+        }
+        & .it-about-2-funfact {
+            @media #{$xs} {
+                margin-bottom: 20px;
+                text-align: center;
+            }
+        }
+    }
+    &-shape {
+        &-1 {
+            position: absolute;
+            top: 5%;
+            right: 27%;
+            z-index: -1;
+        }
+        &-2 {
+            position: absolute;
+            top: 7%;
+            right: 0%;
+            z-index: -1;
+            @media #{$xl} {
+                right: -20%;
+            }
+        }
+    }
+}

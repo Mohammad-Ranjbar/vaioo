@@ -1,0 +1,259 @@
+@use '../utils' as *;
+
+/*----------------------------------------*/
+/*  14. hero css start
+/*----------------------------------------*/
+.it-hero {
+    &-title {
+        font-weight: 700 ;
+        font-size: 75px;
+        line-height: 1.13;
+        margin-bottom: 15px;
+        letter-spacing: -1px;
+        @media #{$xxl}{
+            font-size: 70px;
+        }
+        @media #{$xl}{
+            font-size: 72px;
+            & br {
+                display: none;
+            }
+        }
+        @media #{$lg}{
+            font-size: 64px;
+            & br {
+                display: none;
+            }
+        }
+        @media #{$md}{
+            font-size: 48px;
+            & br {
+                display: none;
+            }
+        }
+        @media #{$xs}{
+            font-size: 33px;
+            & br {
+                display: none;
+            }
+        }
+        @media #{$sm}{
+            font-size: 48px;
+            & br {
+                display: none;
+            }
+        }
+        & span {
+            color: var(--it-theme-1);
+        }
+    }
+    &-content {
+        padding-top: 130px;
+        padding-bottom: 155px;
+        @media #{$xl}{
+            padding-top: 110px;
+            padding-bottom: 120px;
+        }
+        @media #{$lg}{
+            padding-top: 100px;
+            padding-bottom: 110px;
+        }
+        @media #{$md}{
+            padding-top: 80px;
+            padding-bottom: 90px;
+        }
+        @media #{$xs}{
+            padding-top: 80px;
+            padding-bottom: 80px;
+        }
+        & p {
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 1.5;
+            color: #525252;
+            @media #{$xl}{
+                font-size: 17px;
+                padding: 0 70px;
+            }
+            @media #{$lg}{
+                font-size: 17px;
+                padding: 0 100px;
+            }
+            @media #{$md}{
+                font-size: 15px;
+                padding: 0 50px;
+            }
+            @media #{$xs}{
+                font-size: 14px;
+                & br {
+                    display: none;
+                }
+            }
+            @media #{$sm}{
+                font-size: 16px;
+                & br {
+                    display: none;
+                }
+            }
+        }
+        & .it-btn-black  {
+            @media #{$xs}{
+                margin: 0 50px;
+                margin-bottom: 20px;
+            }
+            @media #{$sm}{
+                margin-right: 30px;
+                margin-left: 0;
+            }
+        }
+    }
+    &-shape {
+        &-1 {
+            position: absolute;
+            bottom: 10%;
+            left: 0;
+            z-index: -1;
+            width: 100%;
+            opacity: .4;
+        }
+        &-2 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            opacity: .3;
+        }
+    }
+    &-ptb {
+        padding-top: 215px;
+        padding-bottom: 110px;
+        @media #{$lg}{
+            padding-top: 180px;
+        } 
+        @media #{$md}{
+            padding-top: 180px;
+        } 
+        @media #{$xs}{
+            padding-top: 150px;
+            padding-bottom: 80px;
+        } 
+        @media #{$sm}{
+            padding-top: 150px;
+            padding-bottom: 100px;
+        } 
+        
+        & .it-hero-content {
+            padding: 0;
+            & p {
+                margin-top: 20px;
+                @media #{$xl}{
+                    padding-right: 0;
+                    padding-left: 0;
+                } 
+                @media #{$lg}{
+                    padding-right: 60px;
+                    padding-left: 0;
+                    font-size: 20px;
+                    & br {
+                        display: none;
+                    }
+                } 
+                @media #{$md}{
+                    padding-right: 0;
+                    padding-left: 0;
+                    font-size: 18px;
+                    & br {
+                        display: none;
+                    }
+                } 
+                @media #{$xs}{
+                    padding-right: 0;
+                    padding-left: 0;
+                    font-size: 14px;
+                    & br {
+                        display: none;
+                    }
+                } 
+            }
+        }
+        & .it-hero-title {
+            @media #{$xl}{
+                font-size: 60px;
+                & br{
+                    display: none;
+                }
+            }  
+        }
+    } 
+    &-btn {
+        @media #{$xs}{
+           flex-wrap: wrap !important;
+        } 
+    }
+    &-style-2 {
+        & .it-hero-content .it-btn-black {
+            @media #{$xs}{
+                margin: 0;
+            }
+        }
+    }
+}
+.it-hero-2 {
+    &-title {
+        font-weight: 700;
+        font-size: 60px;
+        line-height: 1.25;
+        letter-spacing: -1px;
+        @media #{$xl}{
+            font-size: 55px;
+            & br {
+                display: none;
+            }
+        } 
+        @media #{$lg}{
+            font-size: 50px;
+            & br {
+                display: none;
+            }
+        } 
+        @media #{$xs}{
+            font-size: 30px;
+            & br {
+                display: none;
+            }
+        } 
+        @media #{$sm}{
+            font-size: 42px;
+            & br {
+                display: none;
+            }
+        } 
+    }
+    &-area {
+        border-bottom: 20px solid var(--it-theme-1);
+        & .it-hero-ptb {
+            padding-bottom: 135px;
+            @media #{$xs}{
+                padding-top: 150px;
+            } 
+        }
+    }
+    &-shape {
+        &-1 {
+            position: absolute;
+            bottom: -25%;
+            left: 0;
+            z-index: -1;
+            opacity: .5;
+            @media #{$xl}{
+                bottom: -9%;
+            } 
+            @media #{$lg,$md}{
+                bottom: -5%;
+            } 
+            @media #{$xs}{
+                bottom: -5%;
+            } 
+        }
+    }
+}

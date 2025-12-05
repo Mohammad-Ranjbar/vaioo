@@ -1,0 +1,162 @@
+
+@use '../utils' as *;
+
+/*----------------------------------------*/
+/*  28. tracking css start
+/*----------------------------------------*/
+.it-tracking {
+    &-content {
+        padding: 55px 40px;
+        margin-right: 25px;
+        background-color: var(--it-common-black);
+        @media #{$xl,$lg}{
+            padding: 45px 20px;
+        }
+        @media #{$md}{
+            margin-bottom: 50px;
+        }
+        @media #{$xs}{
+            margin-bottom: 50px;
+            padding: 45px 15px;
+            margin-right: 0;
+        }
+    }
+    &-input {
+        &-box {
+            & input {
+                line-height: 50px;
+                height: 50px;
+                width: 100%; 
+                font-weight: 400;
+                font-size: 14px; 
+                &::placeholder {
+                    font-weight: 400;
+                    font-size: 14px;  
+                }
+                @media #{$lg}{
+                    width: 60%;
+                    height: 46px;
+                    line-height: 46px;
+                }          
+                @media #{$md}{
+                    height: 46px;
+                    line-height: 46px;
+                }          
+                @media #{$xs}{
+                    height: 46px;
+                    line-height: 46px;
+                }          
+            }
+            & .it-btn-orange {
+                padding: 14px 40px;
+            }
+            & label {
+                font-weight: 600;
+                font-size: 17px;
+                color: var(--it-common-white);
+                margin-bottom: 10px;
+            }
+            & p {
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 1.71;
+                color: #fff;
+                @media #{$xl,$lg,$md,$xs}{
+                    & br {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+    &-form-wrap {
+        @media #{$xl,$lg,$xs}{
+            flex-wrap: wrap;
+        }
+        & .it-btn-orange {
+            @media #{$xs}{
+                margin-left: 0;
+                margin-top: 20px;
+            }
+            @media #{$sm}{
+                margin-top: 0;
+            }
+        }
+    }
+    &-top {
+        @media #{$xs}{
+            flex-wrap: wrap;
+        }
+    }
+    &-textarea-box {
+        & textarea {
+            height: 250px;
+            font-weight: 400;
+            font-size: 14px;
+            @media #{$lg,$md,$xs}{
+                height: 220px;
+            }
+            &::placeholder {
+                font-weight: 400;
+                font-size: 14px;  
+            }
+        }
+    }
+    &-line {
+        border-top: 1px solid var(--it-common-white);
+        & span {
+            position: relative;
+            padding-top: 12px;
+            color: var(--it-common-white);
+            @media #{$xs}{
+                font-size: 10px;
+            }
+            &:last-child {
+                &::after {
+                    left: auto;
+                    right: -1px;
+                }
+                &::before {
+                    left: auto;
+                    right: 3px;
+                }
+            }
+            &::after {
+                position: absolute;
+                top: -11px;
+                left: -1px;
+                content: '';
+                border-radius: 50%;
+                transition: .3s;
+                height: 16px;
+                width: 16px;
+                background-color: var(--it-theme-1);
+            }
+            &::before {
+                position: absolute;
+                top: -8px;
+                left: 2px;
+                content: '';
+                border-radius: 50%;
+                transition: .3s;
+                height: 9px;
+                width: 9px;
+                z-index: 1;
+                background-color: var(--it-common-white);
+            }
+            &.active {
+                &::after {
+                    z-index: 2;
+                }
+            }
+        }
+    }
+    &-shape {
+        &-1 {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            z-index: -1;
+        }
+    }
+}

@@ -1,0 +1,246 @@
+@use '../utils' as *;
+
+/*----------------------------------------*/
+/*  13. header css start
+/*----------------------------------------*/
+.it-header-transparent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+}
+.it-header-top {
+    &-ptb {
+        padding: 11px 0;
+    }
+    &-list-box {
+        @media #{$xs}{
+            text-align: center;
+        }
+        @media #{$sm}{
+            text-align: start;
+        }
+        & ul {
+            & li {
+                display: inline-block;
+                list-style-type: none;
+                padding-left: 30px;
+                position: relative;
+                padding-right: 35px;
+                margin-right: 35px;
+                border-right: 1px solid rgba($color: #fff, $alpha: .21);
+                @media #{$xs}{
+                    padding-right: 0;
+                    margin-right: 0;
+                    border-right: none;
+                }
+                &:last-child {
+                    border-right: none;
+                    @media #{$xl,$lg}{
+                        margin-right: 0;
+                    }
+                }
+                &:nth-child(2){
+                    @media #{$xl,$lg,$md}{
+                        padding-right: 0;
+                        margin-right: 0;
+                        border-right: none;
+                    }
+                }
+                & span {
+                    display: inline-block;
+                    font-family: var(--it-ff-body);
+                    color: var(--it-common-white);
+                    @media #{$sm}{
+                        font-size: 13px;
+                    }
+                    & svg,i {
+                        position: absolute;
+                        top: 1px;
+                        left: 0;
+                        font-size: 20px;
+                        color: var(--it-theme-1);    
+                        @media #{$sm}{
+                            font-size: 16px;
+                            top: 3px;
+                        }              
+                    }
+                    & a {
+                        transition: .3s;
+                        &:hover {
+                            color: var(--it-theme-1);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &-social-box {
+        & a {
+            font-size: 14px;
+            display: inline-block;
+            transition: .3s;
+            color: var(--it-common-white);
+            &:not(:last-child){
+                margin-right: 15px;
+            }
+            &:hover {
+                color: var(--it-theme-1);
+            }
+        }
+    }
+    &-contact {
+        & a {
+            font-family: var(--it-ff-body);
+            color: var(--it-common-white);
+            transition: .3s;
+            &:hover {
+                color: var(--it-theme-1);
+            }
+        }
+        & span {
+            display: inline-block;
+            color: var(--it-common-white);
+            margin: 0 3px;
+        }
+    }
+}
+.it-header {
+    &-ptb {
+        @media #{$lg,$md,$xs}{
+            padding: 15px 0;
+        }
+    }
+    &-menu{
+        & > nav{
+            & > ul{
+                margin-left: 65px;
+                @media #{$xl,$lg}{
+                    margin-left: 30px;
+                }
+                & > li{
+                    list-style-type: none;
+                    display: inline-block;
+                    margin: 0px 13px;
+                    @media #{$xl}{
+                        margin: 0px 10px;
+                    }
+                    & > a{
+                        font-weight: 600;
+                        font-size: 15px;
+                        padding: 47px 0;
+                        display: inline-block;
+                        color: var(--it-common-black);
+                        font-family: var(--it-ff-heading);
+                        @media #{$xl}{
+                            padding: 30px 0; 
+                            font-size: 14px;
+                        }                     
+                    }
+                }
+            }
+        }
+    }
+    &-bar {
+        & button {
+            & span {
+                margin-left: 20px;
+                height: 48px;
+                width: 48px;
+                text-align: center;
+                line-height: 45px;
+                color: var(--it-common-white);
+                background-color: var(--it-theme-1);
+                transition: .3s;
+                display: inline-block;
+                @media #{$xs}{
+                    height: 40px;
+                    width: 40px;
+                    line-height: 40px;
+                }
+                & svg {
+                    @media #{$xs}{
+                        width: 18px;
+                    }
+                }
+            }
+        }
+    }
+    &-search {
+        margin-right: 27px;
+        @media #{$md}{
+            margin-right: 0;
+        }
+        @media #{$xs}{
+            display: none;
+        }
+    }
+    &-style-2 {
+        & .it-header-menu > nav > ul > li > a {
+            padding: 30px 0;
+        }
+    }
+    &-right-action {
+        & .it-btn-orange {
+            @media #{$xl}{
+                font-size: 15px;
+                padding: 18px 25px;
+            }
+        }
+    }
+}
+.header-sticky {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	opacity: 1;
+	visibility: visible;
+	width: 100%;
+	z-index: 999;
+	visibility: visible;
+    background-color: var(--it-common-white);
+	animation: 0.95s ease 0s normal forwards 1 running headerSlideDown;
+	box-shadow: 0px 1px 3px 0px rgba(18, 20, 32, 0.14);
+    & .it-header-menu > nav > ul > li > a {
+        padding: 27px 0;
+    }
+    &.it-header-style-4  {
+        background-color: var(--it-common-red);
+        & .it-header-wrap::after {
+            border-radius: 0;
+        }
+    }
+    &.it-header-style-2  {
+        background-color: var(--it-common-white);
+        & .it-header-border::after {
+            display: none;
+        }
+        &.it-header-border-2 {
+            border-bottom: none;
+        }
+    }
+    &.it-header-style-3  {
+        background-color: var(--it-common-white);
+    }
+    &.it-header-innar-style {
+        border-bottom: none;
+    }
+    
+}
+
+.it-onepage{
+    &-menu{
+        & li{
+            &.active {
+                & > a {                
+                    color: var(--it-theme-1);
+                }
+                &.has-dropdown::after {
+                    color: var(--it-theme-1);
+                }
+            }
+        }
+    }
+}

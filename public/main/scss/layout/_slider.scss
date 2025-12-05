@@ -1,0 +1,254 @@
+@use '../utils' as *;
+
+/*----------------------------------------*/
+/*  23. slider css start
+/*----------------------------------------*/
+.it-slider {
+    &-subtitle {
+        font-weight: 600;
+        font-size: 17px;
+        margin-bottom: 23px;
+        color: var(--it-common-white);
+        @media #{$xs}{
+            font-size: 14px;
+        }
+        &::before {
+            content: '';
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            margin-right: 12px;
+            transform: translateY(1px);
+            background-color: var(--it-theme-1);
+            @media #{$xs}{
+                width: 8px;
+                height: 8px;
+                transform: translateY(-1px);
+            }
+        }
+    }
+    &-title {
+        font-weight: 700;
+        font-size: 70px;
+        line-height: 1.14;
+        margin-bottom: 20px;
+        text-transform: capitalize;
+        color: var(--it-common-white);
+        @media #{$xl}{
+            font-size: 60px;
+        }
+        @media #{$lg}{
+            font-size: 55px;
+        }
+        @media #{$md}{
+            font-size: 60px;
+        }
+        @media #{$xs}{
+            font-size: 37px;
+        }
+        @media #{$sm}{
+            font-size: 49px;
+        }
+    }
+    &-content {
+        padding: 232px 0;
+        @media #{$xxl}{
+            padding: 170px 0;
+        }
+        @media #{$xl}{
+            padding: 150px 0;
+        }
+        @media #{$lg}{
+            padding: 150px 0;
+        }
+        @media #{$md}{
+            padding: 140px 0;
+        }
+        @media #{$xs}{
+            padding: 120px 0;
+        }
+        & p {
+            font-weight: 600;
+            font-size: 17px;
+            line-height: 1.76;
+            color: var(--it-common-white);
+            @media #{$xl,$lg}{
+                & br {
+                    display: none;
+                }
+            }
+            @media #{$xs}{
+                font-size: 14px;
+                & br {
+                    display: none;
+                }
+            }
+        }
+    }
+    &-overlay {
+        background-size: cover;
+        background-repeat: no-repeat;
+        &::after {
+            position: absolute;
+            content: '';
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(90deg, rgba(15, 49, 58, 0.8) 0%, rgba(15, 49, 58, 0.2) 99.99%, rgba(15, 49, 58, 0) 100%);
+        }
+    }
+    &-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: -2;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        background-position:center;
+        -webkit-transform: scale(1.15);
+        transform: scale(1.15);
+        -webkit-transition: opacity 1500ms ease-in, -webkit-transform 7000ms ease;
+        transition: opacity 1500ms ease-in, -webkit-transform 7000ms ease;
+        transition: transform 9000ms ease, opacity 1500ms ease-in;
+        transition: transform 9000ms ease, opacity 1500ms ease-in, -webkit-transform 9000ms ease;
+    }
+    &-arrow-box {
+        position: absolute;
+        top: 50%;
+        right: 15%;
+        z-index: 1;
+        transform: translateY(-50%);
+        @media #{$xl}{
+            right: 10%;
+        }
+        @media #{$lg}{
+            right: 7%;
+        }
+        & .arrow-prev {
+            margin-left: 45px;
+        }
+        & button {
+            padding: 0;
+            height: 60px;
+            width: 60px;
+            line-height: 60px;
+            font-weight: 400;
+            font-size: 24px;
+            transition: .3s;
+            border-radius: 50%;
+            color: var(--it-theme-1);
+            display: block;
+            background-color: var(--it-common-white);  
+            & svg {
+                display: inline-block;
+                margin-top: -2px;
+            }       
+            &:hover{
+                color: var(--it-common-white);
+                background-color: var(--it-theme-1);
+            }
+        }
+    }
+    &-wrap {
+        & .swiper-slide{
+            &.swiper-slide-active{ 
+                & .it-slider-bg{
+                    -webkit-transform: scale(1);
+                    transform: scale(1)
+                }  
+            }
+        }
+    }
+    &-active {
+        & .swiper-slide-active {
+            & .it-slider-subtitle,
+            & .it-slider-title,
+            & .it-slider-text,
+            & .it-slider-btn {
+                display: inline-block;
+                animation-fill-mode: both;
+                animation-name: fadeInUp;
+            }
+        }
+    }
+    &-style-2 {
+        & .it-slider-overlay {
+            height: 820px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            @media #{$xxl}{
+                height: 750px;
+            }
+            @media #{$xl,$lg}{
+                height: 650px;
+            }
+            @media #{$md}{
+                height: 580px;
+            }
+            @media #{$xs}{
+                height: 550px;
+            }
+            @media #{$sm}{
+                height: 600px;
+            }
+            &::after {
+                background: linear-gradient(90deg, #0f313a 0%, rgba(15, 49, 58, 0.45) 99.99%, rgba(15, 49, 58, 0) 100%);
+            }
+        }
+        & .it-slider-title {
+            font-weight: 700;
+            font-size: 75px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            text-transform: capitalize;
+            color: var(--it-common-white);
+            @media #{$xxl}{
+                font-size: 70px;
+            }
+            @media #{$xl}{
+                font-size: 62px;
+            }
+            @media #{$lg}{
+                font-size: 54px;
+            }
+            @media #{$md}{
+                font-size: 50px;
+            }
+            @media #{$xs}{
+                font-size: 31px;
+            }
+            @media #{$sm}{
+                font-size: 44px;
+            }
+        }
+        & .it-slider-content {
+            padding:0;
+        }
+    }
+}
+.it-slider-active  {
+    & .swiper-slide-active {
+        & .it-slider-subtitle {
+            animation-delay: .3s;
+            animation-duration: 0.5s;
+        }
+        & .it-slider-title {
+            animation-delay: .7s;
+            animation-duration: 0.5s;
+        }
+        & .it-slider-text {
+            animation-delay: .9s;
+            animation-duration: 0.7s;
+        }
+        & .it-slider-btn  {
+            animation-delay: 1.1s;
+            animation-duration: 0.9s;
+        }
+    }
+}

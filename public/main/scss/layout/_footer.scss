@@ -1,0 +1,266 @@
+@use '../utils' as *;
+
+/*----------------------------------------*/
+/*  11. footer css start
+/*----------------------------------------*/
+.it-footer{
+    &-widget{
+        &-title{
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 1.42;
+            text-transform: capitalize;
+            color: var(--it-common-white);
+            margin-bottom: 40px;
+            @media #{$lg,$md,$xs}{
+                font-size: 20px;
+            }
+        }
+        &-text {
+            & p {
+                font-weight: 500;
+                font-size: 17px;
+                line-height: 1.76;
+                margin-bottom: 40px;
+                color: rgba($color: #fff, $alpha: .6);
+                @media #{$xl,$lg,$md,$xs} {
+                    font-size: 14px;
+                    & br {
+                        display: none;
+                    }
+                }
+            }
+        }
+        &-menu{
+            & ul{
+                & li{
+                    list-style-type: none;
+                    &:not(:last-child){
+                        margin-bottom: 20px;
+                    }
+                    & a{
+                        transition: .3s;
+                        font-weight: 400;
+                        font-size: 17px;
+                        color: var(--it-common-white);
+                        position: relative;
+                        &::before {
+                            content: '';
+                            height: 1px;
+                            width: 4px;
+                            transition: .3s;
+                            margin-right: 14px;
+                            display: inline-block;
+                            transform: translateY(-5px);
+                            background-color: var(--it-common-white);
+                        }
+                        @media #{$xl,$lg,$md,$xs} {
+                            font-size: 14px;
+                        }
+                        &:hover {
+                            color: var(--it-theme-1);
+                            &::before {
+                                width: 10px;
+                                background-color: var(--it-theme-1);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        &-input-box {
+            & span {
+                font-weight: 600;
+                font-size: 22px;
+                color: #fff;
+                display: block;
+                margin-bottom: 20px;
+                font-family: var(--it-ff-heading);
+            }
+            & form {
+                &.input-wrap{
+                    width: 265px;
+                    display: inline-block;
+                    @media #{$xl} {
+                        width: 75%;
+                    }
+                    @media #{$lg} {
+                        width: 100%;
+                    }
+                    @media #{$xs} {
+                        width: 80%;
+                    }
+                }
+                & input {
+                    line-height: 45px;
+                    padding-right: 50px;
+                    height: 45px;
+                    background: rgba(255, 255, 255, 0.1);
+                    border: 1px solid rgba(255, 255, 255, 0);
+                    color: #F1F2EA;
+                    &::placeholder {
+                        color: #F1F2EA;
+                    }
+                    &:focus {
+                        border-color: var(--it-theme-1);
+                    }
+                    @media #{$sm}{
+                        height: 40px;
+                        line-height: 40px;
+                        font-size: 14px;
+                        padding-left: 20px;
+                    }
+                }
+            }
+            & button {
+                position: absolute;
+                top: 50%;
+                right: 0;
+                padding: 0;
+                height: 100%;
+                width: 44px;
+                color: var(--it-common-white);
+                transform: translateY(-50%);
+                background: var(--it-theme-1);
+            }
+        }
+        &-tel {
+            &-box {
+                position: relative;
+                padding-left: 26px;
+                & a {
+                    font-weight: 400;
+                    font-size: 17px;
+                    line-height: 1.76;
+                    transition: .3s;
+                    color: rgba($color: #fff, $alpha: .6);
+                    @media #{$xl,$lg,$md,$xs} {
+                        font-size: 14px;
+                    }
+                    &:hover{
+                        color: var(--it-common-white);
+                    }
+                }
+                & span {                    
+                    position: absolute;
+                    top: 6px;
+                    left: 0;
+                    color: var(--it-theme-1);
+                }
+            }
+        }
+        &-social{
+            @media #{$xs} {
+                margin-top: 15px;
+            }
+            & a{
+                font-size: 16px;
+                height: 40px;
+                width: 40px;
+                line-height: 37px;
+                text-align: center;
+                border-radius: 50%;
+                display: inline-block;
+                color: var(--it-common-white);
+                background: rgba(255, 255, 255, 0.1);
+                @media #{$xs} {
+                    font-size: 14px;
+                }
+                &:not(:last-child){
+                    margin-right: 5px;
+                }
+                &:hover{
+                    color: var(--it-common-white);
+                    background-color: var(--it-theme-1);
+                }
+            }
+        }
+    }
+    &-col{
+        &-2{
+            margin-left: 95px;
+            @media #{$lg}{
+                margin-left: 50px;
+            }
+            @media #{$md}{
+                margin-left: 40px;
+            }
+            @media #{$xs}{
+                margin-left: 0px;
+            }
+            @media #{$sm}{
+                margin-left: 30px;
+            }
+            
+        }
+        &-3{
+            margin-left: 55px;
+            @media #{$lg}{
+                margin-left: 22px;
+            }
+            @media #{$md,$xs}{
+                margin-left: 0;
+            }
+        }
+        &-4{
+            margin-left: 40px;
+            @media #{$lg}{
+                margin-left: 0;
+            }
+            @media #{$md}{
+                margin-left: 40px;
+            }
+            @media #{$xs}{
+                margin-left: 0px;
+            }
+            @media #{$sm}{
+                margin-left: 30px;
+            }
+        }
+    }
+    &-shape {
+        &-1 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+        &-2 {
+            position: absolute;
+            bottom: 10%;
+            left: 0;
+            z-index: -1;
+            opacity: .4;
+        }
+    }
+}
+
+.it-copyright {
+    &-left{
+        @media #{$md,$xs}{
+            margin-bottom: 10px;
+        }
+        & p{
+            font-weight: 400;
+            font-size: 14px;
+            color: var(--it-common-white);
+            & a {
+                color: var(--it-theme-1);
+            }
+        }
+    }
+    &-border{
+        padding: 16px 0;
+        border-top: 1px solid rgba($color: #FFF, $alpha: .1); 
+    }
+    &-link {
+        & a {
+            color: var(--it-common-white);
+        }
+        & span {
+            display: inline-block;
+            margin: 0 12px;
+            color: var(--it-common-white);
+        }
+    }
+}

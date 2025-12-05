@@ -1,0 +1,39 @@
+@use '../utils' as *;
+
+/*----------------------------------------*/
+/*  04. brand css start
+/*----------------------------------------*/
+.it-brand {
+    &-active{
+        & .slider-transtion {
+            -webkit-transition-timing-function: linear;
+            transition-timing-function: linear;
+        }
+        & .swiper-slide{
+            width: auto;
+        }
+    }
+    &-scroll-hr {
+        position: relative;
+        &::before {
+            position: absolute;
+            content: "";
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 10%;
+            background: linear-gradient(90deg, #0F313A 4.11%, rgba(15, 49, 58, 0.8) 57.6%, rgba(15, 49, 58, 0) 101.94%);
+            z-index: 2;
+        }
+        &::after {
+            position: absolute;
+            content: "";
+            top: 0;
+            height: 100%;
+            width: 10%;
+            right: 0;
+            background: linear-gradient(90deg, rgba(15, 49, 58, 0) 3.69%, rgba(15, 49, 58, 0.8) 60.29%, #0F313A 92.05%);
+            z-index: 2;
+        }
+    }
+}

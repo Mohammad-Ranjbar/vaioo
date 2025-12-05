@@ -1,0 +1,391 @@
+@use '../utils' as *;
+
+/*----------------------------------------*/
+/*  25. team css start
+/*----------------------------------------*/
+
+.it-team {
+    &-item {
+        &:hover {
+            & .it-team-thumb {
+                & img {
+                    transform: scale(1.15) rotate(-2deg);
+                }
+                &::before {
+                    left: 0;
+                    right: 0;
+                    opacity: 0;
+                    -webkit-transition: all 400ms linear;
+                    transition: all 400ms linear;
+                }
+            }
+            & .it-team-content {
+                margin-bottom: 0;
+                & > span{
+                    color: var(--it-common-white);
+                }
+            }
+            & .it-team-content-box {
+                margin-bottom: 0;
+                background-color: var(--it-theme-1);
+                & > span {
+                    color: var(--it-common-white);
+                }
+            }
+            & .it-team-title {
+                color: var(--it-common-white);
+            }
+        }
+    }
+    &-thumb {
+        overflow: hidden;
+        position: relative;
+        & img {
+            transition: 1.3s all ease;
+        }
+        &::before {
+            background: rgba(255, 255, 255, 0.3);
+            bottom: 0;
+            content: "";
+            left: 50%;
+            position: absolute;
+            right: 51%;
+            top: 0;
+            opacity: 1;
+            pointer-events: none;
+            -webkit-transition: all 400ms linear;
+            transition: all 400ms linear;
+            z-index: 1;
+        }
+    }
+    &-title {
+        font-weight: 600;
+        font-size: 20px;
+        margin-bottom: 10px;
+        transition: .3s;
+        @media #{$xl,$lg,$md,$sm}{
+            font-size: 19px;
+        }
+    }
+    &-content-box {
+        position: absolute;
+        bottom: 30px;
+        left: 23px;
+        right: 30px;
+        text-align: center;
+        padding: 26px 30px;
+        overflow: hidden;
+        transition: 0.3s allease;
+        z-index: 2;
+        background-color: var(--it-common-white);
+        & > span {
+            font-weight: 500;
+            font-size: 16px;
+            color: #707070;
+            transition: 0.3s allease;
+        }
+    }
+    &-content {
+        margin-bottom: -68px;
+        transition: .3s all ease;
+        & > span {
+            font-weight: 500;
+            font-size: 16px;
+            color: #707070;
+            transition: 0.3s allease;
+            @media #{$lg,$md,$xs}{
+                font-size: 15px;
+            }
+        }
+    }
+    &-social {
+        padding-top: 25px;
+        margin-top: 20px;
+        border-top: 1px solid rgba($color: #fff, $alpha: .3);
+        & > a {
+            height: 40px;
+            width: 40px;
+            line-height: 38px;
+            text-align: center;
+            display: inline-block;
+            transition: .3s;
+            font-size: 16px;
+            color: var(--it-common-black);
+            background-color: var(--it-common-white);
+            @media #{$lg,$md,$xs}{
+                height: 30px;
+                width: 30px;
+                line-height: 28px;
+            }
+            &:not(:last-child){
+                margin-right: 12px;
+            }
+            &:hover {
+                color: var(--it-theme-1);
+            }
+        }
+    }
+    &-top-wrap {
+        @media #{$xs}{
+            padding-bottom: 40px;
+        } 
+        & .it-section-title-box {
+            @media #{$md,$xs}{
+                margin-bottom: 30px;
+            }
+        }
+    }
+}
+
+/* details area start */
+
+.it-team-details{
+    &-wrap{
+        background-color: var(--it-gray-1);
+        padding: 50px;
+        @media #{$xl,$lg}{
+            font-size: 14px;
+            padding: 50px 20px;
+        }
+        @media #{$md}{
+            font-size: 14px;
+            padding: 50px 40px;
+        }
+        @media #{$xs}{
+            font-size: 14px;
+            padding: 50px 20px;
+        }
+        @media #{$sm}{
+            font-size: 14px;
+            padding: 50px 40px;
+        }
+    }
+    &-left{
+        &-thumb{
+            & img{
+                width: 100%;
+                margin-bottom: 30px;
+            }
+        }
+        &-social{
+            padding-bottom: 30px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #D9D9D9;
+            & a{
+                height: 45px;
+                width: 45px;
+                border-radius: 50%;
+                line-height: 45px;
+                text-align: center;
+                display: inline-block;
+                margin: 0px 1px;
+                transition: 0.3s;
+                color: var(--it-common-black);
+                background-color: var(--it-common-white);
+                @media #{$lg}{
+                    height: 30px;
+                    width: 30px;
+                    line-height: 30px;
+                }
+                &:hover {
+                    color: var(--it-common-white);
+                    background-color: var(--it-theme-1);
+                }
+            }
+        }
+        &-info{
+            margin-bottom: 40px;
+            & ul{
+                & li{
+                    list-style-type: none;
+                    position: relative;
+                    padding-left: 30px;
+                    & a{
+                        font-size: 15px;
+                        font-weight: 400;
+                        line-height: 1;
+                        @media #{$xl,$lg,$md,$xs}{
+                            font-size: 14px;
+                        }
+                    }
+                    & i{
+                        color: var(--it-theme-1);
+                        position: absolute;
+                        top: 8px;
+                        left: 0;
+                    }
+                }
+            }
+        }
+    }
+    &-left {
+        @media #{$md,$xs}{
+            margin-bottom: 50px;
+        }
+    }
+    &-right{
+        background-color: var(--it-common-white);
+        padding: 50px;
+        margin-left: 20px;
+        @media #{$md,$xs}{
+            padding: 60px 25px;
+            margin-left: 0;
+        }
+        & .it-progress-bar-wrap {
+            & h4 {
+                text-transform: uppercase;
+                @media #{$lg,$md,$xs}{
+                    font-size: 18px;
+                }
+            }
+        }
+        & .it-progress-bar-item {
+            & label {
+                @media #{$lg,$md,$xs}{
+                    font-size: 14px;
+                }
+            }
+        }
+        &-title-box{
+            margin-bottom: 40px;
+            & h4{
+                font-size: 24px;
+                font-weight: 600;
+                margin-bottom: 3px;
+                text-transform: capitalize;
+                @media #{$lg,$md}{
+                    font-size: 24px;
+                }
+                @media #{$xs}{
+                    font-size: 19px;
+                }
+                &.title {
+                    font-size: 30px;
+                }
+            }
+            & span{
+                color:var(--it-theme-1);
+                font-size: 14px;
+                font-weight: 500;
+                line-height: 1;
+                text-transform: uppercase;
+                margin-bottom: 30px;
+                display: inline-block;
+            }
+            & p {
+                line-height: 1.65;
+                font-size: 16px;
+                @media #{$lg,$md,$xs}{
+                    font-size: 14px;
+                }
+            }
+        }
+        &-content {
+            & p {
+                @media #{$lg,$md,$xs}{
+                    font-size: 14px;
+                }
+            }
+            & h4 {
+                @media #{$xs}{
+                    font-size: 20px;
+                }
+            }
+        }
+        & .it-progress-bar-wrap{
+            & .it-progress-bar .progress-bar span {
+                top: -22px;
+            }
+        }
+    }
+    &-list {
+        & > span {
+            font-weight: 700;
+            font-size: 20px;
+            letter-spacing: 0.03em;
+            color: var(--it-common-black);
+            text-transform: capitalize;
+            margin-bottom: 25px;
+            display: block;
+        }
+        & ul {
+            & li {
+                display: block;
+                list-style-type: none;
+                &:not(:last-child){
+                    margin-bottom: 10px;
+                }
+                & span {
+                    position: relative;
+                    display: inline-block;
+                    padding-left: 30px;
+                    font-weight: 600;
+                    font-size: 16px;
+                    transition: .3s;
+                    color: #4B4B4B;
+                    &:hover {
+                        color: var(--it-theme-1);
+                    }
+                    & i,svg {
+                        position: absolute;
+                        top: 1px;
+                        left: 0;
+                        font-size: 18px;
+                        color: var(--it-theme-1);                  
+                    }
+                }
+            }
+        }
+    }
+}
+
+.it-progress-bar{
+    &-item{
+        padding: 5px 0px;
+        overflow: hidden;
+        padding-top: 0;
+        @media #{$lg}{
+            padding-top: 20px;
+        }
+        & label{
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 1;
+            margin-bottom: 16px;
+            display: inline-block;
+            color: var(--it-common-black);
+            @media #{$xs}{
+                font-size: 14px;
+            }
+        }
+    }
+    & .progress{
+        overflow: visible;
+        background: #F3E8DF;
+        height: 8px;
+        border-radius: 10px;
+    }
+    & .progress-bar{
+        background-color: var(--it-theme-1);
+        position: relative;
+        overflow: visible;
+        height: 100%;
+        top: 0;
+        border-radius: 10px;
+    }
+    & .progress-bar span {
+        position: absolute;
+        right: 0;
+        top: -30px;
+        transform: translateY(-50%);
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 1;
+        color: var(--it-common-black);
+    }
+}
+.it-team-details-right-title-box h4 {
+    @media #{$xs}{
+        font-size: 19px !important;
+    }
+}
