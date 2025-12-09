@@ -3,12 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Representative extends Model implements HasMedia
+class Representative extends Authenticatable implements HasMedia
 {
 
     use Notifiable, InteractsWithMedia;
@@ -59,7 +59,7 @@ class Representative extends Model implements HasMedia
     public function getDocumentUrl(string $collectionName): ?string
     {
         $media = $this->getFirstMedia($collectionName);
-        return  $media?->getUrl() ?? null;
+        return $media?->getUrl() ?? null;
     }
 
     public function hasDocument(string $collectionName): bool

@@ -6,3 +6,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [MainController::class, 'main'])->name('main');
 
 require __DIR__ . '/admin.php';
+require __DIR__ . '/representative.php';
