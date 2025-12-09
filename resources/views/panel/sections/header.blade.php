@@ -18,7 +18,6 @@
                     </form>
                 </div>
                 <div class="d-flex align-items-center gap-1">
-                    <!-- Theme Color (Light/Dark) -->
                     <div class="topbar-item">
                         <button class="topbar-button" id="light-dark-mode" type="button">
                             <i class="ri-moon-line fs-24 light-mode">
@@ -27,7 +26,6 @@
                             </i>
                         </button>
                     </div>
-                    <!-- Category -->
                     <div class="dropdown topbar-item d-none d-lg-flex">
                         <button class="topbar-button" data-toggle="fullscreen" type="button">
                             <i class="ri-fullscreen-line fs-24 fullscreen">
@@ -36,7 +34,6 @@
                             </i>
                         </button>
                     </div>
-                    <!-- Notification -->
                     <div class="dropdown topbar-item">
                         <button aria-expanded="false" aria-haspopup="true" class="topbar-button position-relative" data-bs-toggle="dropdown" id="page-header-notifications-dropdown" type="button">
                             <i class="ri-notification-3-line fs-24">
@@ -178,7 +175,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-end">
                             <h6 class="dropdown-header">
-                                    {{$auth->fullname}}
+                                    {{$auth?->fullname ?? '-'}}
                                  خوش آمدی!
                             </h6>
 

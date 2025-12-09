@@ -39,16 +39,16 @@ class TripController extends Controller
         return response()->json($trips);
     }
 
-    public function representativeTrips($representativeId, Request $request)
-    {
-        $trips = Trip::query()->with(['sourceAirport', 'destinationAirport'])
-            ->where('representative_id', $representativeId)
-            ->filter($request)
-            ->orderBy('departure_date', 'desc')
-            ->paginate(20);
-
-        return response()->json($trips);
-    }
+//    public function representativeTrips($representativeId, Request $request)
+//    {
+//        $trips = Trip::query()->with(['sourceAirport', 'destinationAirport'])
+//            ->where('representative_id', $representativeId)
+//            ->filter($request)
+//            ->orderBy('departure_date', 'desc')
+//            ->paginate(20);
+//
+//        return response()->json($trips);
+//    }
 
     public function store(StoreTripRequest $request): Redirector|RedirectResponse
     {
