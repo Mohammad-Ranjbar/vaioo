@@ -20,31 +20,10 @@
                     </h5>
                     <hr>
 
-                    <form action="{{ route('admin.trips.update', $trip->id) }}" method="post" role="form">
+                    <form action="{{ route('representative.trips.update', $trip->id) }}" method="post" role="form">
                         @csrf
                         @method('PUT')
 
-                        <!-- Representative Selection (Required) -->
-                        <div class="mb-3">
-                            <label for="representative_id" class="form-label">
-                                نماینده <span class="text-danger">*</span>
-                            </label>
-                            <select class="form-select @error('representative_id') is-invalid @enderror"
-                                    id="representative_id" name="representative_id" required>
-                                <option value="">-- انتخاب نماینده --</option>
-                                @foreach($representatives as $representative)
-                                    <option value="{{ $representative->id }}"
-                                            {{ old('representative_id', $trip->representative_id) == $representative->id ? 'selected' : '' }}>
-                                        {{ $representative->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            @error('representative_id')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <!-- Source Airport Selection (Required) -->
                         <div class="mb-3">
                             <label for="source_airport_id" class="form-label">
                                 فرودگاه مبدا <span class="text-danger">*</span>
@@ -64,7 +43,6 @@
                             @enderror
                         </div>
 
-                        <!-- Destination Airport Selection (Required) -->
                         <div class="mb-3">
                             <label for="destination_airport_id" class="form-label">
                                 فرودگاه مقصد <span class="text-danger">*</span>
@@ -84,7 +62,6 @@
                             @enderror
                         </div>
 
-                        <!-- Departure Date (Required) -->
                         <div class="mb-3">
                             <label class="form-label" for="departure_date">
                                 تاریخ رفت <span class="text-danger">*</span>
@@ -109,7 +86,6 @@
                             @enderror
                         </div>
 
-                        <!-- Capacity Weight (Required) -->
                         <div class="mb-3">
                             <label class="form-label" for="capacity_weight">
                                 ظرفیت وزن (کیلوگرم) <span class="text-danger">*</span>
@@ -122,7 +98,6 @@
                             @enderror
                         </div>
 
-                        <!-- Capacity Value (Required) -->
                         <div class="mb-3">
                             <label class="form-label" for="capacity_value">
                                 ظرفیت ارزش <span class="text-danger">*</span>
@@ -135,7 +110,6 @@
                             @enderror
                         </div>
 
-                        <!-- Status (Required) -->
                         <div class="mb-3">
                             <label for="status" class="form-label">
                                 وضعیت <span class="text-danger">*</span>
@@ -154,7 +128,7 @@
                         <button type="submit" class="btn btn-primary">
                             بروزرسانی سفر
                         </button>
-                        <a href="{{ route('admin.trips.index') }}" class="btn btn-secondary">
+                        <a href="{{ route('representative.trips.index') }}" class="btn btn-secondary">
                             بازگشت
                         </a>
                     </form>

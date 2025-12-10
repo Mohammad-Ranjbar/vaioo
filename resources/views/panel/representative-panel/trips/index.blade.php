@@ -16,7 +16,7 @@
                         </h4>
                     </div>
                     <div>
-                        <a class="card-title btn btn-info" href="{{route('admin.trips.create')}}">
+                        <a class="card-title btn btn-info" href="{{route('representative.trips.create')}}">
                             ایجاد سفر
                         </a>
                     </div>
@@ -73,7 +73,7 @@
                                     <td>
                                         <div class="d-flex gap-2">
                                             <a class="btn btn-soft-primary btn-sm"
-                                               href="{{route('admin.trips.edit',$trip->id)}}">
+                                               href="{{route('representative.trips.edit',$trip->id)}}">
                                                 <iconify-icon class="align-middle fs-18"
                                                               icon="solar:pen-2-broken"></iconify-icon>
                                             </a>
@@ -88,7 +88,7 @@
                                                  aria-labelledby="deleteModalLabel{{$trip->id}}" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered">
                                                     <div class="modal-content">
-                                                        <form action="{{route('admin.trips.destroy',$trip->id)}}"
+                                                        <form action="{{route('representative.trips.destroy',$trip->id)}}"
                                                               method="POST">
                                                             @method('DELETE')
                                                             @csrf

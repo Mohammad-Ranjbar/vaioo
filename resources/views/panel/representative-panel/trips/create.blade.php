@@ -18,27 +18,8 @@
                     </h5>
                     <hr>
 
-                    <form action="{{ route('admin.trips.store') }}" method="post" role="form">
+                    <form action="{{ route('representative.trips.store') }}" method="post" role="form">
                         @csrf
-                        <div class="mb-3">
-                            <label for="representative_id" class="form-label">
-                                نماینده <span class="text-danger">*</span>
-                            </label>
-                            <select class="form-select @error('representative_id') is-invalid @enderror"
-                                    id="representative_id" name="representative_id" required>
-                                <option value="">-- انتخاب نماینده --</option>
-                                @foreach($representatives as $representative)
-                                    <option value="{{ $representative->id }}"
-                                            {{ old('representative_id') == $representative->id ? 'selected' : '' }}>
-                                        {{ $representative->full_name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            @error('representative_id')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
                         <div class="mb-3">
                             <label for="source_airport_id" class="form-label">
                                 فرودگاه مبدا <span class="text-danger">*</span>
@@ -139,7 +120,7 @@
                         <button type="submit" class="btn btn-success">
                             ثبت سفر
                         </button>
-                        <a href="{{ route('admin.trips.index') }}" class="btn btn-secondary">
+                        <a href="{{ route('representative.trips.index') }}" class="btn btn-secondary">
                             بازگشت
                         </a>
                     </form>

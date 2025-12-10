@@ -20,11 +20,11 @@ class AppServiceProvider extends ServiceProvider
                 $auth = Admin::query()->find(Auth::guard('admin')->id());
                 $logoutUrl = route('admin.logout');
             }
-            if (Auth::guard('representative')->check()&& request()->routeIs('representative.*')) {
+            if (Auth::guard('representative')->check() && request()->routeIs('representative.*')) {
                 $auth = Representative::query()->find(Auth::guard('representative')->id());
                 $logoutUrl = route('representative.logout');
             }
-            return $view->with(['auth' =>  $auth, 'logoutUrl' => $logoutUrl]);
+            return $view->with(['auth' => $auth, 'logoutUrl' => $logoutUrl]);
         });
     }
 
