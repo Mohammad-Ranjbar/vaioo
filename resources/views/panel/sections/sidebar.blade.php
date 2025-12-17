@@ -144,6 +144,17 @@
                     </span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('representative.shipments.index')}}">
+                    <span class="nav-icon">
+                         <i class="ri-home-office-line">
+                         </i>
+                    </span>
+                        <span class="nav-text">
+                         محموله های شما
+                    </span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

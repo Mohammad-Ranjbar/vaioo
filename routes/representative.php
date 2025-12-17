@@ -3,9 +3,10 @@
 
 use App\Http\Controllers\Representative\AuthController;
 use App\Http\Controllers\Representative\DashboardController;
+use App\Http\Controllers\Representative\ShipmentController;
+use App\Http\Controllers\Representative\TripController;
 use App\Http\Middleware\RepresentativeMidlleware;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Representative\TripController;
 
 
 Route::prefix('representative')->as('representative.')->group(function () {
@@ -21,6 +22,8 @@ Route::prefix('representative')->as('representative.')->group(function () {
         Route::get('/', [AuthController::class, 'check'])->name('check');
         Route::post('logout', [AuthController::class, 'logout'])->name('logout');
         Route::get('dashboard', DashboardController::class)->name('dashboard');
+
+        Route::resource('shipments', ShipmentController::class)->only(['index', 'show','edit','update']);
 
         Route::resources([
             'trips' => TripController::class,
