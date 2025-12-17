@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <title>
-      ادمین پنل
+      پنل نماینده
     </title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <meta content="vaioo" name="description"/>
@@ -53,6 +53,12 @@
                                 <div class="mb-1 text-center d-grid">
                                     <button class="btn btn-danger py-2 fw-medium" type="submit">
                                         ورود
+                                    </button>
+                                </div>
+                                <hr>
+                                <div class="mb-1 text-center d-grid">
+                                    <button class="btn btn-info py-2 fw-medium" type="submit">
+                                        ثبت نام
                                     </button>
                                 </div>
                             </form>

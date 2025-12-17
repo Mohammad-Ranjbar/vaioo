@@ -13,6 +13,8 @@ Route::prefix('representative')->as('representative.')->group(function () {
     Route::middleware('')->group(function () {
         Route::get('login', [AuthController::class, 'loginPage'])->name('login.page');
         Route::post('login', [AuthController::class, 'login'])->name('login');
+        Route::get('register', [AuthController::class, 'registerPage'])->name('register.page');
+        Route::post('register', [AuthController::class, 'register'])->name('register');
     });
 
     Route::middleware(RepresentativeMidlleware::class)->group(function () {

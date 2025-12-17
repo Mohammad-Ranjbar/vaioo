@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 
 class MainController extends Controller
 {
-    public function main()
+    public function main(): Factory|View
     {
-        return view('main.layout.layout');
+        return view('main.pages.index');
     }
 }
