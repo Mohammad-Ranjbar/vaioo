@@ -33,8 +33,8 @@
                             <h4 class="it-footer-widget-title">خدمات ما</h4>
                             <div class="it-footer-widget-menu">
                                 <ul>
-                                    <li><a href="#">پنل کاربر</a></li>
-                                    <li><a href="#">پنل نماینده</a></li>
+                                    <li><a href="{{route('user.check')}}" target="_blank">پنل کاربر</a></li>
+                                    <li><a href="{{route('representative.check')}}" target="_blank">پنل نماینده</a></li>
                                 </ul>
                             </div>
                         </div>

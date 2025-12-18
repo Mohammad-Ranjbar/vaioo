@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <title>
-        پنل نماینده - ثبت‌نام
+        پنل  کاربر - ثبت‌نام
     </title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <meta content="vaioo" name="description"/>
@@ -199,7 +199,7 @@
                                 <!-- دکمه‌های اقدام -->
                                 <div class="mb-3 text-center d-grid">
                                     <button class="btn btn-danger py-2 fw-medium" type="submit" id="submitBtn">
-                                        ثبت‌نام نماینده
+                                        ثبت‌نام  کاربر
                                     </button>
                                 </div>
 
