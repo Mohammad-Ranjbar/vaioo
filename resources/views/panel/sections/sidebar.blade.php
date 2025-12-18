@@ -155,6 +155,17 @@
                     </span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('representative.documents')}}">
+                    <span class="nav-icon">
+                         <i class="ri-home-office-line">
+                         </i>
+                    </span>
+                        <span class="nav-text">
+                         مدارک هویتی
+                    </span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

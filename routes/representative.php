@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\Representative\AuthController;
 use App\Http\Controllers\Representative\DashboardController;
+use App\Http\Controllers\Representative\DocumentController;
 use App\Http\Controllers\Representative\ShipmentController;
 use App\Http\Controllers\Representative\TripController;
 use App\Http\Middleware\RepresentativeMidlleware;
@@ -23,7 +24,19 @@ Route::prefix('representative')->as('representative.')->group(function () {
         Route::post('logout', [AuthController::class, 'logout'])->name('logout');
         Route::get('dashboard', DashboardController::class)->name('dashboard');
 
-        Route::resource('shipments', ShipmentController::class)->only(['index', 'show','edit','update']);
+
+        Route::get('/documents', [DocumentController::class, 'documents'])->name('documents');
+        Route::post('/documents', [DocumentController::class, 'store'])
+            ->name('documents.store');
+
+        Route::delete('/documents/{collectionName}', [DocumentController::class, 'destroy'])
+            ->name('documents.destroy');
+
+        Route::delete('/documents', [DocumentController::class, 'destroyAll'])
+            ->name('documents.destroyAll');
+
+
+        Route::resource('shipments', ShipmentController::class)->only(['index', 'show', 'edit', 'update']);
 
         Route::resources([
             'trips' => TripController::class,

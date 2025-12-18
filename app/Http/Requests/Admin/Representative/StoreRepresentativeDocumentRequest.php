@@ -21,9 +21,6 @@ class StoreRepresentativeDocumentRequest extends FormRequest
         ];
     }
 
-    /**
-     * Get custom attributes for validator errors.
-     */
     public function attributes(): array
     {
         return [
@@ -33,9 +30,6 @@ class StoreRepresentativeDocumentRequest extends FormRequest
         ];
     }
 
-    /**
-     * Get the error messages for the defined validation rules.
-     */
     public function messages(): array
     {
         return [

@@ -22,7 +22,7 @@
                             </p>
                             <div class="it-hero-btn d-flex align-items-center justify-content-center">
                                 <div class="it-fade-anim" data-fade-from="top" data-ease="bounce" data-delay=".5">
-                                    <a class="it-btn-black ml-30 mb-20" href="#">
+                                    <a class="it-btn-black ml-30 mb-20" href="{{route('representative.check')}}" target="_blank">
                                         <span>پنل نماینده</span>
                                     </a>
                                 </div>
