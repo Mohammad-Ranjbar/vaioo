@@ -411,7 +411,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-12 col-md-10">
                     <div class="it-section-title-box text-center pb-85">
-                        <h4 class="it-section-title  it-split-in-right">Why <span>Clients</span> <br> Love <span>Working</span> with Us
+                        <h4 class="it-section-title  it-split-in-right">چرا <span>کاربران ما</span> <br> عاشق <span>کارکردن</span> با ما هستند
                         </h4>
                     </div>
                 </div>
@@ -424,7 +424,7 @@
                                 <div class="swiper-slide">
                                     <div class="it-testimonial-item text-center">
                                         <div class="it-testimonial-avatar mb-60 p-relative">
-                                            <img src="assets/img/testimonial/avata-1-1.png" alt="">
+                                            <img src="/images/testimonials/user-1.jpg" alt="تصویر کاربر">
                                             <div class="it-testimonial-avatar-shape">
                                                 <svg width="150" height="150" viewBox="0 0 150 150" fill="none"
                                                      xmlns="http://www.w3.org/2000/svg">
@@ -441,11 +441,7 @@
                                             </div>
                                         </div>
                                         <div class="it-testimonial-text">
-                                            <p class="mb-40">Our comprehensive program guides you through a structured
-                                                             journey
-                                                             across three pillars. Each pillar features focused sessions and integration
-                                                             steps
-                                                             to ensure you not only learn but also apply these</p>
+                                            <p class="mb-40">برنامه جامع ما شما را در یک سفر ساختاریافته از طریق سه ستون اصلی راهنمایی می‌کند. هر ستون شامل جلسات متمرکز و مراحل یکپارچه‌سازی است تا اطمینان حاصل شود که شما نه تنها یاد می‌گیرید، بلکه این دانش را عملی می‌کنید.</p>
                                         </div>
                                         <div class="it-testimonial-quote mb-25">
                                             <svg width="51" height="42" viewBox="0 0 51 42" fill="none"
@@ -455,14 +451,14 @@
                                                         fill="#0F313A" />
                                             </svg>
                                         </div>
-                                        <h4>John Doue</h4>
-                                        <span>Digital Marketing</span>
+                                        <h4>علیرضا محمدی</h4>
+                                        <span>مدیریت دیجیتال مارکتینگ</span>
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="it-testimonial-item text-center">
                                         <div class="it-testimonial-avatar mb-60 p-relative">
-                                            <img src="assets/img/testimonial/avata-1-2.png" alt="">
+                                            <img src="/images/testimonials/user-2.jpg" alt="تصویر کاربر">
                                             <div class="it-testimonial-avatar-shape">
                                                 <svg width="150" height="150" viewBox="0 0 150 150" fill="none"
                                                      xmlns="http://www.w3.org/2000/svg">
@@ -479,11 +475,7 @@
                                             </div>
                                         </div>
                                         <div class="it-testimonial-text">
-                                            <p class="mb-40">Our comprehensive program guides you through a structured
-                                                             journey
-                                                             across three pillars. Each pillar features focused sessions and integration
-                                                             steps
-                                                             to ensure you not only learn but also apply these</p>
+                                            <p class="mb-40">برنامه جامع ما شما را در یک سفر ساختاریافته از طریق سه ستون اصلی راهنمایی می‌کند. هر ستون شامل جلسات متمرکز و مراحل یکپارچه‌سازی است تا اطمینان حاصل شود که شما نه تنها یاد می‌گیرید، بلکه این دانش را عملی می‌کنید.</p>
                                         </div>
                                         <div class="it-testimonial-quote mb-25">
                                             <svg width="51" height="42" viewBox="0 0 51 42" fill="none"
@@ -493,14 +485,14 @@
                                                         fill="#0F313A" />
                                             </svg>
                                         </div>
-                                        <h4>Elia Loving</h4>
-                                        <span>Digital Marketing</span>
+                                        <h4>فاطمه کریمی</h4>
+                                        <span>متخصص سئو</span>
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="it-testimonial-item text-center">
                                         <div class="it-testimonial-avatar mb-60 p-relative">
-                                            <img src="assets/img/testimonial/avata-1-3.png" alt="">
+                                            <img src="/images/testimonials/user-3.jpg" alt="تصویر کاربر">
                                             <div class="it-testimonial-avatar-shape">
                                                 <svg width="150" height="150" viewBox="0 0 150 150" fill="none"
                                                      xmlns="http://www.w3.org/2000/svg">
@@ -517,11 +509,7 @@
                                             </div>
                                         </div>
                                         <div class="it-testimonial-text">
-                                            <p class="mb-40">Our comprehensive program guides you through a structured
-                                                             journey
-                                                             across three pillars. Each pillar features focused sessions and integration
-                                                             steps
-                                                             to ensure you not only learn but also apply these</p>
+                                            <p class="mb-40">برنامه جامع ما شما را در یک سفر ساختاریافته از طریق سه ستون اصلی راهنمایی می‌کند. هر ستون شامل جلسات متمرکز و مراحل یکپارچه‌سازی است تا اطمینان حاصل شود که شما نه تنها یاد می‌گیرید، بلکه این دانش را عملی می‌کنید.</p>
                                         </div>
                                         <div class="it-testimonial-quote mb-25">
                                             <svg width="51" height="42" viewBox="0 0 51 42" fill="none"
@@ -531,8 +519,8 @@
                                                         fill="#0F313A" />
                                             </svg>
                                         </div>
-                                        <h4>Kayla Johnson</h4>
-                                        <span>Digital Marketing</span>
+                                        <h4>محمد حسینی</h4>
+                                        <span>طراح رابط کاربری</span>
                                     </div>
                                 </div>
                             </div>
@@ -546,10 +534,10 @@
                                             d="M0.29332 8.70711C-0.0972061 8.31658 -0.0972061 7.68342 0.29332 7.29289L6.65728 0.928932C7.04781 0.538408 7.68097 0.538408 8.0715 0.928932C8.46202 1.31946 8.46202 1.95262 8.0715 2.34315L2.41464 8L8.0715 13.6569C8.46202 14.0474 8.46202 14.6805 8.0715 15.0711C7.68097 15.4616 7.04781 15.4616 6.65728 15.0711L0.29332 8.70711ZM93.0059 9L1.00043 9V7L93.0059 7V9Z"
                                             fill="currentcolor" />
                                 </svg>
-                                Prew
+                                قبلی
                             </button>
                             <button class="arrow-next">
-                                NeXT
+                                بعدی
                                 <svg width="93" height="16" viewBox="0 0 93 16" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path
