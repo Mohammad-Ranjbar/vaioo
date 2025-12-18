@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Representative;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Admin\AdminLoginRequest;
-use App\Http\Requests\Representative\RegisterRepresentativeRequest;
-use App\Http\Requests\Representative\RepresentativeLoginRequest;
-use App\Models\Representative;
+use App\Http\Requests\User\RegisterUserRequest;
+use App\Http\Requests\User\UserLoginRequest;
+use App\Models\User;
 use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -21,25 +21,25 @@ class AuthController extends Controller
 {
     public function loginPage(): Factory|View
     {
-        return view('panel.representative-panel.login.login');
+        return view('panel.user-panel.login.login');
     }
 
     public function registerPage(): Factory|View
     {
-        return view('panel.representative-panel.register.register');
+        return view('panel.user-panel.register.register');
     }
 
-    public function register(RegisterRepresentativeRequest $request): RedirectResponse
+    public function register(RegisterUserRequest $request): RedirectResponse
     {
         DB::beginTransaction();
 
         try {
-             Representative::query()->create($request->validated());
+            User::query()->create($request->validated());
 
             DB::commit();
 
-            return redirect()->route('representative.login')
-                ->with('success', 'ثبت‌نام شما با موفقیت انجام شد. پس از تأیید مدیر سیستم می‌توانید وارد شوید.');
+            return redirect()->route('user.login')
+                ->with('success', trans('messages.created'));
 
         } catch (Exception $e) {
             DB::rollBack();
@@ -54,20 +54,20 @@ class AuthController extends Controller
         }
     }
 
-    public function login(RepresentativeLoginRequest $request)
+    public function login(UserLoginRequest $request)
     {
         try {
             $validatedData = $request->validated();
-            $representative = Representative::query()->where('mobile', $validatedData['mobile'])->first();
-            if (!$representative) {
+            $user = User::query()->where('mobile', $validatedData['mobile'])->first();
+            if (!$user) {
                 return back()->with('error', trans('messages.account_not_found'));
             }
-            if (!$representative->getAttribute('is_active')) {
+            if (!$user->getAttribute('is_active')) {
                 return back()->with('error', trans('messages.not_active'));
             }
-            if (Hash::check($validatedData['password'], $representative->getAttribute('password'))) {
-                Auth::guard('representative')->login($representative);
-                return redirect()->route('representative.dashboard');
+            if (Hash::check($validatedData['password'], $user->getAttribute('password'))) {
+                Auth::guard()->login($user);
+                return redirect()->route('user.dashboard');
             }
             return back()->with('error', trans('messages.invalid_data'));
         } catch (Exception $exception) {
@@ -77,7 +77,7 @@ class AuthController extends Controller
 
     public function check(): RedirectResponse
     {
-        return redirect()->route('representative.dashboard');
+        return redirect()->route('user.dashboard');
     }
 
     public function logout(Request $request): RedirectResponse
@@ -85,8 +85,8 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        Auth::guard('representative')->logout();
-        return redirect()->route('representative.login');
+        Auth::guard()->logout();
+        return redirect()->route('user.login');
 
     }
 }

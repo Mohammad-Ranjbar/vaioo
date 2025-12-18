@@ -7,3 +7,4 @@ Route::get('/', [MainController::class, 'main'])->name('main');
 
 require __DIR__ . '/admin.php';
 require __DIR__ . '/representative.php';
+require __DIR__ . '/user.php';

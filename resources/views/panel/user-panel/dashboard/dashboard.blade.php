@@ -1,9 +1,9 @@
 @extends('panel.layout.layout')
 @section('title')
-     داشبورد نمایندگان
+     داشبورد کاربران
 @endsection
 @section('breadcrumb')
-    داشبود نمایندگان
+    داشبورد کاربران
 
 @endsection
 @section('content')

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <title>
-      پنل نماینده
+      پنل کاربر
     </title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <meta content="vaioo" name="description"/>
@@ -35,7 +35,7 @@
                             ورود
                         </h2>
                         <div class="px-4">
-                            <form action="{{route('representative.login')}}" method="post" role="form" class="authentication-form">
+                            <form action="{{route('user.login')}}" method="post" role="form" class="authentication-form">
                                 @csrf
                                 <div class="mb-3">
                                     <label class="form-label" for="mobile">
@@ -57,7 +57,7 @@
                                 </div>
                                 <hr>
                                 <div class="mb-1 text-center d-grid">
-                                    <a class="btn btn-info py-2 fw-medium" href="{{route('representative.register.page')}}">
+                                    <a class="btn btn-info py-2 fw-medium" href="{{route('user.register.page')}}">
                                         ثبت نام
                                     </a>
                                 </div>
