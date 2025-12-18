@@ -107,7 +107,7 @@
                         <div class="it-copyright-left text-center text-lg-start">
                             <p class="mb-0">© 2025
                                 تمام مالکیت معنوی سایت متعلق به
-                                <a  href="#">امید مغانی</a>
+                                <a  href="#">sky elite investment</a>
                                 میباشد
                             </p>
                         </div>
