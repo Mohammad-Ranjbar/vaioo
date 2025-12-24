@@ -1,31 +1,24 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\PhoneOtpRequest;
 use App\Http\Requests\VerifyOtpRequest;
 use App\Models\User;
-use App\Services\OtpService;
+use App\Services\OtpVerificationService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Validation\ValidationException;
 use Random\RandomException;
 
-class PhoneOtpAuthController extends Controller
+class UserOtpAuthController extends Controller
 {
-
-
-    public function __construct(private readonly OtpService $otpService)
-    {
-
-    }
-
     /**
      * @throws ValidationException
      */
-    public function verifyOtp(VerifyOtpRequest $request): JsonResponse
+    public function verifyOtp(VerifyOtpRequest $request): true
     {
 
         $validatedData = $request->validated();
@@ -39,48 +32,31 @@ class PhoneOtpAuthController extends Controller
             ]);
         }
 
-        $user = $this->otpService->verifyOtp($phone, $validatedData['otp']);
 
-        if (!$user) {
+        $verification = OtpVerificationService::verifyOtp($phone, $validatedData['otp']);
+
+        if (!$verification) {
             RateLimiter::hit($key, 600);
             throw ValidationException::withMessages([
-                'otp' => 'Invalid or expired OTP.',
+                'otp' => trans('auth.invalid_code'),
             ]);
         }
 
         RateLimiter::clear($key);
 
-        // Regenerate session to prevent fixation
         $request->session()->regenerate();
 
-        // Login
+        $entity = $verification->getAttribute('authenticatable');
 
-        Auth::login($user);
+        Auth::login($entity);
 
-        Log::info('Mobile OTP Login', [
-            'user_id' => $user->getAttribute('id'),
-            'phone' => $phone,
-            'ip' => $request->ip(),
-            'user_agent' => $request->userAgent()
-        ]);
-
-        return response()->json([
-            'message' => 'Login successful.',
-            'user' => $user->only('id', 'name', 'phone'),
-            'redirect' => route('dashboard'),
-        ]);
+        return true;
     }
 
-    /**
-     * @throws ValidationException
-     * @throws RandomException
-     */
-    public function resendOtp(PhoneOtpRequest $request): JsonResponse
+    public function resendOtp($phone): JsonResponse
     {
-        return $this->requestOtp($request);
+        return $this->requestOtp($phone);
     }
-
-    // Optional: Resend
 
     /**
      * @throws ValidationException
@@ -88,9 +64,8 @@ class PhoneOtpAuthController extends Controller
      */
     public function requestOtp(PhoneOtpRequest $request): JsonResponse
     {
-
-        $phone = $request->validated()['phone'];
-        $key = "otp_request:$phone";
+        $mobile = $request->validated()['mobile'];
+        $key = "otp_request:$mobile";
 
         if (RateLimiter::tooManyAttempts($key, 3)) {
             $seconds = RateLimiter::availableIn($key);
@@ -99,9 +74,12 @@ class PhoneOtpAuthController extends Controller
             ]);
         }
 
-        $user = User::query()->where('phone', $phone)->firstOrFail();
-
-        $response = $this->otpService->sendOtpToPhone($phone, $user);
+        $user = User::query()->where('mobile', $mobile)->firstOrFail();
+        $params = [
+            'model_type' => User::class,
+            'model_id' => $user->getAttribute('id')
+        ];
+        $response = OtpVerificationService::send($user->getAttribute('mobile'), '####', $params);
 
         RateLimiter::hit($key, 61);
 

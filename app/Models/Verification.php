@@ -6,8 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 
-class OtpVerification extends Model
+class Verification extends Model
 {
+    const array CHANNELS =[
+        'sms',
+        'email'
+    ];
     protected $fillable = [
         'authenticatable_type', 'authenticatable_id',
         'channel', 'identifier', 'otp_hash', 'expires_at', 'used'
