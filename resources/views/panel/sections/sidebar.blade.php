@@ -202,6 +202,28 @@
                     </span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('user.profile')}}">
+                    <span class="nav-icon">
+                         <i class="ri-home-office-line">
+                         </i>
+                    </span>
+                        <span class="nav-text">
+                         پروفایل
+                    </span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('user.password')}}">
+                    <span class="nav-icon">
+                         <i class="ri-home-office-line">
+                         </i>
+                    </span>
+                        <span class="nav-text">
+                         تغییر رمز عبور
+                    </span>
+                    </a>
+                </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('user.shipments.index')}}">

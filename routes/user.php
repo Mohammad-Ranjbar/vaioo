@@ -5,6 +5,7 @@ use App\Http\Controllers\User\AuthController;
 use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\ShipmentController;
 use App\Http\Controllers\User\UserOtpAuthController;
+use App\Http\Controllers\User\UserProfileController;
 use App\Http\Middleware\UserMidlleware;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +26,11 @@ Route::prefix('user')->as('user.')->group(function () {
         Route::get('/', [AuthController::class, 'check'])->name('check');
         Route::post('logout', [AuthController::class, 'logout'])->name('logout');
         Route::get('dashboard', DashboardController::class)->name('dashboard');
+        Route::get('/profile', [UserProfileController::class, 'getProfile'])->name('profile');
+        Route::put('/set-profile', [UserProfileController::class, 'setProfile'])->name('set-profile');
 
+        Route::get('/password', [UserProfileController::class, 'getPassword'])->name('password');
+        Route::put('/set-password', [UserProfileController::class, 'setPassword'])->name('set-password');
         Route::resources([
             'shipments' => ShipmentController::class,
         ]);
