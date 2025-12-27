@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -42,6 +43,47 @@ class User extends Authenticatable
             return $this->getAttribute('mobile');
         });
     }
+
+    public function sentMessages(): MorphMany
+    {
+        return $this->morphMany(Message::class, 'sender');
+    }
+
+    public function receivedMessages(): MorphMany
+    {
+        return $this->morphMany(Message::class, 'receiver');
+    }
+
+    public function conversationWithRepresentative(Representative $representative)
+    {
+        return Message::conversationBetween($this, $representative)
+            ->orderBy('created_at', 'asc')
+            ->get();
+    }
+
+    /**
+     * Get conversation with a specific admin.
+     */
+    public function conversationWithAdmin(Admin $admin)
+    {
+        return Message::conversationBetween($this, $admin)
+            ->orderBy('created_at', 'asc')
+            ->get();
+    }
+
+    public function unreadMessagesCount(): int
+    {
+        return $this->receivedMessages()->unread()->count();
+    }
+
+    /**
+     * Get unread messages.
+     */
+    public function unreadMessages()
+    {
+        return $this->receivedMessages()->unread()->get();
+    }
+
 
     protected function casts(): array
     {
