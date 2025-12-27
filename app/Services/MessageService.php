@@ -7,13 +7,17 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class MessageService
 {
+    /**
+     * Send a new message (thread starter).
+     */
     public function sendMessage($sender, $receiver, string $subject, string $content): Message
     {
-        return Message::query()->create([
+        return Message::create([
             'sender_id' => $sender->id,
             'sender_type' => $sender->getMorphClass(),
             'receiver_id' => $receiver->id,
             'receiver_type' => $receiver->getMorphClass(),
+            'type' => 'regular',
             'subject' => $subject,
             'message' => $content,
             'read' => false,
@@ -21,131 +25,148 @@ class MessageService
         ]);
     }
 
-    public function getConversation($entity1, $entity2, $perPage = null)
+    /**
+     * Send a reply to an existing message.
+     */
+    public function sendReply(Message $originalMessage, $sender, $receiver, string $content, string $subject = null): Message
     {
-        $query = Message::conversationBetween($entity1, $entity2)
-            ->with(['sender', 'receiver'])
-            ->orderBy('created_at', 'asc');
+        $subject = $subject ?: "RE: {$originalMessage->subject}";
 
-        if ($perPage) {
-            return $query->paginate($perPage);
-        }
-
-        return $query->get();
+        return Message::create([
+            'sender_id' => $sender->id,
+            'sender_type' => $sender->getMorphClass(),
+            'receiver_id' => $receiver->id,
+            'receiver_type' => $receiver->getMorphClass(),
+            'parent_id' => $originalMessage->threadStarter()->id,
+            'type' => 'reply',
+            'original_subject' => $originalMessage->subject,
+            'subject' => $subject,
+            'message' => $content,
+            'read' => false,
+            'read_at' => null,
+        ]);
     }
 
-    public function markConversationAsRead($sender, $receiver): int
+    /**
+     * Get conversation thread.
+     */
+    public function getThread(Message $message)
     {
-        return Message::query()->where('sender_id', $sender->id)
-            ->where('sender_type', $sender->getMorphClass())
-            ->where('receiver_id', $receiver->id)
-            ->where('receiver_type', $receiver->getMorphClass())
-            ->where('read', false)
-            ->update([
-                'read' => true,
-                'read_at' => now(),
-            ]);
+        return $message->thread();
     }
 
-
-    public function getUnreadMessages($entity, $perPage = 15): LengthAwarePaginator
+    /**
+     * Get paginated thread.
+     */
+    public function getPaginatedThread(Message $message, $perPage = 15)
     {
-        return Message::query()->where('receiver_id', $entity->id)
-            ->where('receiver_type', $entity->getMorphClass())
-            ->where('read', false)
-            ->with(['sender'])
-            ->orderBy('created_at', 'desc')
-            ->paginate($perPage);
-    }
+        $threadStarter = $message->threadStarter();
 
-    public function getAllMessages($entity, $perPage = 15): LengthAwarePaginator
-    {
-        return Message::query()->where(function ($query) use ($entity) {
-            $query->where('receiver_id', $entity->id)
-                ->where('receiver_type', $entity->getMorphClass());
+        return Message::where(function($query) use ($threadStarter) {
+            $query->where('id', $threadStarter->id)
+                ->orWhere('parent_id', $threadStarter->id);
         })
-            ->orWhere(function ($query) use ($entity) {
-                $query->where('sender_id', $entity->id)
-                    ->where('sender_type', $entity->getMorphClass());
-            })
-            ->with(['sender', 'receiver'])
-            ->orderBy('created_at', 'desc')
+            ->orderBy('created_at', 'asc')
             ->paginate($perPage);
     }
 
-    public function markAsReadById($messageId, $receiver): bool
+    /**
+     * Get threads for a user.
+     */
+    public function getUserThreads($user, $perPage = 15)
     {
-        $message = Message::query()->where('id', $messageId)
-            ->where('receiver_id', $receiver->id)
-            ->where('receiver_type', $receiver->getMorphClass())
-            ->first();
-
-        if ($message && !$message->read) {
-            return $message->markAsRead();
-        }
-
-        return false;
+        return Message::threadsForUser($user)->paginate($perPage);
     }
 
-    public function markAllAsRead($entity): int
+    /**
+     * Get thread with latest reply first.
+     */
+    public function getUserThreadsWithLatest($user, $perPage = 15)
     {
-        return Message::query()->where('receiver_id', $entity->id)
+        $threads = Message::threadsForUser($user)->get();
+
+        // Add latest reply info to each thread
+        $threads->each(function($thread) {
+            $latestReply = $thread->latestReply();
+            $thread->latest_reply = $latestReply;
+            $thread->reply_count = $thread->replyCount();
+            $thread->has_unread = $thread->replies()->where('read', false)->exists();
+        });
+
+        // Sort by latest activity
+        $sortedThreads = $threads->sortByDesc(function($thread) {
+            if ($thread->latest_reply) {
+                return $thread->latest_reply->created_at;
+            }
+            return $thread->created_at;
+        });
+
+        // Paginate manually
+        $page = request()->get('page', 1);
+        $perPage = $perPage;
+        $offset = ($page * $perPage) - $perPage;
+
+        return new LengthAwarePaginator(
+            $sortedThreads->slice($offset, $perPage)->values(),
+            $sortedThreads->count(),
+            $perPage,
+            $page,
+            ['path' => request()->url(), 'query' => request()->query()]
+        );
+    }
+
+    /**
+     * Get unread messages count for an entity.
+     */
+    public function getUnreadCount($entity): int
+    {
+        return Message::where('receiver_id', $entity->id)
             ->where('receiver_type', $entity->getMorphClass())
             ->where('read', false)
-            ->update([
-                'read' => true,
-                'read_at' => now(),
-            ]);
+            ->count();
     }
 
+    /**
+     * Get unread threads count for a user.
+     */
+    public function getUnreadThreadsCount($user): int
+    {
+        return Message::unreadThreadsCount($user)->count();
+    }
+
+    /**
+     * Mark thread as read.
+     */
+    public function markThreadAsRead(Message $message, $user): int
+    {
+        return $message->markThreadAsRead($user);
+    }
+
+    /**
+     * Get message statistics for an entity.
+     */
     public function getStatistics($entity): array
     {
-        $totalReceived = Message::query()->where('receiver_id', $entity->id)
+        $totalReceived = Message::where('receiver_id', $entity->id)
             ->where('receiver_type', $entity->getMorphClass())
             ->count();
 
         $unread = $this->getUnreadCount($entity);
 
-        $totalSent = Message::query()->where('sender_id', $entity->id)
+        $totalSent = Message::where('sender_id', $entity->id)
             ->where('sender_type', $entity->getMorphClass())
             ->count();
+
+        $threadsCount = Message::threadsForUser($entity)->count();
+        $unreadThreadsCount = $this->getUnreadThreadsCount($entity);
 
         return [
             'total_received' => $totalReceived,
             'unread' => $unread,
             'sent' => $totalSent,
+            'threads' => $threadsCount,
+            'unread_threads' => $unreadThreadsCount,
             'read' => $totalReceived - $unread
         ];
-    }
-
-    public function getUnreadCount($entity): int
-    {
-        return Message::query()->where('receiver_id', $entity->id)
-            ->where('receiver_type', $entity->getMorphClass())
-            ->where('read', false)
-            ->count();
-    }
-
-    public function searchMessages($entity, string $search, $perPage = 15)
-    {
-        return Message::query()->where(function ($query) use ($entity, $search) {
-            $query->where('receiver_id', $entity->id)
-                ->where('receiver_type', $entity->getMorphClass())
-                ->where(function ($subQuery) use ($search) {
-                    $subQuery->where('subject', 'LIKE', "%{$search}%")
-                        ->orWhere('message', 'LIKE', "%{$search}%");
-                });
-        })
-            ->orWhere(function ($query) use ($entity, $search) {
-                $query->where('sender_id', $entity->id)
-                    ->where('sender_type', $entity->getMorphClass())
-                    ->where(function ($subQuery) use ($search) {
-                        $subQuery->where('subject', 'LIKE', "%{$search}%")
-                            ->orWhere('message', 'LIKE', "%{$search}%");
-                    });
-            })
-            ->with(['sender', 'receiver'])
-            ->orderBy('created_at', 'desc')
-            ->paginate($perPage);
     }
 }

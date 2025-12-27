@@ -92,30 +92,31 @@ class MessageController extends Controller
     }
 
 
-    public function show($id): Factory|View
+    public function show($id)
     {
+        $user = Auth::user();
 
-        $message = Message::query()->where(function ($query) use ($id) {
+        $message = Message::where(function($query) use ($user, $id) {
             $query->where('id', $id)
-                ->where(function ($q) {
-                    $q->where('receiver_id', Auth::id())
-                        ->where('receiver_type', User::class)
-                        ->orWhere(function ($sub) {
-                            $sub->where('sender_id', Auth::id())
-                                ->where('sender_type', User::class);
+                ->where(function($q) use ($user) {
+                    $q->where('receiver_id', $user->id)
+                        ->where('receiver_type', $user->getMorphClass())
+                        ->orWhere(function($sub) use ($user) {
+                            $sub->where('sender_id', $user->id)
+                                ->where('sender_type', $user->getMorphClass());
                         });
                 });
         })
             ->with(['sender', 'receiver'])
             ->firstOrFail();
 
-        if ($message->getAttribute('receiver_id') == Auth::id() && !$message->getAttribute('read')) {
-            $message->markAsRead();
-        }
+        // Get thread messages
+        $thread = $this->messageService->getThread($message);
 
-        $conversation = $this->messageService->getConversation($message->sender, $message->receiver);
+        // Mark all messages in thread as read for this user
+        $this->messageService->markThreadAsRead($message, $user);
 
-        return view('panel.user-panel.messages.show', compact('message', 'conversation'));
+        return view('panel.user.messages.show', compact('message', 'thread'));
     }
 
 }
