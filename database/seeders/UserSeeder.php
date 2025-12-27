@@ -101,6 +101,15 @@ class UserSeeder extends Seeder
                 'mobile_verified_at' => now(),
                 'is_active' => true,
                 'password' => Hash::make('password'),
+            ],
+            [
+                'name' => 'Mohammad',
+                'family' => 'Ranjbar',
+                'mobile' => '09126872183',
+                'email' => 'm.ranjbar@gmail.com',
+                'mobile_verified_at' => now(),
+                'is_active' => true,
+                'password' => Hash::make('09126872183'),
             ]
         ];
         $users = array_map(fn($user) => array_merge($user, [
