@@ -248,6 +248,18 @@
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('user.messages')}}">
+                    <span class="nav-icon">
+                         <i class="ri-home-office-line">
+                         </i>
+                    </span>
+                        <span class="nav-text">
+                         پیام ها
+                    </span>
+                    </a>
+                </li>
+
             </ul>
         </div>
     </div>

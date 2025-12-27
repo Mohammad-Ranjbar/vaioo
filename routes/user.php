@@ -8,6 +8,7 @@ use App\Http\Controllers\User\UserOtpAuthController;
 use App\Http\Controllers\User\UserProfileController;
 use App\Http\Middleware\UserMidlleware;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\User\MessageController;
 
 
 Route::prefix('user')->as('user.')->group(function () {
@@ -28,7 +29,9 @@ Route::prefix('user')->as('user.')->group(function () {
         Route::get('dashboard', DashboardController::class)->name('dashboard');
         Route::get('/profile', [UserProfileController::class, 'getProfile'])->name('profile');
         Route::put('/set-profile', [UserProfileController::class, 'setProfile'])->name('set-profile');
-
+        Route::get('/messages', [MessageController::class, 'index'])->name('messages');
+        Route::get('/messages/{id}', [MessageController::class, 'show'])->name('messages.show');
+        Route::get('/messages/{id}/mark-read', [MessageController::class, 'markAsRead'])->name('messages.mark-read');
         Route::get('/password', [UserProfileController::class, 'getPassword'])->name('password');
         Route::put('/set-password', [UserProfileController::class, 'setPassword'])->name('set-password');
         Route::resources([

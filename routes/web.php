@@ -8,3 +8,19 @@ Route::get('/', [MainController::class, 'main'])->name('main');
 require __DIR__ . '/admin.php';
 require __DIR__ . '/representative.php';
 require __DIR__ . '/user.php';
+
+Route::get('/test',function (){
+    \App\Models\Message::query()->create([
+        'sender_type' => \App\Models\User::class,
+        'sender_id' => 10,
+
+        'receiver_type' => \App\Models\User::class,
+        'receiver_id' => 11,
+
+        'subject' => 'subject',
+        'message' => 'message',
+
+    ]);
+
+    return true;
+});
