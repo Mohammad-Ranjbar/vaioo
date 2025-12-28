@@ -5,7 +5,7 @@
 @section('breadcrumb')
     @php
         $breadcrumbs = [
-            ['title' => 'پیام ها', 'url' => route('user.messages')],
+            ['title' => 'پیام ها', 'url' => route('user.messages.index')],
             ['title' => 'مشاهده پیام', 'url' => '#'],
         ];
     @endphp
@@ -37,7 +37,7 @@
                         </p>
                     </div>
                     <div>
-                        <a href="{{ route('user.messages') }}" class="btn btn-soft-secondary">
+                        <a href="{{ route('user.messages.index') }}" class="btn btn-soft-secondary">
                             بازگشت به لیست
                         </a>
                     </div>
@@ -210,37 +210,7 @@
                             </a>
                         @endif
 
-                        <!-- Mark as Read/Unread -->
-                        @if($message->receiver_id == auth()->id())
-                            @if($message->read)
-                                <form action="{{ route('user.messages.mark-unread', $message->id) }}" method="POST" class="d-inline">
-                                    @csrf
-                                    @method('PUT')
-                                    <button type="submit" class="btn btn-warning">
-                                        <iconify-icon icon="solar:letter-unread-broken" class="align-middle me-1"></iconify-icon>
-                                        علامت به عنوان خوانده نشده
-                                    </button>
-                                </form>
-                            @else
-                                <form action="{{ route('user.messages.mark-read', $message->id) }}" method="POST" class="d-inline">
-                                    @csrf
-                                    @method('PUT')
-                                    <button type="submit" class="btn btn-success">
-                                        <iconify-icon icon="solar:letter-read-broken" class="align-middle me-1"></iconify-icon>
-                                        علامت به عنوان خوانده شده
-                                    </button>
-                                </form>
-                            @endif
-                        @endif
-
-                        <!-- Delete Button -->
-                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                            <iconify-icon icon="solar:trash-bin-minimalistic-2-broken" class="align-middle me-1"></iconify-icon>
-                            حذف پیام
-                        </button>
-
-                        <!-- Back Button -->
-                        <a href="{{ route('user.messages') }}" class="btn btn-secondary ms-auto">
+                        <a href="{{ route('user.messages.index') }}" class="btn btn-secondary ms-auto">
                             <iconify-icon icon="solar:arrow-left-broken" class="align-middle me-1"></iconify-icon>
                             بازگشت
                         </a>
@@ -248,7 +218,6 @@
                 </div>
             </div>
 
-            <!-- Replies Section -->
             @if($message->hasReplies())
                 <div class="card mt-4">
                     <div class="card-header border-bottom d-flex justify-content-between align-items-center">
@@ -256,9 +225,7 @@
                             <iconify-icon icon="solar:conversation-broken" class="align-middle me-2"></iconify-icon>
                             پاسخ‌ها ({{ $message->replyCount() }})
                         </h5>
-                        <span class="badge bg-info-subtle text-info">
-                            {{ $message->replies()->where('read', false)->count() }} پاسخ خوانده نشده
-                        </span>
+
                     </div>
                     <div class="card-body">
                         <div class="timeline">
@@ -293,6 +260,7 @@
                                                             <span class="badge bg-warning-subtle text-warning">خوانده نشده</span>
                                                         @endif
                                                     </div>
+
                                                     <small class="text-muted">
                                                         {{ jdate($reply->created_at)->format('Y/m/d H:i') }}
                                                     </small>
@@ -309,82 +277,13 @@
                                                 </h6>
 
                                                 <div class="message-content mb-2">
-                                                    {!! nl2br(e(Str::limit($reply->message, 200))) !!}
-                                                </div>
-
-                                                <div class="d-flex justify-content-between align-items-center mt-3">
-                                                    <div>
-                                                        @if($reply->sender_id != auth()->id())
-                                                            <a href="{{ route('user.messages.show', $reply->id) }}" class="btn btn-sm btn-soft-primary">
-                                                                مشاهده کامل و پاسخ
-                                                            </a>
-                                                        @else
-                                                            <a href="{{ route('user.messages.show', $reply->id) }}" class="btn btn-sm btn-soft-info">
-                                                                مشاهده کامل
-                                                            </a>
-                                                        @endif
-                                                    </div>
-
-                                                    <!-- Reply Actions -->
-                                                    <div class="d-flex gap-1">
-                                                        @if($reply->receiver_id == auth()->id())
-                                                            @if($reply->read)
-                                                                <form action="{{ route('user.messages.mark-unread', $reply->id) }}" method="POST" class="d-inline">
-                                                                    @csrf
-                                                                    @method('PUT')
-                                                                    <button type="submit" class="btn btn-sm btn-soft-warning" title="علامت به عنوان خوانده نشده">
-                                                                        <iconify-icon icon="solar:letter-unread-broken" class="fs-14"></iconify-icon>
-                                                                    </button>
-                                                                </form>
-                                                            @else
-                                                                <form action="{{ route('user.messages.mark-read', $reply->id) }}" method="POST" class="d-inline">
-                                                                    @csrf
-                                                                    @method('PUT')
-                                                                    <button type="submit" class="btn btn-sm btn-soft-success" title="علامت به عنوان خوانده شده">
-                                                                        <iconify-icon icon="solar:letter-read-broken" class="fs-14"></iconify-icon>
-                                                                    </button>
-                                                                </form>
-                                                            @endif
-                                                        @endif
-
-                                                        <!-- Delete Reply Button -->
-                                                        <button type="button" class="btn btn-sm btn-soft-danger"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#deleteReplyModal{{ $reply->id }}"
-                                                                title="حذف پاسخ">
-                                                            <iconify-icon icon="solar:trash-bin-minimalistic-2-broken" class="fs-14"></iconify-icon>
-                                                        </button>
-                                                    </div>
+                                                    {{ $reply->message}}
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- Delete Reply Modal -->
-                                <div class="modal fade" id="deleteReplyModal{{ $reply->id }}" tabindex="-1" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <form action="{{ route('user.messages.destroy', $reply->id) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <div class="modal-body text-center">
-                                                    <iconify-icon icon="solar:warning-circle-broken" class="text-warning fs-48"></iconify-icon>
-                                                    <h5 class="mt-3">آیا از حذف این پاسخ اطمینان دارید؟</h5>
-                                                    <p class="text-muted">این عمل قابل بازگشت نیست.</p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-info" data-bs-dismiss="modal">
-                                                        انصراف
-                                                    </button>
-                                                    <button type="submit" class="btn btn-danger">
-                                                        حذف پاسخ
-                                                    </button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
                             @endforeach
                         </div>
 
@@ -484,34 +383,6 @@
         </div>
     </div>
 
-    <!-- Delete Modal -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <form action="{{ route('user.messages.destroy', $message->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <div class="modal-body text-center">
-                        <iconify-icon icon="solar:warning-circle-broken" class="text-warning fs-48"></iconify-icon>
-                        <h5 class="mt-3">آیا از حذف این پیام اطمینان دارید؟</h5>
-                        <p class="text-muted">
-                            @if($message->hasReplies())
-                                <strong>توجه:</strong> تمام پاسخ‌های مرتبط با این پیام نیز حذف خواهند شد.
-                            @endif
-                        </p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-info" data-bs-dismiss="modal">
-                            انصراف
-                        </button>
-                        <button type="submit" class="btn btn-danger">
-                            حذف پیام
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 @endsection
 
 @push('styles')
@@ -599,50 +470,5 @@
 @endpush
 
 @push('scripts')
-    <script>
-        $(document).ready(function() {
-            // Smooth scroll to reply form
-            $('a[href="#replyForm"]').on('click', function(e) {
-                e.preventDefault();
-                $('html, body').animate({
-                    scrollTop: $('#replyForm').offset().top - 100
-                }, 500);
-            });
 
-            // Load more replies
-            $('#loadMoreReplies').on('click', function() {
-                const button = $(this);
-                const messageId = {{ $message->id }};
-                const currentCount = $('.timeline-item').length - 1; // Exclude current message
-
-                button.prop('disabled', true).html('<span class="spinner-border spinner-border-sm me-2"></span>در حال بارگذاری...');
-
-                $.ajax({
-                    url: '{{ route("user.messages.load-replies", $message->id) }}',
-                    method: 'GET',
-                    data: {
-                        offset: currentCount
-                    },
-                    success: function(response) {
-                        if (response.success && response.data.length > 0) {
-                            // Append new replies
-                            response.data.forEach(function(reply) {
-                                // Create timeline item for each reply
-                                // You can implement the template rendering here
-                            });
-
-                            if (response.data.length < 10) {
-                                button.hide();
-                            }
-                        } else {
-                            button.hide();
-                        }
-                    },
-                    error: function() {
-                        button.prop('disabled', false).html('مشکلی پیش آمد. مجدد تلاش کنید.');
-                    }
-                });
-            });
-        });
-    </script>
 @endpush

@@ -64,10 +64,7 @@ class Message extends Model
         return $this->replies()->exists();
     }
 
-    /**
-     * Get the latest reply.
-     */
-    public function latestReply()
+    public function latestReply(): null
     {
         return $this->replies()->latest()->first();
     }
@@ -77,16 +74,13 @@ class Message extends Model
         return $this->replies()->count();
     }
 
-    /**
-     * Check if message is a reply.
-     */
     public function isReply(): bool
     {
-        return $this->parent_id !== null;
+        return $this->getAttribute('parent_id') !== null;
     }
     public function isFirstMessage(): bool
     {
-        return $this->parent_id === null;
+        return $this->getAttribute('parent_id') === null;
     }
 
     public function createReply($sender, $receiver, $content, $subject = null): Message
@@ -223,11 +217,6 @@ class Message extends Model
             ->where('sender_type', $model->getMorphClass());
     }
 
-    public function scopeReceivedBy($query, $model)
-    {
-        return $query->where('receiver_id', $model->id)
-            ->where('receiver_type', $model->getMorphClass());
-    }
 
     public function scopeConversationBetween($query, $entity1, $entity2)
     {

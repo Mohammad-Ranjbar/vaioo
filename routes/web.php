@@ -17,8 +17,9 @@ Route::get('/test',function (){
         'receiver_type' => \App\Models\User::class,
         'receiver_id' => 11,
 
-        'subject' => 'subject',
-        'message' => 'message',
+        'subject' => 'reply for',
+        'message' => 'message for',
+        'parent_id' => 1
 
     ]);
 

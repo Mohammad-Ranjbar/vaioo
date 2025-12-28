@@ -249,7 +249,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('user.messages')}}">
+                    <a class="nav-link" href="{{route('user.messages.index')}}">
                     <span class="nav-icon">
                          <i class="ri-home-office-line">
                          </i>

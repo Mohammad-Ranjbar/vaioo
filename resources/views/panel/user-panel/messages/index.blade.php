@@ -48,14 +48,14 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->get('type') == 'sent' ? 'active' : '' }}"
-                                   href="{{ route('user.messages', ['type' => 'sent']) }}">
+                                   href="{{ route('user.messages.index', ['type' => 'sent']) }}">
                                     ارسال شده
                                     <span class="badge bg-success-subtle text-success ms-1">{{ $sent_count }}</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->get('type') == 'unread' ? 'active' : '' }}"
-                                   href="{{ route('user.messages', ['type' => 'unread']) }}">
+                                   href="{{ route('user.messages.index', ['type' => 'unread']) }}">
                                     خوانده نشده
                                     <span class="badge bg-warning-subtle text-warning ms-1">{{ $unread_count }}</span>
                                 </a>

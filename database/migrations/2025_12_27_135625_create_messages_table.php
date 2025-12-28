@@ -13,7 +13,7 @@ return new class extends Migration {
             $table->morphs('sender');
             $table->morphs('receiver');
 
-            $table->foreignId('parent_id')->nullable()->constrained('messages')->onDelete('cascade');
+            $table->foreignId('parent_id')->nullable()->constrained('messages')->cascadeOnDelete();
 
             $table->enum('type', ['regular', 'reply'])->default('regular');
 
@@ -26,13 +26,13 @@ return new class extends Migration {
 
             $table->timestamps();
 
-            $table->index(['sender_type', 'sender_id', 'created_at']);
-            $table->index(['receiver_type', 'receiver_id', 'read', 'created_at']);
-            $table->index(['parent_id', 'created_at']);
-            $table->index(['type', 'created_at']);
+            $table->index(['receiver_type', 'receiver_id', 'read']);
 
-            $table->index(['parent_id', 'sender_id', 'created_at']);
-            $table->index(['parent_id', 'receiver_id', 'created_at']);
+            $table->index(['parent_id']);
+            $table->index(['type']);
+
+            $table->index(['parent_id', 'sender_id']);
+            $table->index(['parent_id', 'receiver_id']);
         });
     }
 
