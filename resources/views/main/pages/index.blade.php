@@ -23,12 +23,12 @@
                             <div class="it-hero-btn d-flex align-items-center justify-content-center">
                                 <div class="it-fade-anim" data-fade-from="top" data-ease="bounce" data-delay=".5">
                                     <a class="it-btn-black ml-30 mb-20" href="{{route('representative.check')}}" target="_blank">
-                                        <span>پنل نماینده</span>
+                                        <span>پنل فرستنده </span>
                                     </a>
                                 </div>
                                 <div class="it-fade-anim" data-fade-from="top" data-ease="bounce" data-delay=".7">
                                     <a class="it-btn-orange mb-20" href="#">
-                                        <span>پنل کاربر</span>
+                                        <span>پنل گیرنده</span>
                                     </a>
                                 </div>
                             </div>
