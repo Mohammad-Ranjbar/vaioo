@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 #[ObservedBy(ShipmentObserver::class)]
 class Shipment extends Model
@@ -35,5 +36,10 @@ class Shipment extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function receivedMessages(): MorphMany
+    {
+        return $this->morphMany(Message::class, 'receiver');
     }
 }

@@ -85,6 +85,11 @@
                                     <td>
                                         <div class="d-flex gap-2 justify-content-center">
                                             <a class="btn btn-soft-primary btn-sm"
+                                               href="{{route('user.messages.shipment',$shipment->tracking_code)}}">
+                                                <iconify-icon class="align-middle fs-18"
+                                                              icon="solar:pen-2-broken"></iconify-icon>
+                                            </a>
+                                            <a class="btn btn-soft-primary btn-sm"
                                                href="{{route('user.shipments.edit',$shipment->id)}}">
                                                 <iconify-icon class="align-middle fs-18"
                                                               icon="solar:pen-2-broken"></iconify-icon>

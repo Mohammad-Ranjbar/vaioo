@@ -57,17 +57,15 @@ class User extends Authenticatable
     public function conversationWithRepresentative(Representative $representative)
     {
         return Message::conversationBetween($this, $representative)
-            ->orderBy('created_at', 'asc')
+            ->latest()
             ->get();
     }
 
-    /**
-     * Get conversation with a specific admin.
-     */
+
     public function conversationWithAdmin(Admin $admin)
     {
         return Message::conversationBetween($this, $admin)
-            ->orderBy('created_at', 'asc')
+            ->latest()
             ->get();
     }
 

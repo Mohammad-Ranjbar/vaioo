@@ -4,6 +4,15 @@
 <head>
     <meta charset="utf-8" />
     <title>
+        پنل
+        @if(request()->routeIs('admin.*') && auth('admin')->check())
+            ادمین
+        @elseif(request()->routeIs('representative.*') && auth('representative')->check())
+            حمل کننده
+        @elseif(request()->routeIs('user.*') && auth()->check())
+            فرستنده
+        @endif
+        ::
         @yield('title')
     </title>
     @include('panel.sections.seo')
