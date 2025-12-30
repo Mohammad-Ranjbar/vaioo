@@ -12,7 +12,7 @@ class TripSeeder extends Seeder
     {
         $trips = [
             [
-                'representative_id' => 1,
+                'representative_id' => 5,
                 'source_airport_id' => 1,
                 'destination_airport_id' => 2,
                 'departure_date' => Carbon::now()->addDays(5)->setHour(8)->setMinute(0),
@@ -23,7 +23,7 @@ class TripSeeder extends Seeder
             ],
 
             [
-                'representative_id' => 2,
+                'representative_id' => 5,
                 'source_airport_id' => 3,
                 'destination_airport_id' => 4,
                 'departure_date' => Carbon::now()->subHours(2),
@@ -34,7 +34,7 @@ class TripSeeder extends Seeder
             ],
 
             [
-                'representative_id' => 3,
+                'representative_id' => 5,
                 'source_airport_id' => 4,
                 'destination_airport_id' => 1,
                 'departure_date' => Carbon::now()->subDays(3)->setHour(14)->setMinute(30),

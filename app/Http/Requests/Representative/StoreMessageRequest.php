@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Representative;
 
 use App\Models\Message;
+use App\Models\Representative;
 use App\Models\Shipment;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
@@ -24,7 +25,6 @@ class StoreMessageRequest extends FormRequest
             'receiver_type' => 'nullable',
             'receiver_id' => 'nullable',
             'parent_id' => 'nullable',
-            'subject' => 'required|string|max:255',
             'message' => 'required|string|max:1000',
         ];
     }
@@ -43,12 +43,11 @@ class StoreMessageRequest extends FormRequest
         }
 
         $this->merge([
-            'sender_type' => User::class,
-            'sender_id' => Auth::id(),
+            'sender_type' => Representative::class,
+            'sender_id' => Auth::guard('representative')->id(),
             'receiver_type' => Shipment::class,
             'receiver_id' => $shipmentId,
             'parent_id' => $parentId,
-
         ]);
     }
 }

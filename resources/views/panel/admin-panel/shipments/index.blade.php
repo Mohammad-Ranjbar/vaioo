@@ -29,7 +29,6 @@
                                 <th>کد رهگیری</th>
                                 <th>فرستنده</th>
                                 <th>گیرنده</th>
-                                <th>وزن (kg)</th>
                                 <th>وضعیت</th>
                                 <th>تاریخ</th>
                                 <th>تنظیمات</th>
@@ -45,11 +44,9 @@
                                         {{$shipment->sender_name}}
                                     </td>
                                     <td>
-                                        {{$shipment->reciver_name}}
+                                        {{$shipment->receiver_name}}
                                     </td>
-                                    <td>
-                                        {{number_format($shipment->weight, 2)}}
-                                    </td>
+
                                     <td>
                                         @switch($shipment->status)
                                             @case('pending')
@@ -80,10 +77,11 @@
                                         @endswitch
                                     </td>
                                     <td dir="ltr">
-                                        {{jdate($shipment->created_at)}}
+                                        {{jdate($shipment->created_at)->format('Y-m-d H:i')}}
                                     </td>
                                     <td>
                                         <div class="d-flex gap-2 justify-content-center">
+
                                             <a class="btn btn-soft-primary btn-sm"
                                                href="{{route('admin.shipments.edit',$shipment->id)}}">
                                                 <iconify-icon class="align-middle fs-18"

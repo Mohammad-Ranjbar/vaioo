@@ -17,11 +17,11 @@ class ShipmentSeeder extends Seeder
         for ($i = 1; $i <= 50; $i++) {
             $shipments[] = [
                 'trip_id' => rand(1, 5),
-                'user_id' => rand(1, 10),
+                'user_id' => 11,
                 'sender_name' => $faker->name(),
                 'sender_phone' => $this->generatePersianPhoneNumber($faker),
-                'reciver_name' => $faker->name(),
-                'reciver_phone' => $this->generatePersianPhoneNumber($faker),
+                'receiver_name' => $faker->name(),
+                'receiver_phone' => $this->generatePersianPhoneNumber($faker),
                 'description' => $this->generatePersianDescription($faker),
                 'weight' => rand(50, 5000) / 100,
                 'declared_value' => rand(1000000, 50000000),

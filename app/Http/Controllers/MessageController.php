@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreMessageRequest;
 use App\Http\Requests\UpdateMessageRequest;
+use App\Http\Requests\User\StoreMessageRequest;
 use App\Models\Message;
 
 class MessageController extends Controller

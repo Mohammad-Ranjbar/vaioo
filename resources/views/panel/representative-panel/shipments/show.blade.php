@@ -96,11 +96,11 @@
                                         </tr>
                                         <tr>
                                             <td><strong>نام:</strong></td>
-                                            <td>{{ $shipment->reciver_name }}</td>
+                                            <td>{{ $shipment->receiver_name }}</td>
                                         </tr>
                                         <tr>
                                             <td><strong>تلفن:</strong></td>
-                                            <td>{{ $shipment->reciver_phone }}</td>
+                                            <td>{{ $shipment->receiver_phone }}</td>
                                         </tr>
                                     </table>
                                 </div>

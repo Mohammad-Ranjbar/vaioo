@@ -45,7 +45,7 @@
                                         {{$shipment->sender_name}}
                                     </td>
                                     <td>
-                                        {{$shipment->reciver_name}}
+                                        {{$shipment->receiver_name}}
                                     </td>
                                     <td>
                                         {{number_format($shipment->weight, 2)}}
@@ -84,10 +84,9 @@
                                     </td>
                                     <td>
                                         <div class="d-flex gap-2 justify-content-center">
-                                            <a class="btn btn-soft-primary btn-sm"
+                                            <a class="btn btn-soft-warning btn-sm"
                                                href="{{route('user.messages.shipment',$shipment->tracking_code)}}">
-                                                <iconify-icon class="align-middle fs-18"
-                                                              icon="solar:pen-2-broken"></iconify-icon>
+                                                <iconify-icon class="align-middle fs-18" icon="mdi:message"></iconify-icon>
                                             </a>
                                             <a class="btn btn-soft-primary btn-sm"
                                                href="{{route('user.shipments.edit',$shipment->id)}}">
@@ -108,7 +107,6 @@
                                                               icon="solar:trash-bin-minimalistic-2-broken"></iconify-icon>
                                             </button>
 
-                                            <!-- Delete Modal -->
                                             <div class="modal fade" id="deleteModal{{$shipment->id}}" tabindex="-1"
                                                  aria-labelledby="deleteModalLabel{{$shipment->id}}" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered">

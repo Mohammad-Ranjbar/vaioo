@@ -4,6 +4,7 @@
 use App\Http\Controllers\Representative\AuthController;
 use App\Http\Controllers\Representative\DashboardController;
 use App\Http\Controllers\Representative\DocumentController;
+use App\Http\Controllers\Representative\MessageController;
 use App\Http\Controllers\Representative\ShipmentController;
 use App\Http\Controllers\Representative\TripController;
 use App\Http\Middleware\RepresentativeMidlleware;
@@ -24,7 +25,11 @@ Route::prefix('representative')->as('representative.')->group(function () {
         Route::post('logout', [AuthController::class, 'logout'])->name('logout');
         Route::get('dashboard', DashboardController::class)->name('dashboard');
 
-
+        Route::as('messages.')->prefix('messages')->group(function () {
+            Route::get('/', [MessageController::class, 'index'])->name('index');
+            Route::post('/shipment/{shipment}', [MessageController::class, 'store'])->name('store');
+            Route::get('/shipment/{tracking_code}', [MessageController::class, 'shipmentMessages'])->name('shipment');
+        });
         Route::get('/documents', [DocumentController::class, 'documents'])->name('documents');
         Route::post('/documents', [DocumentController::class, 'store'])
             ->name('documents.store');

@@ -24,7 +24,6 @@
                                 <th>کد رهگیری</th>
                                 <th>فرستنده</th>
                                 <th>گیرنده</th>
-                                <th>وزن (kg)</th>
                                 <th>وضعیت</th>
                                 <th>تاریخ</th>
                                 <th>تنظیمات</th>
@@ -40,10 +39,7 @@
                                         {{$shipment->sender_name}}
                                     </td>
                                     <td>
-                                        {{$shipment->reciver_name}}
-                                    </td>
-                                    <td>
-                                        {{number_format($shipment->weight, 2)}}
+                                        {{$shipment->receiver_name}}
                                     </td>
                                     <td>
                                         @switch($shipment->status)
@@ -75,10 +71,14 @@
                                         @endswitch
                                     </td>
                                     <td dir="ltr">
-                                        {{jdate($shipment->created_at)}}
+                                        {{jdate($shipment->created_at)->format('Y-m-d')}}
                                     </td>
                                     <td>
                                         <div class="d-flex gap-2 justify-content-center">
+                                            <a class="btn btn-soft-warning btn-sm"
+                                               href="{{route('representative.messages.shipment',$shipment->tracking_code)}}">
+                                                <iconify-icon class="align-middle fs-18" icon="mdi:message"></iconify-icon>
+                                            </a>
                                             <a class="btn btn-soft-primary btn-sm"
                                                href="{{route('representative.shipments.edit',$shipment->id)}}">
                                                 <iconify-icon class="align-middle fs-18"

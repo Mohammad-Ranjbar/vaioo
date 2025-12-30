@@ -67,26 +67,26 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label class="form-label" for="reciver_name">
+                                    <label class="form-label" for="receiver_name">
                                         نام گیرنده <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" dir="rtl" id="reciver_name" name="reciver_name"
-                                           class="form-control text-right @error('reciver_name') is-invalid @enderror"
-                                           value="{{ old('reciver_name') }}" required>
-                                    @error('reciver_name')
+                                    <input type="text" dir="rtl" id="receiver_name" name="receiver_name"
+                                           class="form-control text-right @error('receiver_name') is-invalid @enderror"
+                                           value="{{ old('receiver_name') }}" required>
+                                    @error('receiver_name')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label class="form-label" for="reciver_phone">
+                                    <label class="form-label" for="receiver_phone">
                                         تلفن گیرنده <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" dir="ltr" id="reciver_phone" name="reciver_phone"
-                                           class="form-control text-left @error('reciver_phone') is-invalid @enderror"
-                                           value="{{ old('reciver_phone') }}" required>
-                                    @error('reciver_phone')
+                                    <input type="text" dir="ltr" id="receiver_phone" name="receiver_phone"
+                                           class="form-control text-left @error('receiver_phone') is-invalid @enderror"
+                                           value="{{ old('receiver_phone') }}" required>
+                                    @error('receiver_phone')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>

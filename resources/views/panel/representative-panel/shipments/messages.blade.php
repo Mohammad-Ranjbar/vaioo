@@ -17,7 +17,7 @@
                     </h4>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('user.messages.store',$shipment->id) }}" method="POST">
+                    <form action="{{ route('representative.messages.store',$shipment->id) }}" method="POST">
                         @csrf
                         <input type="hidden" name="shipment_id" value="{{ $shipment->id }}">
 
@@ -67,7 +67,7 @@
 
                         <div class="row" id="messagesGrid">
                             @foreach($shipment->receivedMessages->sortByDesc('created_at') as $message)
-                               @include('panel.sections.message',['message' => $message])
+                                @include('panel.sections.message',['message' => $message])
                             @endforeach
                         </div>
 
@@ -124,4 +124,5 @@
         </div>
     </div>
 @endsection
+
 

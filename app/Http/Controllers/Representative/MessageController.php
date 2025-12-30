@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Representative;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\User\StoreMessageRequest;
+use App\Http\Requests\Representative\StoreMessageRequest;
 use App\Models\Message;
 use App\Models\Shipment;
 use Exception;
@@ -13,6 +13,7 @@ use Illuminate\Http\RedirectResponse;
 
 class MessageController extends Controller
 {
+
     public function store(StoreMessageRequest $request, string $shipment): RedirectResponse
     {
         $validatedData = $request->validated();
@@ -29,6 +30,7 @@ class MessageController extends Controller
     {
         $shipment = Shipment::query()->where('tracking_code', $trackingCode)->with(['receivedMessages.replies', 'user', 'trip'])->firstOrFail();
 
-        return view('panel.user-panel.shipments.messages', compact('shipment'));
+        return view('panel.representative-panel.shipments.messages', compact('shipment'));
     }
+
 }

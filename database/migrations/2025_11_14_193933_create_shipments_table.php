@@ -14,8 +14,8 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->restrictOnDelete();
             $table->string('sender_name');
             $table->string('sender_phone');
-            $table->string('reciver_name');
-            $table->string('reciver_phone');
+            $table->string('receiver_name');
+            $table->string('receiver_phone');
             $table->text('description')->nullable();
             $table->decimal('weight');
             $table->decimal('declared_value',12);

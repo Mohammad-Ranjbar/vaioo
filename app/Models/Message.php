@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -63,6 +64,26 @@ class Message extends Model
         }
 
         return $this->parent->threadStarter();
+    }
+
+    public function subjectFull(): Attribute
+    {
+
+        return Attribute::get(function (){
+            $title = '-';
+            if ($this->getAttribute('sender_type') === User::class) {
+                $title = 'کاربر :: '.$this->getAttribute('sender')->fullname;
+            }
+            if ($this->getAttribute('sender_type') === Representative::class) {
+                $title = 'نماینده :: '.$this->getAttribute('sender')->fullname;
+            }
+            if ($this->getAttribute('sender_type') === Admin::class) {
+                $title = 'ادمین :: '.$this->getAttribute('sender')->fullname;
+            }
+
+
+            return $title;
+        });
     }
 
     public function hasReplies(): bool

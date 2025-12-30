@@ -9,6 +9,11 @@ return [
     'not_active' => 'حساب کاربری شما غیر فعال است',
     'account_not_found' => 'حساب کاربری شما یافت نشد',
     'verification_sms_sent' => 'پیامک ارسال شد',
-    'invalid_code' => 'کدوارد شده نامعتبر است'
+    'invalid_code' => 'کدوارد شده نامعتبر است',
+    'pending' => 'در انتظار',
+    'accepted' => 'پذیرفته شده',
+    'picked_up' => 'برداشت شده',
+    'in_transit' => 'در حال انتقال',
+    'delivered' => 'تحویل داده شده'
 ];
 
