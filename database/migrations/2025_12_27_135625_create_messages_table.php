@@ -19,7 +19,7 @@ return new class extends Migration {
 
             $table->string('original_subject')->nullable();
 
-            $table->string('subject');
+            $table->string('subject')->nullable();
             $table->text('message');
             $table->boolean('read')->index()->default(false);
             $table->dateTime('read_at')->nullable();

@@ -15,32 +15,13 @@
 @section('content')
     <div class="row">
         <div class="col-xl-12">
-            <!-- Shipment Info Card -->
             <div class="card mb-4">
                 <div class="card-header bg-light-subtle border-bottom d-flex justify-content-between align-items-center">
                     <h4 class="card-title mb-0">
                         <iconify-icon icon="solar:box-broken" class="align-middle me-2"></iconify-icon>
                         اطلاعات محموله
                     </h4>
-                    <div class="dropdown">
-                        <button class="btn btn-soft-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                            <iconify-icon icon="solar:menu-dots-broken"></iconify-icon>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a class="dropdown-item" href="{{ route('user.shipments.show', $shipment->id) }}">
-                                    <iconify-icon icon="solar:eye-broken" class="align-middle me-2"></iconify-icon>
-                                    مشاهده جزئیات محموله
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="{{ route('user.messages.index') }}">
-                                    <iconify-icon icon="solar:letter-broken" class="align-middle me-2"></iconify-icon>
-                                    مشاهده همه پیام‌ها
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -78,9 +59,10 @@
                         </div>
                     </div>
                     @if($shipment->description)
-                        <div class="row">
+                        <div class="row border p-2">
                             <div class="col-12">
                                 <label class="form-label text-muted">توضیحات</label>
+                                <hr>
                                 <p class="mb-0">{{ $shipment->description }}</p>
                             </div>
                         </div>
@@ -88,8 +70,8 @@
                 </div>
             </div>
 
-            <!-- Create New Message Card -->
-            <div class="card mb-4">
+
+            <div class="card mb-4" id="new-message">
                 <div class="card-header bg-primary-subtle border-bottom">
                     <h4 class="card-title mb-0 text-primary">
                         <iconify-icon icon="solar:pen-new-square-broken" class="align-middle me-2"></iconify-icon>
@@ -119,18 +101,8 @@
 
                             <div class="col-12">
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="copy_to_email" id="copy_to_email" value="1">
-                                        <label class="form-check-label" for="copy_to_email">
-                                            ارسال کپی به ایمیل
-                                        </label>
-                                    </div>
 
                                     <div>
-                                        <button type="button" class="btn btn-secondary me-2" onclick="resetForm()">
-                                            <iconify-icon icon="solar:eraser-broken" class="align-middle me-1"></iconify-icon>
-                                            پاک کردن
-                                        </button>
                                         <button type="submit" class="btn btn-primary">
                                             <iconify-icon icon="solar:send-twice-square-linear" class="align-middle me-1"></iconify-icon>
                                             ارسال پیام
@@ -143,7 +115,6 @@
                 </div>
             </div>
 
-            <!-- Messages Section -->
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center border-bottom">
                     <div>
@@ -156,219 +127,70 @@
                                 </span>
                             @endif
                         </h4>
-                        <p class="text-muted mb-0 fs-13">
-                            تمامی پیام‌های رد و بدل شده در مورد این محموله
-                        </p>
-                    </div>
 
-                    <div class="d-flex gap-2">
-                        <button type="button" class="btn btn-soft-info" id="refreshMessages">
-                            <iconify-icon icon="solar:refresh-broken" class="align-middle"></iconify-icon>
-                        </button>
-                        <a href="{{ route('user.shipments.show', $shipment->id) }}" class="btn btn-soft-secondary">
-                            <iconify-icon icon="solar:arrow-left-broken" class="align-middle me-1"></iconify-icon>
-                            بازگشت
-                        </a>
                     </div>
                 </div>
 
                 <div class="card-body">
                     @if($shipment->receivedMessages->count() > 0)
-                        <!-- Messages Filter -->
-                        <div class="row mb-4">
-                            <div class="col-md-6">
-                                <div class="input-group">
-                                    <span class="input-group-text">
-                                        <iconify-icon icon="solar:magnifer-broken"></iconify-icon>
-                                    </span>
-                                    <input type="text" class="form-control" id="messageSearch" placeholder="جستجو در پیام‌ها...">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="d-flex gap-2 justify-content-end">
-                                    <select class="form-select w-auto" id="messageFilter">
-                                        <option value="all">همه پیام‌ها</option>
-                                        <option value="sent">ارسال شده توسط من</option>
-                                        <option value="received">دریافتی از دیگران</option>
-                                        <option value="unread">خوانده نشده</option>
-                                        <option value="with_replies">دارای پاسخ</option>
-                                    </select>
 
-                                    <select class="form-select w-auto" id="messageSort">
-                                        <option value="newest">جدیدترین</option>
-                                        <option value="oldest">قدیمی‌ترین</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Messages Timeline -->
-                        <div class="timeline" id="messagesTimeline">
+                        <div class="row" id="messagesGrid">
                             @foreach($shipment->receivedMessages->sortByDesc('created_at') as $message)
-                                <div class="timeline-item message-item"
+                                <div class="col-md-12 mb-4 message-item"
                                      data-sender="{{ $message->sender_id == auth()->id() ? 'sent' : 'received' }}"
                                      data-read="{{ $message->read ? 'read' : 'unread' }}"
                                      data-replies="{{ $message->replies->count() > 0 ? 'has-replies' : 'no-replies' }}">
-                                    <div class="timeline-marker">
-                                        @if($message->sender_id == auth()->id())
-                                            <div class="marker bg-success">
-                                                <iconify-icon icon="solar:upload-minimalistic-broken"></iconify-icon>
-                                            </div>
-                                        @else
-                                            <div class="marker bg-info">
-                                                <iconify-icon icon="solar:download-minimalistic-broken"></iconify-icon>
-                                            </div>
-                                        @endif
-                                    </div>
-                                    <div class="timeline-content">
-                                        <div class="card {{ !$message->read && $message->receiver_id == auth()->id() ? 'border-warning' : '' }}">
-                                            <div class="card-body">
-                                                <!-- Message Header -->
-                                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                                    <div class="flex-grow-1">
-                                                        <div class="d-flex align-items-center gap-2 mb-1">
-                                                            <!-- Sender/Receiver Info -->
-                                                            @if($message->sender_id == auth()->id())
-                                                                <span class="badge bg-success-subtle text-success border border-success-subtle">
-                                                                    <iconify-icon icon="solar:user-check-broken" class="me-1"></iconify-icon>
-                                                                    شما
-                                                                </span>
-                                                                <iconify-icon icon="solar:arrow-right-broken" class="text-muted"></iconify-icon>
-                                                                <span class="fw-semibold">{{ $message->receiver->name ?? $message->receiver->email }}</span>
-                                                            @else
-                                                                <span class="badge bg-info-subtle text-info border border-info-subtle">
-                                                                    <iconify-icon icon="solar:user-broken" class="me-1"></iconify-icon>
-                                                                    {{ class_basename($message->sender_type) }}
-                                                                </span>
-                                                                <iconify-icon icon="solar:arrow-left-broken" class="text-muted"></iconify-icon>
-                                                                <span class="fw-semibold">{{ $message->sender->name ?? $message->sender->email }}</span>
-                                                            @endif
 
-                                                            <!-- Urgent Badge -->
-                                                            @if($message->priority == 'urgent')
-                                                                <span class="badge bg-danger">
-                                                                    <iconify-icon icon="solar:danger-broken" class="me-1"></iconify-icon>
-                                                                    فوری
-                                                                </span>
-                                                            @endif
-                                                        </div>
-
-                                                        <!-- Subject -->
-                                                        <h5 class="mb-0">
-                                                            <a href="{{ route('user.messages.show', $message->id) }}" class="text-dark text-decoration-none">
-                                                                {{ $message->subject }}
-                                                            </a>
-                                                        </h5>
+                                    <div class="card h-100 {{ !$message->read && $message->receiver_id == auth()->id() ? 'border-warning border-2' : 'border-light' }}">
+                                        <div class="card-header bg-light-subtle border-bottom d-flex justify-content-between align-items-center">
+                                            <div class="d-flex align-items-center">
+                                                @if($message->sender_id == auth()->id())
+                                                    <div class="avatar-sm bg-success-subtle text-success rounded-circle d-flex align-items-center justify-content-center me-2">
+                                                        <iconify-icon icon="solar:upload-minimalistic-broken" class="fs-18"></iconify-icon>
                                                     </div>
+                                                @else
+                                                    <div class="avatar-sm bg-info-subtle text-info rounded-circle d-flex align-items-center justify-content-center me-2">
+                                                        <iconify-icon icon="solar:download-minimalistic-broken" class="fs-18"></iconify-icon>
+                                                    </div>
+                                                @endif
 
-                                                    <!-- Time & Status -->
-                                                    <div class="text-end flex-shrink-0 ms-3">
-                                                        <small class="text-muted d-block">
-                                                            <iconify-icon icon="solar:calendar-broken" class="align-middle me-1"></iconify-icon>
-                                                            {{ jdate($message->created_at)->format('Y/m/d') }}
-                                                        </small>
-                                                        <small class="text-muted">
-                                                            <iconify-icon icon="solar:clock-circle-broken" class="align-middle me-1"></iconify-icon>
-                                                            {{ jdate($message->created_at)->format('H:i') }}
-                                                        </small>
-
-                                                        <!-- Read Status -->
-                                                        @if($message->receiver_id == auth()->id())
-                                                            @if($message->read)
-                                                                <small class="d-block text-success mt-1">
-                                                                    <iconify-icon icon="solar:check-read-broken" class="align-middle me-1"></iconify-icon>
-                                                                    خوانده شده
-                                                                </small>
-                                                            @else
-                                                                <small class="d-block text-warning mt-1">
-                                                                    <iconify-icon icon="solar:eye-closed-broken" class="align-middle me-1"></iconify-icon>
-                                                                    خوانده نشده
-                                                                </small>
-                                                            @endif
+                                                <div>
+                                                    <h6 class="mb-0">
+                                                        @if($message->sender_id == auth()->id())
+                                                            شما
+                                                        @else
+                                                            {{ class_basename($message->sender_type) }}
                                                         @endif
-                                                    </div>
-                                                </div>
-
-                                                <!-- Message Content Preview -->
-                                                <div class="border rounded p-3 bg-light-subtle mb-3">
-                                                    <div class="message-content-preview">
-                                                        {!! Str::limit(nl2br(e($message->message)), 200) !!}
-                                                    </div>
-                                                    @if(strlen($message->message) > 200)
-                                                        <div class="text-end mt-2">
-                                                            <a href="{{ route('user.messages.show', $message->id) }}" class="text-primary fs-13">
-                                                                مشاهده کامل متن
-                                                                <iconify-icon icon="solar:arrow-left-broken" class="align-middle"></iconify-icon>
-                                                            </a>
-                                                        </div>
-                                                    @endif
-                                                </div>
-
-                                                <!-- Message Actions -->
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <!-- Left Actions -->
-                                                    <div class="d-flex gap-2">
-                                                        <!-- View Full Message -->
-                                                        <a href="{{ route('user.messages.show', $message->id) }}"
-                                                           class="btn btn-sm btn-outline-primary">
-                                                            <iconify-icon icon="solar:eye-broken" class="align-middle me-1"></iconify-icon>
-                                                            مشاهده کامل
-                                                        </a>
-
-                                                        <!-- Reply Button -->
-                                                        @if($message->sender_id != auth()->id())
-                                                            <a href="{{ route('user.messages.show', $message->id) }}#replyForm"
-                                                               class="btn btn-sm btn-outline-success">
-                                                                <iconify-icon icon="solar:undo-left-broken" class="align-middle me-1"></iconify-icon>
-                                                                پاسخ
-                                                            </a>
-                                                        @endif
-                                                    </div>
-
-                                                    <!-- Right Badges -->
-                                                    <div class="d-flex gap-2">
-                                                        <!-- Replies Badge -->
-                                                        @if($message->replies->count() > 0)
-                                                            <a href="{{ route('user.messages.show', $message->id) }}"
-                                                               class="badge bg-info-subtle text-info text-decoration-none">
-                                                                <iconify-icon icon="solar:chat-round-line-broken" class="align-middle me-1"></iconify-icon>
-                                                                {{ $message->replyCount() }} پاسخ
-                                                            </a>
-                                                        @endif
-
-                                                        <!-- Priority Badge -->
-                                                        @if($message->priority != 'normal')
-                                                            <span class="badge bg-{{ $message->priority == 'urgent' ? 'danger' : 'warning' }}-subtle
-                                                                      text-{{ $message->priority == 'urgent' ? 'danger' : 'warning' }}">
-                                                                {{ $message->priority_label }}
-                                                            </span>
-                                                        @endif
-                                                    </div>
+                                                    </h6>
+                                                    <small class="text-muted">
+                                                        {{ jdate($message->created_at)->format('Y/m/d H:i') }}
+                                                    </small>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-3">
+                                                <span  class="text-dark text-decoration-none">
+                                                    {{ $message->subject }}
+                                                </span>
+                                                @if(!$message->read && $message->receiver_id == auth()->id())
+                                                    <span class="badge bg-danger rounded-circle ms-1" style="width: 8px; height: 8px;"></span>
+                                                @endif
+                                            </h5>
+                                            <div class="mb-3">
+                                                <div class="message-content">
+                                                   {{$message->message}}
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             @endforeach
                         </div>
 
-                        <!-- No Messages Match Filter -->
-                        <div id="noMessagesFound" class="text-center py-5 d-none">
-                            <div class="avatar-lg mx-auto mb-3">
-                                <div class="avatar-title bg-light-subtle text-secondary rounded-circle">
-                                    <iconify-icon icon="solar:search-broken" class="fs-24"></iconify-icon>
-                                </div>
-                            </div>
-                            <h5 class="mb-2">پیامی یافت نشد</h5>
-                            <p class="text-muted">هیچ پیامی با فیلترهای انتخابی مطابقت ندارد.</p>
-                            <button type="button" class="btn btn-secondary" onclick="resetFilters()">
-                                <iconify-icon icon="solar:refresh-broken" class="align-middle me-1"></iconify-icon>
-                                بازنشانی فیلترها
-                            </button>
-                        </div>
-
                     @else
-                        <!-- No Messages Found -->
                         <div class="text-center py-5">
                             <div class="avatar-lg mx-auto mb-3">
                                 <div class="avatar-title bg-light-subtle text-primary rounded-circle">
@@ -376,32 +198,28 @@
                                 </div>
                             </div>
                             <h5 class="mb-2">هنوز پیامی وجود ندارد</h5>
-                            <p class="text-muted mb-4">شما اولین نفری باشید که در مورد این محموله پیام ارسال می‌کند.</p>
+                            <hr>
+                            <br>
                             <div class="d-flex gap-2 justify-content-center">
-                                <a href="#createMessage" class="btn btn-primary">
-                                    <iconify-icon icon="solar:pen-new-square-broken" class="align-middle me-1"></iconify-icon>
-                                    ارسال پیام جدید
-                                </a>
                                 <a href="{{ route('user.shipments.show', $shipment->id) }}" class="btn btn-outline-secondary">
                                     <iconify-icon icon="solar:arrow-left-broken" class="align-middle me-1"></iconify-icon>
-                                    بازگشت به محموله
+                                    مشاهده محموله
                                 </a>
                             </div>
                         </div>
                     @endif
                 </div>
 
-                <!-- Message Statistics -->
                 @if($shipment->receivedMessages->count() > 0)
                     <div class="card-footer border-top">
                         <div class="row">
-                            <div class="col-md-3 col-6 text-center">
+                            <div class="col-md-4 col-6 text-center">
                                 <div class="p-3">
                                     <h3 class="text-primary mb-0">{{ $shipment->receivedMessages->count() }}</h3>
                                     <p class="text-muted mb-0">کل پیام‌ها</p>
                                 </div>
                             </div>
-                            <div class="col-md-3 col-6 text-center">
+                            <div class="col-md-4 col-6 text-center">
                                 <div class="p-3">
                                     <h3 class="text-success mb-0">
                                         {{ $shipment->receivedMessages->where('sender_id', auth()->id())->count() }}
@@ -409,7 +227,7 @@
                                     <p class="text-muted mb-0">ارسال شده توسط شما</p>
                                 </div>
                             </div>
-                            <div class="col-md-3 col-6 text-center">
+                            <div class="col-md-4 col-6 text-center">
                                 <div class="p-3">
                                     <h3 class="text-info mb-0">
                                         {{ $shipment->receivedMessages->where('sender_id', '!=', auth()->id())->count() }}
@@ -417,14 +235,7 @@
                                     <p class="text-muted mb-0">دریافتی از دیگران</p>
                                 </div>
                             </div>
-                            <div class="col-md-3 col-6 text-center">
-                                <div class="p-3">
-                                    <h3 class="text-warning mb-0">
-                                        {{ $shipment->receivedMessages->where('read', 0)->where('receiver_id', auth()->id())->count() }}
-                                    </h3>
-                                    <p class="text-muted mb-0">خوانده نشده</p>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 @endif
