@@ -3,13 +3,18 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreMessageRequest;
 use App\Models\Message;
+use App\Models\Shipment;
 use App\Models\User;
 use App\Services\MessageService;
+use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
 
 class MessageController extends Controller
 {
@@ -18,12 +23,30 @@ class MessageController extends Controller
 
     }
 
+    public function store(StoreMessageRequest $request, string $shipment): RedirectResponse
+    {
+        $validatedData = $request->validated();
+        try {
+            Message::query()->create($validatedData);
+
+            return back()->with('success', trans('messages.created'));
+        } catch (Exception $exception) {
+            return back()->with('error', $exception->getMessage());
+        }
+    }
+
+    public function shipmentMessages(string $trackingCode): Factory|View
+    {
+        $shipment = Shipment::query()->where('tracking_code', $trackingCode)->with(['receivedMessages.replies', 'user', 'trip'])->firstOrFail();
+
+        return view('panel.user-panel.shipments.messages', compact('shipment'));
+    }
+
     public function index(Request $request): Factory|View
     {
         $user = Auth::user();
         $type = $request->get('type', 'all');
 
-        // Get messages based on type
         switch ($type) {
             case 'inbox':
                 $messages = Message::where('receiver_id', $user->id)
@@ -95,12 +118,12 @@ class MessageController extends Controller
     public function show($id)
     {
 
-        $message = Message::query()->where(function($query) use ( $id) {
+        $message = Message::query()->where(function ($query) use ($id) {
             $query->where('id', $id)
-                ->where(function($q) {
+                ->where(function ($q) {
                     $q->where('receiver_id', Auth::id())
                         ->where('receiver_type', User::class)
-                        ->orWhere(function($sub)  {
+                        ->orWhere(function ($sub) {
                             $sub->where('sender_id', Auth::id())
                                 ->where('sender_type', User::class);
                         });
@@ -129,10 +152,10 @@ class MessageController extends Controller
         try {
             // Find the message being replied to
             $originalMessage = Message::where('id', $id)
-                ->where(function($query) use ($user) {
+                ->where(function ($query) use ($user) {
                     $query->where('sender_id', $user->id)
                         ->where('sender_type', $user->getMorphClass())
-                        ->orWhere(function($q) use ($user) {
+                        ->orWhere(function ($q) use ($user) {
                             $q->where('receiver_id', $user->id)
                                 ->where('receiver_type', $user->getMorphClass());
                         });
@@ -166,10 +189,10 @@ class MessageController extends Controller
             return redirect()->route('user.messages.show', $threadStarter->id)
                 ->with('success', 'پاسخ شما با موفقیت ارسال شد.');
 
-        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+        } catch (ModelNotFoundException $e) {
             return redirect()->route('user.messages.index')
                 ->with('error', 'پیام مورد نظر یافت نشد.');
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return redirect()->back()
                 ->withInput()
                 ->with('error', 'خطا در ارسال پاسخ. لطفاً مجدد تلاش کنید.');
@@ -200,6 +223,31 @@ class MessageController extends Controller
         // ]);
     }
 
+    public function markAsReadWeb($id)
+    {
+        $user = Auth::user();
+
+        try {
+            $message = Message::query()->where('id', $id)
+                ->where('receiver_id', $user->id)
+                ->where('receiver_type', $user->getMorphClass())
+                ->firstOrFail();
+
+            $message->markAsRead();
+
+            // Also mark thread as read if it's a thread starter
+            if ($message->parent_id === null) {
+                $this->messageService->markThreadAsRead($message, $user);
+            }
+
+            return redirect()->back()
+                ->with('success', 'پیام با موفقیت خوانده شد.');
+
+        } catch (Exception $e) {
+            return redirect()->back()
+                ->with('error', 'خطا در انجام عملیات.');
+        }
+    }
 
     public function markAsRead($id)
     {
@@ -247,48 +295,18 @@ class MessageController extends Controller
                 'message' => 'پیام قبلاً خوانده شده است.'
             ], 400);
 
-        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+        } catch (ModelNotFoundException $e) {
             return response()->json([
                 'success' => false,
                 'message' => 'پیام مورد نظر یافت نشد یا شما دسترسی ندارید.'
             ], 404);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return response()->json([
                 'success' => false,
                 'message' => 'خطا در انجام عملیات. لطفاً مجدد تلاش کنید.'
             ], 500);
         }
     }
-
-
-
-    public function markAsReadWeb($id)
-    {
-        $user = Auth::user();
-
-        try {
-            $message = Message::query()->where('id', $id)
-                ->where('receiver_id', $user->id)
-                ->where('receiver_type', $user->getMorphClass())
-                ->firstOrFail();
-
-            $message->markAsRead();
-
-            // Also mark thread as read if it's a thread starter
-            if ($message->parent_id === null) {
-                $this->messageService->markThreadAsRead($message, $user);
-            }
-
-            return redirect()->back()
-                ->with('success', 'پیام با موفقیت خوانده شد.');
-
-        } catch (\Exception $e) {
-            return redirect()->back()
-                ->with('error', 'خطا در انجام عملیات.');
-        }
-    }
-
-
 
 
 }

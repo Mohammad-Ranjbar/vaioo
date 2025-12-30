@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -40,6 +41,21 @@ class Message extends Model
         return $this->replies()->paginate($perPage);
     }
 
+    public function replies(): HasMany
+    {
+        return $this->hasMany(Message::class, 'parent_id')->orderBy('created_at');
+    }
+
+    public function thread(): Collection
+    {
+        $threadStarter = $this->threadStarter();
+
+        return Message::query()->where(function ($query) use ($threadStarter) {
+            $query->where('id', $threadStarter->id)
+                ->orWhere('parent_id', $threadStarter->id);
+        })->orderBy('created_at', 'asc')->get();
+    }
+
     public function threadStarter()
     {
         if (!$this->getAttribute('parent_id')) {
@@ -47,16 +63,6 @@ class Message extends Model
         }
 
         return $this->parent->threadStarter();
-    }
-
-    public function thread()
-    {
-        $threadStarter = $this->threadStarter();
-
-        return Message::query()->where(function($query) use ($threadStarter) {
-            $query->where('id', $threadStarter->id)
-                ->orWhere('parent_id', $threadStarter->id);
-        })->orderBy('created_at', 'asc')->get();
     }
 
     public function hasReplies(): bool
@@ -78,6 +84,7 @@ class Message extends Model
     {
         return $this->getAttribute('parent_id') !== null;
     }
+
     public function isFirstMessage(): bool
     {
         return $this->getAttribute('parent_id') === null;
@@ -120,7 +127,7 @@ class Message extends Model
 
     public function scopeThreadsForUser($query, $user)
     {
-        return $query->where(function($q) use ($user) {
+        return $query->where(function ($q) use ($user) {
             $q->where('sender_id', $user->id)
                 ->where('sender_type', $user->getMorphClass())
                 ->orWhere('receiver_id', $user->id)
@@ -133,7 +140,7 @@ class Message extends Model
     public function scopeUnreadThreadsCount($query, $user)
     {
         return $query->whereNull('parent_id')
-            ->where(function($q) use ($user) {
+            ->where(function ($q) use ($user) {
                 $q->where('receiver_id', $user->id)
                     ->where('receiver_type', $user->getMorphClass())
                     ->where('read', false);
@@ -144,7 +151,7 @@ class Message extends Model
     {
         $threadStarter = $this->threadStarter();
 
-        return Message::query()->where(function($query) use ($threadStarter) {
+        return Message::query()->where(function ($query) use ($threadStarter) {
             $query->where('id', $threadStarter->id)
                 ->orWhere('parent_id', $threadStarter->id);
         })
@@ -155,11 +162,6 @@ class Message extends Model
                 'read' => true,
                 'read_at' => now(),
             ]);
-    }
-
-    public function replies(): HasMany
-    {
-        return $this->hasMany(Message::class, 'parent_id')->orderBy('created_at');
     }
 
     public function sender(): MorphTo

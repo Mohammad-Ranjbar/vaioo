@@ -32,6 +32,8 @@ Route::prefix('user')->as('user.')->group(function () {
 
         Route::as('messages.')->prefix('messages')->group(function () {
             Route::get('/', [MessageController::class, 'index'])->name('index');
+            Route::post('/shipment/{shipment}', [MessageController::class, 'store'])->name('store');
+            Route::get('/shipment/{tracking_code}', [MessageController::class, 'shipmentMessages'])->name('shipment');
             Route::get('/{id}', [MessageController::class, 'show'])->name('show');
             Route::post('/{id}/reply', [MessageController::class, 'storeReply'])->name('reply.store');
         });
